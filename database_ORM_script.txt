@@ -1,0 +1,72 @@
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Creating tables
+Table users {
+  id int [pk, increment] // auto-increment
+  user_name varchar
+  email varchar
+  occupation varchar
+  hashed_password varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+//----------------------------------------------//
+
+//// -- LEVEL 2
+//// -- Adding column settings
+
+Table questions {
+  id int [pk, increment] // auto-increment
+  user_id int [ref: > users.id] // inline relationship (many-to-one)
+  title varchar
+  description text
+  votes int
+  created_at timestamp 
+  updated_at timestamp
+}
+
+
+Table answers {
+  id int [pk] // primary key
+  user_id int [ref: > users.id] 
+  question_id int [ref: > questions.id] // inline relationship (many-to-one)
+  content text
+  votes int
+  created_at timestamp 
+  updated_at timestamp
+}
+
+//----------------------------------------------//
+
+//// -- Level 3 
+//// -- Enum, Indexes
+
+
+
+// Indexes: You can define a single or multi-column index 
+Table comments {
+  id int [pk] 
+  answer_id int [ref: > answers.id]  
+  user_id int [ref: > users.id] 
+  content text
+  created_at timestamp 
+  updated_at timestamp
+ }
+
+Table question_topics{
+  id int [pk]
+  question_id int [ref: > questions.id] 
+  topic_id int [ref: > topics.id] 
+  created_at timestamp 
+  updated_at timestamp
+}
+
+Table topics {
+  id int [pk]
+  name varchar
+  created_at timestamp 
+  updated_at timestamp
+}
+
