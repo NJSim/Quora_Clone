@@ -22,11 +22,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      votes_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: { model: 'Votes'}
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
