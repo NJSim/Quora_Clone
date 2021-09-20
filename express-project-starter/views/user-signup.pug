@@ -1,0 +1,14 @@
+extends layout
+
+include utils.pug
+
+block content
+  form(action='/user/signup' method='post')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    +field('User Name', 'userName', user.user_name)
+    +field('Email', 'email', user.email)
+    +field('Occuption', 'occupation', user.occupation)
+    +field('Password', 'password', user.password, 'password')
+    +field('Confirm Password', 'confirmPassword', '', 'password')
+    div
+      button(type='submit') Sign Up

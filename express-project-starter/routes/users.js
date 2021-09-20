@@ -1,5 +1,8 @@
 var express = require('express');
+
 const { csrfProtection } = require('./utils');
+const db = require('../db/models');
+
 var router = express.Router();
 
 /* GET users listing. */
@@ -8,10 +11,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/signup', csrfProtection, function(req, res, next) {
-  res.render('user-sign');
-
-  //check test
-  //check test again
+  const user = db.User.build();
+  res.render('user-signup', {
+    title: 'Signup',
+    user,
+    csrfToken: req.csrfToken(),
+  });
 });
 
 module.exports = router;
