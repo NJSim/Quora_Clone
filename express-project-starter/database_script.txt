@@ -3,3 +3,7 @@ CREATE USER mora_development_app WITH PASSWORD 'password' CREATEDB;
 CREATE DATABASE mora_development OWNER 'mora_development_app';
 
 npx sequelize model:generate --name User --attributes user_name:string,email:string,occupation:string,hashed_password:string
+
+npx sequelize model:generate --name Question --attributes user_id:integer,title:text,votes_id:integer
+
+npx sequelize model:generate --name Answer --attributes user_id:integer,question_id:integer,content:text,votes_id:integer
