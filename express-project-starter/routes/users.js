@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/signup', csrfProtection, function(req, res, next) {
   res.render('user-sign');
+
 });
 
 module.exports = router;
