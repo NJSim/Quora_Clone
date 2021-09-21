@@ -1,18 +1,17 @@
 var express = require('express');
+const { check, validationResult } = require('express-validator');
 
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
+const { requireAuth } = require('../auth');
 
 var router = express.Router();
-const { check, validationResult } = require('express-validator');
-const { csrfProtection, asyncHandler } = require('./utils');
-const db = require('../db/models');
-const { requireAuth } = require('../auth');
+
 /* GET home page. */
 router.get('/', asyncHandler(async (req, res, next) => {
   const questions = await db.Question.findAll({
     include: [{ model: db.User }, { model: db.Answer }],
-    order: [['createdAt', 'ASC']] 
+    order: [['createdAt', 'DESC']] 
   });
   res.render('index', {
     title: 'Mora Home Page(edit later)', 
