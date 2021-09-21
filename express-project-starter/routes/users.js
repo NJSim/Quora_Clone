@@ -59,11 +59,7 @@ const userValidators = [
 ];
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-router.get('/signup', csrfProtection, function(req, res, next) {
+router.get('/signup', csrfProtection, (req, res) => {
   const user = db.User.build();
   res.render('user-signup', {
     title: 'Sign up',
@@ -73,18 +69,19 @@ router.get('/signup', csrfProtection, function(req, res, next) {
 });
 
 router.post('/signup', csrfProtection, userValidators,
-
   asyncHandler(async (req, res) => {
     const {
       user_name, email, occupation, password
     } = req.body;
+
     const user = db.User.build({
       user_name,
       email,
       occupation,
     });
+
     const validatorErrors = validationResult(req);
-    console.log(validatorErrors)
+
     if (validatorErrors.isEmpty()) {
       const hashedPassword = await bcrypt.hash(password, 10);
       user.hashed_password = hashedPassword;
@@ -112,13 +109,11 @@ const loginValidators = [
 ];
 
 router.get('/login', csrfProtection, (req, res) => {
-  console.log(req.locals+"************");
   res.render('user-login', {
     title: 'Log in',
     csrfToken: req.csrfToken(),
   });
 });
-
 
 router.post('/login', csrfProtection, loginValidators,
   asyncHandler(async (req, res) => {
@@ -135,6 +130,7 @@ router.post('/login', csrfProtection, loginValidators,
 
       if (user !== null) {
         const passwordMatch = await bcrypt.compare(password, user.hashed_password.toString());
+        
         if (passwordMatch) {
           loginUser(req, res, user);
           return res.redirect('/');
@@ -153,10 +149,9 @@ router.post('/login', csrfProtection, loginValidators,
     });
 }));
 
-
-router.post('/logout',(req,res)=>{
-    logoutUser(req, res);
-    res.redirect('/users/login');
+router.post('/logout', (req,res) => {
+  logoutUser(req, res);
+  res.redirect('/users/login');
 });
 
 module.exports = router;
