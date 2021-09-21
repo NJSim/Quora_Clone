@@ -25,6 +25,34 @@ router.get('/', asyncHandler(async (req, res, next) => {
     questions
   });
 }));
+router.get('/questions/:id(\\d+)',requireAuth,async(req,res,next)=>{
+   const questionId = parseInt(req.params.id,10);
+   const question = await db.Question.findByPk(questionId,{
+     include:[
+      {model:db.Answer,
+      include: [db.Answers_vote]},
+      {model:db.User},
+      {model:db.Questions_vote}
+    ]
+   });
+   res.render('question-detail',{
+     title:'View Question',
+     question
+   })
+})
+
+router.post('/questions/:id(\\d+)/answers',requireAuth,async(req,res,next)=>{
+  const {content} = req.body;
+  await db.Answer.create({
+    user_id: res.locals.user.id,
+    question_id:req.params.id,
+    content
+  })
+  res.redirect('/questions/'+`${req.params.id}`)
+})
+
+
+
 
 router.get('/questions/new',requireAuth,csrfProtection, (req,res,next)=>{
   res.render('create-question', {token: req.csrfToken(),})
