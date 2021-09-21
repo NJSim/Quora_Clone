@@ -23,7 +23,8 @@ router.get('/questions/:id(\\d+)',requireAuth,async(req,res,next)=>{
    const question = await db.Question.findByPk(questionId,{
      include:[
       {model:db.Answer,
-      include: [db.Answers_vote]},
+      include: [db.Answers_vote, db.User],
+      order: [['createdAt', 'DESC']]},
       {model:db.User},
       {model:db.Questions_vote}
     ]
