@@ -3,9 +3,9 @@ extends layout
 include utils.pug
 
 block content
-  form(action='/user/signup' method='post')
+  form(action='/users/signup' method='post')
     input(type='hidden' name='_csrf' value=csrfToken)
-    +field('User Name', 'userName', user.user_name)
+    +field('User Name', 'user_name', user.user_name)
     +field('Email', 'email', user.email)
     +field('Occuption', 'occupation', user.occupation)
     +field('Password', 'password', user.password, 'password')
