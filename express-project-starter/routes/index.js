@@ -10,18 +10,25 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', asyncHandler(async (req, res, next) => {
   const questions = await db.Question.findAll({
-    include: [{ model: db.User }, { model: db.Answer }],
-    order: [['createdAt', 'DESC']] 
+    include: [{
+      model: db.User
+    }, {
+      model: db.Answer,
+      include: [{
+        model: db.User
+      }]
+    }],
+    order: [['createdAt', 'DESC']]
   });
   res.render('index', {
-    title: 'Mora Home Page(edit later)', 
+    title: 'Mora Home Page(edit later)',
     questions
   });
 }));
 
 router.get('/questions/new',requireAuth,csrfProtection, (req,res,next)=>{
   res.render('create-question', {token: req.csrfToken(),})
-})
+});
 
 const questionValidator=[
   check('title')
@@ -34,12 +41,12 @@ const questionValidator=[
 router.post('/questions', requireAuth, csrfProtection, questionValidator, asyncHandler(async(req,res)=>{
   const {title}=req.body;
   const validatorErrors = validationResult(req);
-  
+
   if (validatorErrors.isEmpty()) {
     await db.Question.create({
-      title, 
+      title,
       user_id:res.locals.user.id
-      
+
     })
     res.redirect('/');
   } else {
@@ -50,9 +57,54 @@ router.post('/questions', requireAuth, csrfProtection, questionValidator, asyncH
     });
   }
 }));
-  
- 
-  
+
+router.get('/my-questions', requireAuth, asyncHandler(async(req, res, next) => {
+  const myQuestions = await db.Question.findAll({
+    where: { user_id: res.locals.user.id },
+    include: [{
+      model: db.User
+    }, {
+      model: db.Answer,
+      include: [{
+        model: db.User
+      }]
+    }],
+    order: [['createdAt', 'DESC']]
+  });
+  res.render('my-questions', {
+    title: 'My Questions',
+    myQuestions
+  })
+}));
+
+router.get('/my-answers', requireAuth, asyncHandler(async(req, res, next) => {
+  const myAnswers = await db.Answer.findAll({
+    where: { user_id: res.locals.user.id },
+    include: [{
+      model: db.User
+    }, {
+      model: db.Question,
+      include: [{
+        model: db.User
+      }]
+     }],
+    order: [['createdAt', 'DESC']]
+  });
+  console.log(myAnswers);
+  console.log(myAnswers[0].Question);
+  console.log(myAnswers[0].User);
+
+  res.render('my-answers', {
+    title: 'My Answers',
+    myAnswers,
+
+  })
+}));
+
+
+
+
+
 
 
 
