@@ -66,35 +66,32 @@ router.get('/', function(req, res, next) {
 router.get('/signup', csrfProtection, function(req, res, next) {
   const user = db.User.build();
   res.render('user-signup', {
-    title: 'Signup',
+    title: 'Sign up',
     user,
     csrfToken: req.csrfToken(),
   });
 });
 
-router.post('/signup', csrfProtection, userValidators, 
+router.post('/signup', csrfProtection, userValidators,
 
   asyncHandler(async (req, res) => {
     const {
       user_name, email, occupation, password
     } = req.body;
-    console.log('1')
     const user = db.User.build({
       user_name,
       email,
       occupation,
     });
-    console.log('2')
     const validatorErrors = validationResult(req);
     console.log(validatorErrors)
-    if (validatorErrors.isEmpty()) { console.log('4')
+    if (validatorErrors.isEmpty()) {
       const hashedPassword = await bcrypt.hash(password, 10);
       user.hashed_password = hashedPassword;
       await user.save();
       loginUser(req, res, user);
       res.redirect('/');
     } else {
-      console.log('5')
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('user-signup', {
         title: 'Sign up',
@@ -104,5 +101,56 @@ router.post('/signup', csrfProtection, userValidators,
       });
     }
 }));
+
+const loginValidators = [
+  check('user_name')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for your user name'),
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Password'),
+];
+
+router.get('/login', csrfProtection, (req, res) => {
+  res.render('user-login', {
+    title: 'Log in',
+    csrfToken: req.csrfToken(),
+  });
+});
+
+router.post('/login', csrfProtection, loginValidators,
+  asyncHandler(async (req, res) => {
+    const {
+      user_name,
+      password,
+    } = req.body;
+
+    let errors = [];
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+      const user = await db.User.findOne({ where: { user_name } });
+
+      if (user !== null) {
+        const passwordMatch = await bcrypt.compare(password, user.hashed_password.toString());
+        if (passwordMatch) {
+          loginUser(req, res, user);
+          return res.redirect('/');
+        }
+      }
+      errors.push('Login failed for the provided username and password')
+    } else {
+      errors = validatorErrors.array().map((error) => error.msg);
+    }
+
+    res.render('user-login', {
+      title: 'Login',
+      user_name,
+      errors,
+      csrfToken: req.csrfToken(),
+    });
+}));
+
+
 
 module.exports = router;

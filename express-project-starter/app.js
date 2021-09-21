@@ -27,6 +27,7 @@ const store = new SequelizeStore({ db: sequelize });
 app.use(
   session({
     secret: 'superSecret',
+    name: 'mora_session_id',
     store,
     saveUninitialized: false,
     resave: false,
