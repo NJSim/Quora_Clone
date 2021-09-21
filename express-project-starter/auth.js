@@ -6,7 +6,7 @@ const loginUser = (req, res, user) => {
   };
 };
 
-const logoutUser = (req, res) => {
+const logoutUser = async (req, res) => {
   delete req.session.auth;
 };
 
