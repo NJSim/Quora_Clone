@@ -8,6 +8,8 @@ html
     nav
       a Mora
       input(type=text placeholder='Search Mora')
+      div
+        a(href="/questions/new") Ask Question
       div 
         if locals.authenticated
           span Welcome #{locals.user.user_name}!
