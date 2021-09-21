@@ -87,7 +87,10 @@ router.post('/signup', csrfProtection, userValidators,
       user.hashed_password = hashedPassword;
       await user.save();
       loginUser(req, res, user);
-      res.redirect('/');
+      // res.redirect('/');
+      return req.session.save(() => {
+        res.redirect('/');
+      });
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('user-signup', {
@@ -130,10 +133,12 @@ router.post('/login', csrfProtection, loginValidators,
 
       if (user !== null) {
         const passwordMatch = await bcrypt.compare(password, user.hashed_password.toString());
-        
+
         if (passwordMatch) {
           loginUser(req, res, user);
-          return res.redirect('/');
+          return req.session.save(() => {
+            res.redirect('/');
+          });
         }
       }
       errors.push('Login failed for the provided username and password')
@@ -151,7 +156,10 @@ router.post('/login', csrfProtection, loginValidators,
 
 router.post('/logout', (req,res) => {
   logoutUser(req, res);
-  res.redirect('/users/login');
+  return req.session.save(() => {
+    res.redirect('/users/login');
+  });
+  //res.redirect('/users/login');
 });
 
 module.exports = router;
