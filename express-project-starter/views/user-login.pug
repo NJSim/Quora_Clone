@@ -1,0 +1,11 @@
+extends layout
+
+include utils.pug
+
+block content
+  form(action='/users/login' method='post')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    +field('User Name', 'user_name', user_name)
+    +field('Password', 'password', password, 'password')
+    div
+      button(type='submit') Log in
