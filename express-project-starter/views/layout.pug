@@ -4,13 +4,14 @@ html
       block head
         title="Express Starter App"
         link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel='stylesheet' href='/stylesheets/index.css')
   body
-    nav
-      a Mora
+    div(id='nav_container')
+      a(id='logo' href='/') Mora
       input(type=text placeholder='Search Mora')
-      div
-        a(href="/questions/new") Ask Question
-      div 
+      div(id='search-container')
+        a(href='/questions/new') Ask Question
+      div(id='user_auth_container')
         if locals.authenticated
           span Welcome #{locals.user.user_name}!
           form( action='/users/logout' method='post')
