@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const { sessionSecret } = require('./config');
 const { sequelize } = require('./db/models');
@@ -17,24 +17,24 @@ const app = express();
 // view engine setup
 app.set('view engine', 'pug');
 // create Session table if it doesn't already exist
-// const store = new SequelizeStore({ db: sequelize });
+const store = new SequelizeStore({ db: sequelize });
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cookieParser(sessionSecret));
 // set up session middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   session({
     secret: 'superSecret',
     name: 'mora_session_id',
-    // store,
+    store,
     saveUninitialized: false,
     resave: false,
   })
 );
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
 
-// store.sync();
+store.sync();
 app.use(restoreUser);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
