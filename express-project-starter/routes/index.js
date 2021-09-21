@@ -29,15 +29,23 @@ router.get('/questions/:id(\\d+)',requireAuth,async(req,res,next)=>{
    const questionId = parseInt(req.params.id,10);
    const question = await db.Question.findByPk(questionId,{
      include:[
-      {model:db.Answer,
-      include: [db.Answers_vote]},
       {model:db.User},
-      {model:db.Questions_vote}
-    ]
+      {model:db.Questions_vote},
+    ],
    });
+   const answers=await db.Answer.findAll({
+    where: {question_id:questionId},
+    include:[
+      {model:db.User},
+      {model:db.Answers_vote},
+    ],
+    order: [['createdAt', 'DESC']]
+  })
+   //console.log(question.json())
    res.render('question-detail',{
      title:'View Question',
-     question
+     question,
+     answers
    })
 })
 
