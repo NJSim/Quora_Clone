@@ -118,9 +118,7 @@ router.get('/my-answers', requireAuth, asyncHandler(async(req, res, next) => {
      }],
     order: [['createdAt', 'DESC']]
   });
-  console.log(myAnswers);
-  console.log(myAnswers[0].Question);
-  console.log(myAnswers[0].User);
+
 
   res.render('my-answers', {
     title: 'My Answers',
