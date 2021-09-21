@@ -1,13 +1,14 @@
 var express = require('express');
 const { check, validationResult } = require('express-validator');
-//const { csrfProtection } = require('./utils');
+
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const bcrypt = require('bcryptjs');
-var router = express.Router();
 const {loginUser}=require('../auth.js')
+
+var router = express.Router();
+
 const userValidators = [
-  // TODO Define the user validators.
   check('user_name')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a value for User Name')
@@ -36,7 +37,6 @@ const userValidators = [
           }
         });
     }),
-  
   check('occupation')
     .isLength({ max: 100 })
     .withMessage('Occupation must not be more than 100 characters long'),
@@ -56,7 +56,7 @@ const userValidators = [
         }
         return true;
       })
-]
+];
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -78,7 +78,6 @@ router.post('/signup', csrfProtection, userValidators,
     const {
       user_name, email, occupation, password
     } = req.body;
-    
     console.log('1')
     const user = db.User.build({
       user_name,
@@ -87,26 +86,23 @@ router.post('/signup', csrfProtection, userValidators,
     });
     console.log('2')
     const validatorErrors = validationResult(req);
-   console.log(validatorErrors)
-
-
-   if (validatorErrors.isEmpty()) { console.log('4')
-    const hashedPassword = await bcrypt.hash(password, 10);
-    user.hashed_password = hashedPassword;
-    await user.save();
-    loginUser(req, res, user);
-    res.redirect('/');
-  } else {
-    console.log('5')
-    const errors = validatorErrors.array().map((error) => error.msg);
-    res.render('user-signup', {
-      title: 'Sign up',
-      user,
-      errors,
-      csrfToken: req.csrfToken(),
-    });
-  }
+    console.log(validatorErrors)
+    if (validatorErrors.isEmpty()) { console.log('4')
+      const hashedPassword = await bcrypt.hash(password, 10);
+      user.hashed_password = hashedPassword;
+      await user.save();
+      loginUser(req, res, user);
+      res.redirect('/');
+    } else {
+      console.log('5')
+      const errors = validatorErrors.array().map((error) => error.msg);
+      res.render('user-signup', {
+        title: 'Sign up',
+        user,
+        errors,
+        csrfToken: req.csrfToken(),
+      });
+    }
 }));
-
 
 module.exports = router;
