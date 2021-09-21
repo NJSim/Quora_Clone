@@ -8,4 +8,14 @@ append head
 
 block content
   h1= title
-  p Welcome to your Project Skeleton
+  if questions && questions.length > 0
+    each question in questions
+      div 
+        div= question.User.user_name
+        div= question.title 
+        div 
+          if question.Answers && question.Answers.length > 0
+            each answer in question.Answers 
+              div= answer.content 
+        div= 'placeholder for upvote button'
+        div= '*************************'

@@ -1,14 +1,23 @@
 var express = require('express');
-var router = express.Router();
 const { check, validationResult } = require('express-validator');
-const { csrfProtection, asyncHandler } = require('./utils');
+
 const db = require('../db/models');
+const { csrfProtection, asyncHandler } = require('./utils');
 const { requireAuth } = require('../auth');
+
+var router = express.Router();
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  
-  res.render('index', { title: 'a/A Express Skeleton Home' });
-});
+router.get('/', asyncHandler(async (req, res, next) => {
+  const questions = await db.Question.findAll({
+    include: [{ model: db.User }, { model: db.Answer }],
+    order: [['createdAt', 'DESC']] 
+  });
+  res.render('index', {
+    title: 'Mora Home Page(edit later)', 
+    questions
+  });
+}));
 
 router.get('/questions/new',requireAuth,csrfProtection, (req,res,next)=>{
   res.render('create-question', {token: req.csrfToken(),})
