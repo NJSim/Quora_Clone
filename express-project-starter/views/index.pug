@@ -7,6 +7,14 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
+  div(id='welcome_container')
+        if locals.authenticated
+          p Welcome #{locals.user.user_name}!
+          form(method="post" action="/questions")
+            input(type="hidden" name="_csrf" value=token)
+            input(name="title" type="text" placeholder="What is your question?" required)
+            button(id="welcome-submit-btn" type="submit") Submit
+        
   a(href='/my-questions') My Questions
   a(href='/my-answers') My Answers
 

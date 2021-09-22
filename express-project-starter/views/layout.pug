@@ -5,15 +5,20 @@ html
         title="Express Starter App"
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/index.css')
+        //- add page specific js
+        script(src="/javascripts/index.js" type="module" defer)
   body
     div(id='nav_container')
       a(id='logo' href='/') Mora
       input(type=text placeholder='Search Mora')
       div(id='search-container')
-        a(href='/questions/new') Ask Question
+        a(id='askQuestion' href='/questions/new') Ask Question
       div(id='user_auth_container')
         if locals.authenticated
-          span Welcome #{locals.user.user_name}!
+          select(name='dropDown', id='profileSelect')
+               each val in ['myQuestion' , 'myAnswer' , 'Logout']
+                  option(value=val)=val
+          p Welcome #{locals.user.user_name}!
           form( action='/users/logout' method='post')
             button( type='submit') Logout
         else
