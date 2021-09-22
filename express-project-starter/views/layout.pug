@@ -18,9 +18,6 @@ html
           select(name='dropDown', id='profileSelect')
                each val in ['myQuestion' , 'myAnswer' , 'Logout']
                   option(value=val)=val
-          p Welcome #{locals.user.user_name}!
-          form( action='/users/logout' method='post')
-            button( type='submit') Logout
         else
           span
             a(href='/users/login') Login
