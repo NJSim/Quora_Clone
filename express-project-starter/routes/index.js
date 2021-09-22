@@ -136,7 +136,30 @@ router.get('/my-answers', requireAuth, asyncHandler(async(req, res, next) => {
   })
 }));
 
+router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
+  const questionId = parseInt(req.params.id,10);
+  const userId = res.locals.user.id;
 
+  const alreadyVoted = await db.Questions_vote.findOne({
+    where : {user_id: userId, question_id: questionId}
+  });
+
+  if (alreadyVoted) {
+    await alreadyVoted.destroy()
+  } else {
+    const upvote = db.Questions_vote.build({
+      user_id: userId,
+      question_id: questionId
+    });
+    await upvote.save();
+  }
+    
+  const voteArray = await db.Questions_vote.findAll({
+    where: { question_id: questionId}
+  });
+
+  res.json({voteArray});
+}));
 
 
 
