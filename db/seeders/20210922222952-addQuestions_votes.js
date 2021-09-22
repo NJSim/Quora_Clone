@@ -12,25 +12,13 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert('Questions', [
-      {
-        user_id: 1,
-        title: "This is my first question?",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
+    return queryInterface.bulkInsert('Questions_votes', [
       {
         user_id: 2,
-        title: "Hello second question here?",
+        question_id: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      {
-        user_id: 3,
-        title: "Third Question check?",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
     ], {});
   },
 
@@ -42,7 +30,7 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-    return queryInterface.bulkDelete('Questions', null, {
+    return queryInterface.bulkDelete('Questions_votes', null, { 
       truncate: true,
       cascade: true,
       restartIdentity: true

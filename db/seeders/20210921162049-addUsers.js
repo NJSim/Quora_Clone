@@ -14,6 +14,13 @@ module.exports = {
     */
     return queryInterface.bulkInsert('Users', [
       {
+        user_name: 'demoUser',
+        email: 'demoUser@demoUser.com',
+        hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
         user_name: 'nick123',
         email: 'nick@nick.com',
         hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
@@ -53,6 +60,10 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-      return queryInterface.bulkDelete('Users', null, {});
+      return queryInterface.bulkDelete('Users', null, {
+        truncate: true,
+        cascade: true,
+        restartIdentity: true
+      });
   }
 };
