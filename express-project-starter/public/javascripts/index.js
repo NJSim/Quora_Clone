@@ -25,19 +25,22 @@ document.addEventListener("DOMContentLoaded", (e) => {
   }
 
   const vote = document.querySelectorAll(".upvote-button");
+  const voteHolder = document.querySelectorAll(".vote_holder");
 
   for (let i = 0; i < vote.length; i++) {
     vote[i].addEventListener('click', async event => {
       // const userid = document.getElementById('userid').value;
       const questionid = document.getElementsByClassName(`upvote-button`)[i].id;
-      
+      const voteid = document.getElementsByClassName(`vote_holder`)[i];
+
       const res = await fetch(`http://localhost:8080/questions/${questionid}/votes`, {
         method: 'GET'
       })
 
       const {voteArray} = await res.json();
       console.log(voteArray.length)
-      
+      voteid.innerText = voteArray.length;
+
 
 
       // const vote = await db.Questions_vote.findOne({

@@ -10,16 +10,19 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   const questions = await db.Question.findAll({
-    include: [{
-      model: db.User
-    }, {
+    include: [
+      db.Questions_vote,
+      db.User,
+      {
       model: db.Answer,
-      include: [{
-        model: db.User
-      }]
+      include: [
+        db.User
+      ]
     }],
     order: [['createdAt', 'DESC']]
   });
+  console.log(questions);
+  console.log(questions)
   res.render('index', {
     title: 'Mora Home Page(edit later)',
     questions,
@@ -153,7 +156,7 @@ router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, r
     });
     await upvote.save();
   }
-    
+
   const voteArray = await db.Questions_vote.findAll({
     where: { question_id: questionId}
   });
