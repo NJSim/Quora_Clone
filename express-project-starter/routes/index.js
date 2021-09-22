@@ -125,18 +125,10 @@ router.get('/my-answers', requireAuth, asyncHandler(async(req, res, next) => {
     order: [['createdAt', 'DESC']]
   });
 
-  // console.log('******')
-  // console.log(myAnswers)
-  // console.log('******')
-  // console.log(myAnswers[0].Question)
-  // console.log('******')
-  
-
   res.render('my-answers', {
     title: 'My Answers',
     myAnswers,
   })
-  
 }));
 
 router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
