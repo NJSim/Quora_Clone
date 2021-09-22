@@ -1,4 +1,31 @@
 document.addEventListener("DOMContentLoaded", (e) => {
+  const searchBar = document.getElementById("searchBar");
+  searchBar.addEventListener("keyup", async (e) => {
+    const res = await fetch("/search-question", {
+      method: "POST",
+      body: JSON.stringify({
+        title: e.target.value,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+     const questions = await res.json();
+     const ul=document.getElementById("suggestions")
+     ul.innerHTML=""
+     if(e.target.value) {
+     for (let question of questions) {
+      const newli= document.createElement("li")
+      const newa=document.createElement("a")
+      const newaText= document.createTextNode(question.title)
+      newa.appendChild(newaText);
+      newa.setAttribute('href', `/questions/${question.id}`);
+      newli.appendChild(newa)
+      ul.appendChild(newli)
+     }
+    }
+  });
+
   const answer = document.getElementById("answer");
   if (answer) {
     answer.addEventListener("click", (e) => {
