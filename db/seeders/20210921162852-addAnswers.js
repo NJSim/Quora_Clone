@@ -29,6 +29,10 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-      return queryInterface.bulkDelete('Answers', null, {});
+      return queryInterface.bulkDelete('Answers', null, {
+        truncate: true,
+        cascade: true,
+        restartIdentity: true
+      });
   }
 };

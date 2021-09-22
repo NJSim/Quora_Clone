@@ -20,10 +20,6 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
     order: [['createdAt', 'DESC']]
   });
 
-  console.log('******')
-  console.log(questions)
-  console.log('******')
-
   res.render('index', {
     title: 'Mora Home Page(edit later)',
     questions,
