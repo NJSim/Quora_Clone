@@ -10,17 +10,19 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   const questions = await db.Question.findAll({
-    include: [
-      db.Questions_vote,
-      db.User,
+    include: [db.Questions_vote,db.User,
       {
       model: db.Answer,
       include: [
-        db.User
+        db.User, db.Answers_vote
       ]
     }],
     order: [['createdAt', 'DESC']]
   });
+
+  console.log('******')
+  console.log(questions)
+  console.log('******')
 
   res.render('index', {
     title: 'Mora Home Page(edit later)',
@@ -100,14 +102,10 @@ router.post('/questions', requireAuth, csrfProtection, questionValidator, asyncH
 router.get('/my-questions', requireAuth, asyncHandler(async(req, res, next) => {
   const myQuestions = await db.Question.findAll({
     where: { user_id: res.locals.user.id },
-    include: [
-      db.Questions_vote,
-      db.User,
+    include: [db.Questions_vote, db.User,
       {
       model: db.Answer,
-      include: [
-        db.User
-      ]
+      include: [db.User, db.Answers_vote]
     }],
     order: [['createdAt', 'DESC']]
   });
@@ -120,23 +118,25 @@ router.get('/my-questions', requireAuth, asyncHandler(async(req, res, next) => {
 router.get('/my-answers', requireAuth, asyncHandler(async(req, res, next) => {
   const myAnswers = await db.Answer.findAll({
     where: { user_id: res.locals.user.id },
-    include: [{
-      model: db.User
-    }, {
+    include: [db.User, db.Answers_vote, {
       model: db.Question,
-      include: [{
-        model: db.User
-      }]
-     }],
+      include: [db.User, db.Questions_vote]
+    }],
     order: [['createdAt', 'DESC']]
   });
 
+  // console.log('******')
+  // console.log(myAnswers)
+  // console.log('******')
+  // console.log(myAnswers[0].Question)
+  // console.log('******')
+  
 
   res.render('my-answers', {
     title: 'My Answers',
     myAnswers,
-
   })
+  
 }));
 
 router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
@@ -164,11 +164,29 @@ router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, r
   res.json({voteArray});
 }));
 
+router.get('/answers/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
+  const answerId = parseInt(req.params.id,10);
+  const userId = res.locals.user.id;
 
+  const alreadyVoted = await db.Answers_vote.findOne({
+    where : {user_id: userId, answer_id: answerId}
+  });
 
+  if (alreadyVoted) {
+    await alreadyVoted.destroy()
+  } else {
+    const upvote = db.Answers_vote.build({
+      user_id: userId,
+      answer_id: answerId
+    });
+    await upvote.save();
+  }
 
+  const voteArray = await db.Answers_vote.findAll({
+    where: { answer_id: answerId}
+  });
 
-
-
+  res.json({voteArray});
+}));
 
 module.exports = router;

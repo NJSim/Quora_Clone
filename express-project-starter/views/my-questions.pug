@@ -17,11 +17,14 @@ block content
         div= question.User.user_name
         div= question.title
         div
+          button(class='upvote-question-button' id= `${question.id}`) Upvote
+          div(class='vote_holder')= question.Questions_votes.length
+        div
           if question.Answers && question.Answers.length > 0
             each answer in question.Answers
               div= answer.User.user_name
               div= answer.content
-        div
-          button(class='upvote-button' id= `${question.id}`) Upvote
-          div(class='vote_holder')= question.Questions_votes.length
+              div
+                button(class='upvote-answer-button' id=`${answer.id}`) Upvote
+                div(class='answer_vote_holder')= answer.Answers_votes.length
         div= '*************************'
