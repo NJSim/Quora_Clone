@@ -47,13 +47,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
-  const vote = document.querySelectorAll(".upvote-button");
-  const voteHolder = document.querySelectorAll(".vote_holder");
+  const vote = document.querySelectorAll(".upvote-question-button");
 
   for (let i = 0; i < vote.length; i++) {
     vote[i].addEventListener('click', async event => {
       // const userid = document.getElementById('userid').value;
-      const questionid = document.getElementsByClassName(`upvote-button`)[i].id;
+      const questionid = document.getElementsByClassName(`upvote-question-button`)[i].id;
       const voteid = document.getElementsByClassName(`vote_holder`)[i];
 
       const res = await fetch(`http://localhost:8080/questions/${questionid}/votes`, {
@@ -63,18 +62,32 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const {voteArray} = await res.json();
       console.log(voteArray.length)
       voteid.innerText = voteArray.length;
-
-
-
-      // const vote = await db.Questions_vote.findOne({
-      //   where: { user_id }
-      // });
-
-      //check database questions_votes has user's vote
-      //if it does
-      //delete the vote
-      //else
-      //add the vote to the questions_vote database table
     });
   }
+
+  const answerVote = document.querySelectorAll(".upvote-answer-button");
+
+  for (let i = 0; i < answerVote.length; i++) {
+    answerVote[i].addEventListener('click', async event => {
+      // const userid = document.getElementById('userid').value;
+      const answerid = document.getElementsByClassName(`upvote-answer-button`)[i].id;
+      const voteid = document.getElementsByClassName(`answer_vote_holder`)[i];
+
+      const res = await fetch(`http://localhost:8080/answers/${answerid}/votes`, {
+        method: 'GET'
+      })
+
+      const {voteArray} = await res.json();
+      console.log(voteArray.length)
+      voteid.innerText = voteArray.length;
+    });
+  }
+
+
+
+
+
+
+
+
 });
