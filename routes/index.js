@@ -4,7 +4,7 @@ const { check, validationResult } = require('express-validator');
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { requireAuth } = require('../auth');
-
+const Sequelize = require('sequelize');
 var router = express.Router();
 
 /* GET home page. */
@@ -176,5 +176,17 @@ router.get('/answers/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res
 
   res.json({voteArray});
 }));
+
+
+router.post('/search-question', asyncHandler(async (req, res) => {
+  const {title} = req.body;
+  const questions = await db.Question.findAll({
+    where:{
+      title:{
+        [Sequelize.Op.iLike]: '%' + title + '%'
+      }}
+  })
+  res.send(questions)
+}))
 
 module.exports = router;
