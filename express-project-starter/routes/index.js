@@ -8,7 +8,7 @@ const { requireAuth } = require('../auth');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', asyncHandler(async (req, res, next) => {
+router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   const questions = await db.Question.findAll({
     include: [{
       model: db.User
@@ -22,7 +22,8 @@ router.get('/', asyncHandler(async (req, res, next) => {
   });
   res.render('index', {
     title: 'Mora Home Page(edit later)',
-    questions
+    questions,
+    token: req.csrfToken(),
   });
 }));
 router.get('/questions/:id(\\d+)',requireAuth,async(req,res,next)=>{
