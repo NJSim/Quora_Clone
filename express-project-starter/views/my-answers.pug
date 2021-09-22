@@ -10,7 +10,7 @@ block content
   a(href='/my-questions') My Questions
   a(href='/my-answers') My Answers
 
-  h1= title
+  h1(id='dropdownSelect')= title
   if myAnswers && myAnswers.length > 0
     //- answer[i] in each myAnswers
     each answer in myAnswers

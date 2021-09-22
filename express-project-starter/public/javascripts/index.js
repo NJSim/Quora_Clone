@@ -8,18 +8,41 @@ document.addEventListener("DOMContentLoaded", (e) => {
   }
 
   const profile = document.getElementById("profileSelect");
+  const title=document.getElementById('dropdownSelect');
+  if(title) {
+    if(title.innerText==='My Answers') {
+      profile.value='myAnswer'
+    } else if(title.innerText==='My Questions') {
+      profile.value='myQuestion'
+    } 
+  }
+  
+
   if (profile) {
     profile.addEventListener("change", async (e) => {
       if (e.target.value === "myQuestion") {
-      } else if (e.target.value === "myAnswer") {
+        await fetch("http://localhost:8080/my-questions", {
+          method: "GET",
+        }).then((response) => {
+          console.log(response);
+          window.location.href=response.url
+          return
+        }); 
+       } else if (e.target.value === "myAnswer") {
+         await fetch("http://localhost:8080/my-answers", {
+        method: "GET",
+      })
+        .then((response)=>{window.location.href=response.url;
+          return}
+      );
       } else {
         await fetch("http://localhost:8080/users/logout", {
           method: "POST",
-        }).then((response) => {
-          if (response.redirected) {
-            window.location.href = response.url;
-          }
-        });
+         })
+         .then((response)=>{response.json() 
+        if(response.redirected) {
+          window.location.href=response.url
+        } }) 
       }
     });
   }
