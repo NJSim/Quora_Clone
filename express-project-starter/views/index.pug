@@ -22,7 +22,7 @@ block content
   if questions && questions.length > 0
     each question in questions
       input(type='hidden' id= `questionid` value= question.id)
-      input(type='hidden' id= 'userid' value= user.id)
+      //- input(type='hidden' id= 'userid' value= user.id)
       div
         div= question.User.user_name
         div
