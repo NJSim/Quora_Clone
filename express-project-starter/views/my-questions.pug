@@ -21,5 +21,7 @@ block content
             each answer in question.Answers
               div= answer.User.user_name
               div= answer.content
-        div= 'placeholder for upvote button'
+        div
+          button(class='upvote-button' id= `${question.id}`) Upvote
+          div(class='vote_holder')= question.Questions_votes.length
         div= '*************************'
