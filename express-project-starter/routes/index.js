@@ -21,8 +21,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
     }],
     order: [['createdAt', 'DESC']]
   });
-  console.log(questions);
-  console.log(questions)
+
   res.render('index', {
     title: 'Mora Home Page(edit later)',
     questions,
@@ -101,13 +100,14 @@ router.post('/questions', requireAuth, csrfProtection, questionValidator, asyncH
 router.get('/my-questions', requireAuth, asyncHandler(async(req, res, next) => {
   const myQuestions = await db.Question.findAll({
     where: { user_id: res.locals.user.id },
-    include: [{
-      model: db.User
-    }, {
+    include: [
+      db.Questions_vote,
+      db.User,
+      {
       model: db.Answer,
-      include: [{
-        model: db.User
-      }]
+      include: [
+        db.User
+      ]
     }],
     order: [['createdAt', 'DESC']]
   });
