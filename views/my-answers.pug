@@ -17,7 +17,8 @@ block content
     
       div
         div= answer.Question.User.user_name
-        div= answer.Question.title
+        div 
+          a(href=`questions/${answer.Question.id}`)= answer.Question.title
         div
           button(class='upvote-question-button' id= `${answer.question_id}`) Upvote
           div(class='vote_holder')= answer.Question.Questions_votes.length
