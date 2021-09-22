@@ -14,35 +14,35 @@ document.addEventListener("DOMContentLoaded", (e) => {
       profile.value='myAnswer'
     } else if(title.innerText==='My Questions') {
       profile.value='myQuestion'
-    } 
+    }
   }
-  
+
 
   if (profile) {
     profile.addEventListener("change", async (e) => {
       if (e.target.value === "myQuestion") {
-        await fetch("http://localhost:8080/my-questions", {
+        await fetch("/my-questions", {
           method: "GET",
         }).then((response) => {
           console.log(response);
           window.location.href=response.url
           return
-        }); 
+        });
        } else if (e.target.value === "myAnswer") {
-         await fetch("http://localhost:8080/my-answers", {
+         await fetch("/my-answers", {
         method: "GET",
       })
         .then((response)=>{window.location.href=response.url;
           return}
       );
       } else {
-        await fetch("http://localhost:8080/users/logout", {
+        await fetch("/users/logout", {
           method: "POST",
          })
-         .then((response)=>{response.json() 
+         .then((response)=>{response.json()
         if(response.redirected) {
           window.location.href=response.url
-        } }) 
+        } })
       }
     });
   }
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const questionid = document.getElementsByClassName(`upvote-question-button`)[i].id;
       const voteid = document.getElementsByClassName(`vote_holder`)[i];
 
-      const res = await fetch(`http://localhost:8080/questions/${questionid}/votes`, {
+      const res = await fetch(`/questions/${questionid}/votes`, {
         method: 'GET'
       })
 
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const answerid = document.getElementsByClassName(`upvote-answer-button`)[i].id;
       const voteid = document.getElementsByClassName(`answer_vote_holder`)[i];
 
-      const res = await fetch(`http://localhost:8080/answers/${answerid}/votes`, {
+      const res = await fetch(`/answers/${answerid}/votes`, {
         method: 'GET'
       })
 
