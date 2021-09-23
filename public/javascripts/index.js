@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
   }
 
+  /////SEARCH BAR/////
   const searchBar = document.getElementById("searchBar");
   searchBar.addEventListener("keyup", async (e) => {
     const res = await fetch("/search-question", {
@@ -63,6 +64,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const questions = await res.json();
     const ul = document.getElementById("suggestions");
     ul.innerHTML = "";
+    
     if (e.target.value) {
       for (let question of questions) {
         const newli = document.createElement("li");
@@ -175,10 +177,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   deleteQuestion.forEach((button) => {
     button.addEventListener("click", async (e) => {
+      console.log(1)
       document.querySelector(`#question-container-${button.id}`).remove();
-
-      const res = await fetch(`/questions/${button.id}/delete`, {
-        method: "DELETE",
+      console.log(2)
+      const res = await fetch(`/questions/${button.id}`, {
+        method: 'DELETE',
       });
     });
   });
