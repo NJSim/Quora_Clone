@@ -7,7 +7,6 @@ html
         link(rel='stylesheet' href='/stylesheets/index.css')
         script(src="https://kit.fontawesome.com/72b8be2715.js" crossorigin="anonymous")
         script(src="/javascripts/index.js" type="module" defer)
-        script(src="https://kit.fontawesome.com/a1baabc963.js" crossorigin="anonymous")
   body
     div(id='nav_container')
       a(id='logo' href='/') Mora
@@ -26,11 +25,21 @@ html
             a(href='/users/signup') Sign Up
     div(id="body")
       div(id="left-nav-container")
+        div(id="nav-home")
+          a(href='/') 
+            i(class="fas fa-home") 
+            div Home
         div(id="nav-question")
-          a(href='/my-questions') My Questions
+          a(href='/my-questions') 
+            i(class="fas fa-question-circle")
+            div My Questions
         div(id="nav-answer")
-          a(href='/my-answers') My Answers
+          a(href='/my-answers')
+            i(class="fas fa-edit")
+            div My Answers
         div(id="nav-story")
-          a(href='/our-story') Our Story
+          a(href='/our-story')
+            i(class="fas fa-book-open")
+            div Our Story
       div(id="content-parts")
         block content
