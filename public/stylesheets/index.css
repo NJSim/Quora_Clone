@@ -10,6 +10,10 @@ a#askQuestion {
   font-weight: bold;
 }
 #nav_container {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
   background-color: white;
   display:flex;
   justify-content: center;
@@ -53,6 +57,7 @@ button#welcome-submit-btn{
   flex-direction: column;
   border: solid black 2px;
   width: 50%;
+  background-color: white;
 
   /* justify-content: center; */
   /* align-items: center; */
@@ -60,7 +65,7 @@ button#welcome-submit-btn{
 
 .questions-container {
   display: flex;
-  background-color: white;
+  background-color: rgb(241, 242, 242);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -98,6 +103,11 @@ button#welcome-submit-btn{
 .answer-container {
   display: flex;
   flex-direction:column;
+  border-top: solid red 2px;
+}
+
+.question-offset {
+  padding-bottom: 20px;
 }
 
 .answer-delete-section {
