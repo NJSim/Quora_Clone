@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", (e) => {
+
+  /////SEARCH BAR/////
   const searchBar = document.getElementById("searchBar");
   searchBar.addEventListener("keyup", async (e) => {
     const res = await fetch("/search-question", {
@@ -26,6 +28,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
   });
 
+  ////I WANT TO ANSWER BUTTON/////
   const answers = document.getElementsByClassName("answer");
   for (const answer of answers) {
     answer.addEventListener("click", (e) => {
@@ -39,6 +42,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
+  ////PROFILE DROPDOWN/////
   const profile = document.getElementById("profileSelect");
   const title = document.getElementById("dropdownSelect");
   if (title) {
@@ -79,42 +83,53 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
+  /////QUESTION UPVOTE BUTTON/////
   const vote = document.querySelectorAll(".upvote-question-button");
 
   for (let i = 0; i < vote.length; i++) {
-    vote[i].addEventListener("click", async (event) => {
+    vote[i].addEventListener("click", async (e) => {
       // const userid = document.getElementById('userid').value;
-      const questionid = document.getElementsByClassName(
-        `upvote-question-button`
-      )[i].id;
+      const questionid = document.getElementsByClassName(`upvote-question-button`)[i].id;
       const voteid = document.getElementsByClassName(`vote_holder`)[i];
 
       const res = await fetch(`/questions/${questionid}/votes`, {
-        method: "GET",
-      });
+        method: 'GET'
+      })
 
       const { voteArray } = await res.json();
-      console.log(voteArray.length);
       voteid.innerText = voteArray.length;
     });
   }
 
+  /////ANSWER UPVOTE BUTTON/////
   const answerVote = document.querySelectorAll(".upvote-answer-button");
 
   for (let i = 0; i < answerVote.length; i++) {
-    answerVote[i].addEventListener("click", async (event) => {
+    answerVote[i].addEventListener("click", async (e) => {
       // const userid = document.getElementById('userid').value;
-      const answerid =
-        document.getElementsByClassName(`upvote-answer-button`)[i].id;
+      const answerid = document.getElementsByClassName(`upvote-answer-button`)[i].id;
       const voteid = document.getElementsByClassName(`answer_vote_holder`)[i];
 
       const res = await fetch(`/answers/${answerid}/votes`, {
         method: "GET",
       });
 
-      const { voteArray } = await res.json();
-      console.log(voteArray.length);
+      const {voteArray} = await res.json();
       voteid.innerText = voteArray.length;
     });
   }
+
+  /////DELETE QUESTION BUTTON/////
+  const deleteQuestion = document.querySelectorAll(".delete-question-button");
+
+  deleteQuestion.forEach(button => {
+    button.addEventListener("click", async (e) => {
+      document.querySelector(`#question-container-${button.id}`).remove();
+      
+      const res = await fetch(`/questions/${button.id}/delete`, {
+        method: 'DELETE',
+      });
+    })
+  });
+  
 });

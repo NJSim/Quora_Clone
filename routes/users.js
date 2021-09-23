@@ -8,6 +8,7 @@ const {loginUser, logoutUser}=require('../auth.js')
 
 var router = express.Router();
 
+/////USER VALIDATOR/////
 const userValidators = [
   check('user_name')
     .exists({ checkFalsy: true })
@@ -58,7 +59,7 @@ const userValidators = [
       })
 ];
 
-/* GET users listing. */
+/////GET SIGNUP PAGE/////
 router.get('/signup', csrfProtection, (req, res) => {
   const user = db.User.build();
   res.render('user-signup', {
@@ -68,6 +69,7 @@ router.get('/signup', csrfProtection, (req, res) => {
   });
 });
 
+/////POST SIGNUP PAGE/////
 router.post('/signup', csrfProtection, userValidators,
   asyncHandler(async (req, res) => {
     const {
@@ -102,6 +104,7 @@ router.post('/signup', csrfProtection, userValidators,
     }
 }));
 
+/////LOGIN VALIDATOR/////
 const loginValidators = [
   check('user_name')
     .exists({ checkFalsy: true })
@@ -111,6 +114,7 @@ const loginValidators = [
     .withMessage('Please provide a value for Password'),
 ];
 
+/////GET LOGIN PAGE/////
 router.get('/login', csrfProtection, (req, res) => {
   res.render('user-login', {
     title: 'Log in',
@@ -118,6 +122,7 @@ router.get('/login', csrfProtection, (req, res) => {
   });
 });
 
+/////POST LOGIN PAGE/////
 router.post('/login', csrfProtection, loginValidators,
   asyncHandler(async (req, res) => {
     const {
@@ -154,7 +159,7 @@ router.post('/login', csrfProtection, loginValidators,
     });
 }));
 
-//Demo Login
+/////DEMO LOGIN/////
 router.post('/demo-login',
   asyncHandler(async (req, res) => {
     console.log(111111111)
@@ -169,7 +174,7 @@ router.post('/demo-login',
     });
 }));
 
-
+/////LOGOUT/////
 router.post('/logout', (req,res) => {
   logoutUser(req, res);
   return req.session.save(() => {
