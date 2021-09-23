@@ -17,15 +17,15 @@ block content
       each answer in myAnswers
 
         div(class='question-container')
-          div(class='user-text')= answer.Question.User.user_name
-          div(class='question-text')
-            a(href=`questions/${answer.Question.id}`)= answer.Question.title
-          div(class='question-buttons')
-            div(class='vote-section')
-              button(class='upvote-question-button' id= `${answer.question_id}`) Upvote
-              div(class='vote_holder')= answer.Question.Questions_votes.length
+          div(class='question-offset')
+            div(class='user-text')= answer.Question.User.user_name
+            div(class='question-text')
+              a(href=`questions/${answer.Question.id}`)= answer.Question.title
+            div(class='question-buttons')
+              div(class='vote-section')
+                button(class='upvote-question-button' id= `${answer.question_id}`) Upvote
+                div(class='vote_holder')= answer.Question.Questions_votes.length
           div(class='answer-container' id=`answer-${answer.id}`)
-            div= '--------------------------------------------'
             div(class='user-text')= answer.User.user_name
             div(class='answer-edit-delete')
               div(class='answer-text')= answer.content
