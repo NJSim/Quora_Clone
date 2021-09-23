@@ -1,25 +1,31 @@
 document.addEventListener("DOMContentLoaded", (e) => {
-  const editAnswerBtn = document.querySelector("div button.editBtn")
-  if(editAnswerBtn){
+  const editAnswerBtn = document.querySelector("div button.editBtn");
+  if (editAnswerBtn) {
     editAnswerBtn.addEventListener("click", async (e) => {
-      const answerContains = document.querySelector(`#answer-${editAnswerBtn.id} .answerContain`)
-      answerContains.style.display="block"
-
-    })
+      const answerContains = document.querySelector(
+        `#answer-${editAnswerBtn.id} .answerContain`
+      );
+      answerContains.style.display = "block";
+    });
   }
-
 
   const deleteAnswerBtn = document.querySelector("div button.deleteBtn");
   if (deleteAnswerBtn) {
     deleteAnswerBtn.addEventListener("click", async (e) => {
       const deleteAnswerId = parseInt(deleteAnswerBtn.id, 10);
-      const divToDelete = document.querySelector(`#answer-${deleteAnswerBtn.id}`);
-      divToDelete.remove();
-      await fetch(`/answers/${deleteAnswerId}`, {
+      const divToDelete = document.querySelector(
+        `#answer-${deleteAnswerBtn.id}`
+      );
+      const res = await fetch(`/answers/${deleteAnswerId}`, {
         method: "DELETE",
       })
-   });
-
+      
+      if (res.status === 200) {
+         window.location.reload();
+      }
+      
+     
+    });
   }
 
   const searchBar = document.getElementById("searchBar");

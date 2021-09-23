@@ -194,7 +194,8 @@ router.delete('/answers/:id(\\d+)', async(req,res)=>{
     const id = req.params.id;
     const answer = await db.Answer.findByPk(id);
     await answer.destroy();
-    
+    res.status = 200
+    res.send();
 })
 
 module.exports = router;
