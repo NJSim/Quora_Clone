@@ -12,13 +12,29 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert('Answers', [{
-      user_id: 2,
-      question_id: 1,
-      content: 'This is an answer for question_id 1',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
+    return queryInterface.bulkInsert('Answers', [
+      {
+        user_id: 2,
+        question_id: 1,
+        content: 'This is first answer for question_id 1',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 3,
+        question_id: 1,
+        content: 'This is second answer for question_id 1',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 4,
+        question_id: 2,
+        content: 'This is first answer for question_id 2',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+    ], {});
   },
 
   down: (queryInterface, Sequelize) => {

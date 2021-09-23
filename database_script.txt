@@ -13,3 +13,13 @@ npx sequelize model:generate --name Questions_vote --attributes 'user_id:integer
 npx sequelize model:generate --name Answers_vote --attributes 'user_id:integer,answer_id:integer'
 
 ,
+
+
+
+
+
+ORDER TO UNDO SEED, AND UNDO DATABASE
+npx dotenv sequelize db:seed:undo:all
+npx dotenv sequelize db:migrate:undo:all
+npx dotenv sequelize db:migrate
+npx dotenv sequelize db:seed:all

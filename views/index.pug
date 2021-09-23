@@ -21,9 +21,10 @@ block content
   h1= title
   if questions && questions.length > 0
     each question in questions
-      input(type='hidden' id= `questionid` value= question.id)
-      //- input(type='hidden' id= 'userid' value= user.id)
-      div
+      div(id=`question-container-${question.id}`)
+        div= '#########################################'
+        input(type='hidden' id= `questionid` value= question.id)
+        //- input(type='hidden' id= 'userid' value= user.id)
         div= question.User.user_name
         div
           a(href=`/questions/${question.id}`) #{question.title}
@@ -39,11 +40,13 @@ block content
             div
               button(type='submit') Submit
         div
+          button(class='delete-question-button' id= `${question.id}`) Delete
+        div
           if question.Answers && question.Answers.length > 0
             each answer in question.Answers
+              div= '--------------------------------------------'
               div= answer.User.user_name
               div= answer.content
               div
                 button(class='upvote-answer-button' id=`${answer.id}`) Upvote
                 div(class='answer_vote_holder')= answer.Answers_votes.length
-        div= '*************************'

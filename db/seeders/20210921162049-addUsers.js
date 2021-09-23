@@ -26,7 +26,6 @@ module.exports = {
         hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
         createdAt: new Date(),
         updatedAt: new Date()
-
       },
       {
         user_name: 'jack123',

@@ -7,7 +7,7 @@ const { requireAuth } = require('../auth');
 const Sequelize = require('sequelize');
 var router = express.Router();
 
-/* GET home page. */
+/////GET HOME PAGE/////
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   const questions = await db.Question.findAll({
     include: [db.Questions_vote,db.User,
@@ -26,15 +26,18 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
     token: req.csrfToken(),
   });
 }));
+
+//////GET INDIVIDUAL QUESTION/////
 router.get('/questions/:id(\\d+)',requireAuth,async(req,res,next)=>{
-   const questionId = parseInt(req.params.id,10);
-   const question = await db.Question.findByPk(questionId,{
-     include:[
+  const questionId = parseInt(req.params.id,10);
+  const question = await db.Question.findByPk(questionId,{
+    include:[
       {model:db.User},
       {model:db.Questions_vote},
     ],
-   });
-   const answers=await db.Answer.findAll({
+  });
+
+  const answers = await db.Answer.findAll({
     where: {question_id:questionId},
     include:[
       {model:db.User},
@@ -43,13 +46,14 @@ router.get('/questions/:id(\\d+)',requireAuth,async(req,res,next)=>{
     order: [['createdAt', 'DESC']]
   })
    //console.log(question.json())
-   res.render('question-detail',{
-     title:'View Question',
-     question,
-     answers
-   })
+  res.render('question-detail',{
+    title:'View Question',
+    question,
+    answers
+  })
 })
 
+/////POST ANSWER TO QUESTION/////
 router.post('/questions/:id(\\d+)/answers',requireAuth,async(req,res,next)=>{
   const {content} = req.body;
   await db.Answer.create({
@@ -60,20 +64,19 @@ router.post('/questions/:id(\\d+)/answers',requireAuth,async(req,res,next)=>{
   res.redirect('/questions/'+`${req.params.id}`)
 })
 
-
-
-
+/////GET NEW QUESTION FORM PAGE/////
 router.get('/questions/new',requireAuth,csrfProtection, (req,res,next)=>{
   res.render('create-question', {token: req.csrfToken(),})
 });
 
-const questionValidator=[
+/////POST NEW QUESTION/////
+const questionValidator = [
   check('title')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a value for Title')
     .isLength({ max: 1000 })
     .withMessage('Title must not be more than 1000 characters long')
-  ]
+]
 
 router.post('/questions', requireAuth, csrfProtection, questionValidator, asyncHandler(async(req,res)=>{
   const {title}=req.body;
@@ -83,7 +86,6 @@ router.post('/questions', requireAuth, csrfProtection, questionValidator, asyncH
     await db.Question.create({
       title,
       user_id:res.locals.user.id
-
     })
     res.redirect('/');
   } else {
@@ -95,6 +97,7 @@ router.post('/questions', requireAuth, csrfProtection, questionValidator, asyncH
   }
 }));
 
+/////GET MY QUESTIONS PAGE/////
 router.get('/my-questions', requireAuth, asyncHandler(async(req, res, next) => {
   const myQuestions = await db.Question.findAll({
     where: { user_id: res.locals.user.id },
@@ -111,6 +114,7 @@ router.get('/my-questions', requireAuth, asyncHandler(async(req, res, next) => {
   })
 }));
 
+/////GET MY ANSWERS PAGE/////
 router.get('/my-answers', requireAuth, asyncHandler(async(req, res, next) => {
   const myAnswers = await db.Answer.findAll({
     where: { user_id: res.locals.user.id },
@@ -127,6 +131,7 @@ router.get('/my-answers', requireAuth, asyncHandler(async(req, res, next) => {
   })
 }));
 
+/////QUESTION VOTE/////
 router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
   const questionId = parseInt(req.params.id,10);
   const userId = res.locals.user.id;
@@ -152,6 +157,7 @@ router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, r
   res.json({voteArray});
 }));
 
+/////ANSWER VOTE/////
 router.get('/answers/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
   const answerId = parseInt(req.params.id,10);
   const userId = res.locals.user.id;
@@ -177,7 +183,7 @@ router.get('/answers/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res
   res.json({voteArray});
 }));
 
-
+/////SEARCH QUESTIONS/////
 router.post('/search-question', asyncHandler(async (req, res) => {
   const {title} = req.body;
   const questions = await db.Question.findAll({
@@ -197,5 +203,16 @@ router.delete('/answers/:id(\\d+)', async(req,res)=>{
     res.status = 200
     res.send();
 })
+/////DELETE QUESTION/////
+router.delete('/questions/:id(\\d+)/delete', requireAuth, asyncHandler(async (req, res, next) => {
+  const questionId = parseInt(req.params.id, 10);
+  const questionToDelete = await db.Question.findByPk(questionId);
+  // const answersToDelete = await db.Answer.findAll({
+  //   where: {
+
+  //   }
+  // })
+  await questionToDelete.destroy();
+}));
 
 module.exports = router;
