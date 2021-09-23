@@ -8,12 +8,12 @@ append head
 
 block content
   div(id='welcome_container')
-        if locals.authenticated
-          p Welcome #{locals.user.user_name}!
-          form(method="post" action="/questions")
-            input(type="hidden" name="_csrf" value=token)
-            input(name="title" type="text" placeholder="What is your question?" required)
-            button(id="welcome-submit-btn" type="submit") Submit
+    if locals.authenticated
+      p Welcome #{locals.user.user_name}!
+      form(method="post" action="/questions")
+        input(type="hidden" name="_csrf" value=token)
+        input(name="title" type="text" placeholder="What is your question?" required)
+        button(id="welcome-submit-btn" type="submit") Submit
   h1= title
   div(class='questions-container')
     if questions && questions.length > 0
@@ -34,8 +34,6 @@ block content
                 div
                   button(class='answer' id=`${question.id}`)
                     <i class="far fa-comment answer"> Answer</i>
-                //- div
-                //-   button(class='delete-question-button' id= `${question.id}`) Delete
             div(class='answerContain' id=`${question.id}`)
               form(action=`/questions/${question.id}/answers` method='post')
                 input(type='hidden' name='_csrf' value=csrfToken)
