@@ -12,9 +12,11 @@ a#askQuestion {
 #nav_container {
   background-color: white;
   display:flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+  justify-content: center;
+  align-items: center;
+  gap:10px
+  }
+
 a#logo {
   color: rgb(185, 43, 39);
   text-decoration: none;
@@ -44,4 +46,41 @@ button#welcome-submit-btn{
 
 .answerContain {
   display: none;
+}
+
+#left-nav-container {
+  width: 200px;
+  display: flex;
+  gap: 52px;
+  flex-direction: column;
+  margin-left: 80px;
+  margin-right: 20px;
+  margin-top: 200px;
+  
+ 
+}
+
+#left-nav-container a {
+  font-size: 30px;
+  text-decoration: none;
+  align-content: flex-end;
+  display:flex;
+
+}
+#body{
+  display:grid;
+  width:100%;
+  grid-template-columns: 40% 60%;
+}
+
+#content-parts {
+  margin-right: 200px
+
+}
+
+
+
+#searchBar {
+  width: 400px;
+  height: 30px
 }

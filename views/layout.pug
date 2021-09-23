@@ -23,4 +23,11 @@ html
           span
             a(href='/users/login') Login
             a(href='/users/signup') Sign Up
-    block content
+    div(id="body")
+      div(id="left-nav-container")
+        div(id="nav-question")
+          a(href='/my-questions') My Questions
+        div(id="nav-answer")
+          a(href='/my-answers') My Answers
+      div(id="content-parts")
+        block content
