@@ -52,7 +52,12 @@ button#welcome-submit-btn{
 button.editBtn+div, button.edit-question-button+div{
   display: none;
 }
-
+li{
+  list-style-type:none;
+}
+li a{
+  text-decoration: none;
+}
 
 .question-container {
   display: flex;
