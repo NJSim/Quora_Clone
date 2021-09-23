@@ -189,4 +189,12 @@ router.post('/search-question', asyncHandler(async (req, res) => {
   res.send(questions)
 }))
 
+
+router.delete('/answers/:id(\\d+)', async(req,res)=>{
+    const id = req.params.id;
+    const answer = await db.Answer.findByPk(id);
+    await answer.destroy();
+    
+})
+
 module.exports = router;
