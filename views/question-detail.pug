@@ -6,13 +6,17 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 block content
     h1= title
-    div(class='user-text')= question.User.user_name
-    div
-        h3 #{question.title}
-        div
-          button(class='upvote-question-button' id= `${question.id}`) Upvote
-          div(class='vote_holder')= question.Questions_votes.length
-        button(class='answer' id=`${question.id}`) I want to answer!
+    div(class='questions-container')
+      div(class='question-container')
+        div(class='user-text')= question.User.user_name
+        div(class='question-text-single') #{question.title}
+        div(class='question-buttons')
+          div(class='vote-section')
+            button(class='upvote-question-button' id= `${question.id}`) Upvote
+            div(class='vote_holder')= question.Questions_votes.length
+          div(class='answer-delete-section')
+            div
+              button(class='answer' id=`${question.id}`) I want to answer!
         div(class='answerContain' id=`${question.id}`)
             form(action=`/questions/${question.id}/answers` method='post')
                 input(type='hidden' name='_csrf' value=csrfToken)
@@ -22,10 +26,10 @@ block content
         div
           if answers && answers.length > 0
             each answer in answers
-              div
+              div= '--------------------------------------------'
                 p(id="userName" class='user-text')= answer.User.user_name
-                p(id="answerContent")= answer.content
-                div
-                  button(class='upvote-answer-button' id=`${answer.id}`) Upvote
-                  div(class='answer_vote_holder')= answer.Answers_votes.length
-        div= '*************************'
+                p(id="answerContent" class='answer-text')= answer.content
+                div(class='answer-buttons')
+                  div(class='vote-section')
+                    button(class='upvote-answer-button' id=`${answer.id}`) Upvote
+                    div(class='answer_vote_holder')= answer.Answers_votes.length
