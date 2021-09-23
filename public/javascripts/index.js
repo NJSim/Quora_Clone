@@ -85,6 +85,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const res = await fetch(`/questions/${questionid}/votes`, {
         method: 'GET'
       })
+      console.log('&&&&&&&&&&&&&&')
+      console.log(res)
+      console.log('&&&&&&&&&&&&&&')
+      if (res.status === 401) {
+        window.location.href = "/log-in";
+        return;
+      }
 
       const {voteArray} = await res.json();
       console.log(voteArray.length)
@@ -103,6 +110,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const res = await fetch(`/answers/${answerid}/votes`, {
         method: 'GET'
       })
+
+      if (res.status === 401) {
+        window.location.href = "/log-in";
+        return;
+      }
 
       const {voteArray} = await res.json();
       console.log(voteArray.length)
