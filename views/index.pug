@@ -28,11 +28,12 @@ block content
               a(href=`/questions/${question.id}`) #{question.title}
             div(class='question-buttons')
               div(class='vote-section')
-                button(class='upvote-question-button' id= `${question.id}`) Upvote
+                button(class='upvote-question-button' id= `${question.id}`) Like
                 div(class='vote_holder')= question.Questions_votes.length
               div(class='answer-delete-section')
                 div
-                  button(class='answer' id=`${question.id}`) I want to answer!
+                  button(class='answer' id=`${question.id}`)
+                    <i class="far fa-comment answer"> Comment</i>
                 //- div
                 //-   button(class='delete-question-button' id= `${question.id}`) Delete
             div(class='answerContain' id=`${question.id}`)
@@ -49,5 +50,5 @@ block content
                   div(class='answer-text')= answer.content
                   div(class='answer-buttons')
                     div(class='vote-section')
-                      button(class='upvote-answer-button' id=`${answer.id}`) Upvote
+                      button(class='upvote-answer-button' id=`${answer.id}`) Like
                       div(class='answer_vote_holder')= answer.Answers_votes.length
