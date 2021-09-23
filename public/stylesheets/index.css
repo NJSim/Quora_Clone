@@ -42,6 +42,6 @@ button#welcome-submit-btn{
     justify-content: space-between;
 }
 
-#answerContain {
+.answerContain {
   display: none;
 }
