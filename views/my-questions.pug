@@ -14,8 +14,8 @@ block content
   if myQuestions && myQuestions.length > 0
     each question in myQuestions
       div
-        div= question.User.user_name
-        div 
+        div(class='user-text')= question.User.user_name
+        div
           a(href=`questions/${question.id}`)= question.title
         div
           button(class='upvote-question-button' id= `${question.id}`) Upvote
@@ -23,7 +23,7 @@ block content
         div
           if question.Answers && question.Answers.length > 0
             each answer in question.Answers
-              div= answer.User.user_name
+              div(class='user-text')= answer.User.user_name
               div= answer.content
               div
                 button(class='upvote-answer-button' id=`${answer.id}`) Upvote
