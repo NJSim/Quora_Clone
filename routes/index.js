@@ -195,6 +195,14 @@ router.post('/search-question', asyncHandler(async (req, res) => {
   res.send(questions)
 }))
 
+
+router.delete('/answers/:id(\\d+)', async(req,res)=>{
+    const id = req.params.id;
+    const answer = await db.Answer.findByPk(id);
+    await answer.destroy();
+    res.status = 200
+    res.send();
+})
 /////DELETE QUESTION/////
 router.delete('/questions/:id(\\d+)/delete', requireAuth, asyncHandler(async (req, res, next) => {
   const questionId = parseInt(req.params.id, 10);
