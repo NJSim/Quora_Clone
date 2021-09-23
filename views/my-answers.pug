@@ -23,7 +23,7 @@ block content
               a(href=`questions/${answer.Question.id}`)= answer.Question.title
             div(class='question-buttons')
               div(class='vote-section')
-                button(class='upvote-question-button' id= `${answer.question_id}`) Upvote
+                button(class='upvote-question-button' id= `${answer.question_id}`) Like
                 div(class='vote_holder')= answer.Question.Questions_votes.length
           div(class='answer-container' id=`answer-${answer.id}`)
             div(class='user-text')= answer.User.user_name
@@ -40,5 +40,5 @@ block content
                     button(type='submit') Submit
             div(class='answer-buttons')
               div(class='vote-section')
-                button(class='upvote-answer-button' id=`${answer.id}`) Upvote
+                button(class='upvote-answer-button' id=`${answer.id}`) Like
                 div(class='answer_vote_holder')= answer.Answers_votes.length
