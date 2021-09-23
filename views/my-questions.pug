@@ -7,14 +7,11 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  a(href='/my-questions') My Questions
-  a(href='/my-answers') My Answers
-
   h1= title
   div(class='questions-container')
     if myQuestions && myQuestions.length > 0
       each question in myQuestions
-        div(class='question-container')
+        div(id=`question-container-${question.id}` class='question-container')
           div(class='question-offset')
             div(class='user-text')= question.User.user_name
             div(class='question-text')
@@ -23,6 +20,8 @@ block content
               div(class='vote-section')
                 button(class='upvote-question-button' id= `${question.id}`) Like
                 div(class='vote_holder')= question.Questions_votes.length
+              div
+                button(class='delete-question-button' id= `${question.id}`) Delete
           div(class='answer-container')
             if question.Answers && question.Answers.length > 0
               each answer in question.Answers

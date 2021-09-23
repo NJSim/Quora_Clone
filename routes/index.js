@@ -134,7 +134,7 @@ router.get('/my-answers', requireAuth, asyncHandler(async(req, res, next) => {
 /////GET OUR STORY PAGE/////
 router.get('/our-story', asyncHandler(async(req, res, next) => {
   res.render('our-story', {
-    title: 'My Answers',
+    title: 'Our Story',
   })
 }));
 
@@ -202,7 +202,7 @@ router.post('/search-question', asyncHandler(async (req, res) => {
   res.send(questions)
 }))
 
-
+/////DELETE ANSWER/////
 router.delete('/answers/:id(\\d+)', async(req,res)=>{
     const id = req.params.id;
     // const answerVotes = await db.Answers_vote.findAll({
@@ -216,15 +216,11 @@ router.delete('/answers/:id(\\d+)', async(req,res)=>{
     res.status = 200
     res.send();
 })
+
 /////DELETE QUESTION/////
-router.delete('/questions/:id(\\d+)/delete', requireAuth, asyncHandler(async (req, res, next) => {
+router.delete('/questions/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   const questionId = parseInt(req.params.id, 10);
   const questionToDelete = await db.Question.findByPk(questionId);
-  // const answersToDelete = await db.Answer.findAll({
-  //   where: {
-
-  //   }
-  // })
   await questionToDelete.destroy();
 }));
 
