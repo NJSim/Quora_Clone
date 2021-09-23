@@ -4,6 +4,11 @@ html
       block head
         title="Express Starter App"
         link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel='stylesheet' href='/stylesheets/questions.css')
+        link(rel='stylesheet' href='/stylesheets/answers.css')
+        link(rel='stylesheet' href='/stylesheets/votes.css')
+        link(rel='stylesheet' href='/stylesheets/search.css')
+        link(rel='stylesheet' href='/stylesheets/nav.css')
         link(rel='stylesheet' href='/stylesheets/index.css')
         script(src="https://kit.fontawesome.com/72b8be2715.js" crossorigin="anonymous")
         script(src="/javascripts/index.js" type="module" defer)
@@ -23,14 +28,14 @@ html
           span
             a(href='/users/login') Login
             a(href='/users/signup') Sign Up
-    div(id="body")
+    div(id="left-body")
       div(id="left-nav-container")
         div(id="nav-home")
-          a(href='/') 
-            i(class="fas fa-home") 
+          a(href='/')
+            i(class="fas fa-home")
             div Home
         div(id="nav-question")
-          a(href='/my-questions') 
+          a(href='/my-questions')
             i(class="fas fa-question-circle")
             div My Questions
         div(id="nav-answer")

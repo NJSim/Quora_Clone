@@ -1,0 +1,26 @@
+.answer-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left:15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+.answer-container {
+    display: flex;
+    flex-direction:column;
+    border-top: solid red 2px;
+}
+
+.answer-delete-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.answer-text {
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
