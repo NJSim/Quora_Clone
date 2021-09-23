@@ -14,10 +14,6 @@ block content
             input(type="hidden" name="_csrf" value=token)
             input(name="title" type="text" placeholder="What is your question?" required)
             button(id="welcome-submit-btn" type="submit") Submit
-
-  a(href='/my-questions') My Questions
-  a(href='/my-answers') My Answers
-
   h1= title
   if questions && questions.length > 0
     each question in questions
