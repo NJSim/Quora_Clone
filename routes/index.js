@@ -198,6 +198,12 @@ router.post('/search-question', asyncHandler(async (req, res) => {
 
 router.delete('/answers/:id(\\d+)', async(req,res)=>{
     const id = req.params.id;
+    // const answerVotes = await db.Answers_vote.findAll({
+    //   where:{answer_id:id}
+    // })
+    // for( answerVote of answerVotes){
+    //   await answerVote.destroy();
+    // }
     const answer = await db.Answer.findByPk(id);
     await answer.destroy();
     res.status = 200

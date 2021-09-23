@@ -13,18 +13,19 @@ document.addEventListener("DOMContentLoaded", (e) => {
   if (deleteAnswerBtn) {
     deleteAnswerBtn.addEventListener("click", async (e) => {
       const deleteAnswerId = parseInt(deleteAnswerBtn.id, 10);
-      const divToDelete = document.querySelector(
-        `#answer-${deleteAnswerBtn.id}`
-      );
+      // const divToDelete = document.querySelector(
+      //   `#answer-${deleteAnswerBtn.id}`
+      // );
+
       const res = await fetch(`/answers/${deleteAnswerId}`, {
         method: "DELETE",
       })
-      
+
       if (res.status === 200) {
          window.location.reload();
       }
-      
-     
+
+
     });
   }
 
@@ -152,11 +153,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
   deleteQuestion.forEach(button => {
     button.addEventListener("click", async (e) => {
       document.querySelector(`#question-container-${button.id}`).remove();
-      
+
       const res = await fetch(`/questions/${button.id}/delete`, {
         method: 'DELETE',
       });
     })
   });
-  
+
 });
