@@ -48,6 +48,79 @@ button#welcome-submit-btn{
   display: none;
 }
 
+.question-container {
+  display: flex;
+  flex-direction: column;
+  border: solid black 2px;
+  width: 50%;
+
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.questions-container {
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* width:80%;
+  margin: auto; */
+}
+
+.vote-section {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
+}
+
+.question-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left:15px;
+  padding-right: 15px;
+}
+
+.answer-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left:15px;
+  padding-right: 15px;
+}
+
+.answer-delete-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-text {
+  color: gray;
+  font-weight: bold;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
+.question-text a {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.question-text {
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
+.answer-text {
+  font-weight: bold;
+  font-size: 15px;
+  padding-left: 15px;
+}
 #left-nav-container {
   width: 200px;
   display: flex;
@@ -56,8 +129,8 @@ button#welcome-submit-btn{
   margin-left: 80px;
   margin-right: 20px;
   margin-top: 200px;
-  
- 
+
+
 }
 
 #left-nav-container a {

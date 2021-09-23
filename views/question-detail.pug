@@ -6,7 +6,7 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 block content
     h1= title
-    div= question.User.user_name
+    div(class='user-text')= question.User.user_name
     div
         h3 #{question.title}
         div
@@ -23,10 +23,9 @@ block content
           if answers && answers.length > 0
             each answer in answers
               div
-                p(id="userName")= answer.User.user_name
+                p(id="userName" class='user-text')= answer.User.user_name
                 p(id="answerContent")= answer.content
                 div
                   button(class='upvote-answer-button' id=`${answer.id}`) Upvote
                   div(class='answer_vote_holder')= answer.Answers_votes.length
         div= '*************************'
-        
