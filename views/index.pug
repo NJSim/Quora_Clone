@@ -32,8 +32,8 @@ block content
             div(class='answer-delete-section')
               div
                 button(class='answer' id=`${question.id}`) I want to answer!
-              div
-                button(class='delete-question-button' id= `${question.id}`) Delete
+              //- div
+              //-   button(class='delete-question-button' id= `${question.id}`) Delete
           div(class='answerContain' id=`${question.id}`)
             form(action=`/questions/${question.id}/answers` method='post')
               input(type='hidden' name='_csrf' value=csrfToken)
