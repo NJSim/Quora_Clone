@@ -44,7 +44,7 @@ button#welcome-submit-btn{
     justify-content: space-between;
 }
 
-.answerContain {
+button.editBtn+div{
   display: none;
 }
 
@@ -54,8 +54,9 @@ button#welcome-submit-btn{
   gap: 52px;
   flex-direction: column;
   margin-left: 80px;
-  margin-right: 20px;
+  margin-right: 0;
   margin-top: 200px;
+  transform:translateX(30%);
   
  
 }
@@ -63,9 +64,9 @@ button#welcome-submit-btn{
 #left-nav-container a {
   font-size: 30px;
   text-decoration: none;
-  align-content: flex-end;
-  display:flex;
-
+  /* align-content: flex-end;
+  display:flex; */
+ 
 }
 #body{
   display:grid;
@@ -74,8 +75,8 @@ button#welcome-submit-btn{
 }
 
 #content-parts {
-  margin-right: 200px
-
+  margin-right: 200px;
+  margin-left:0;
 }
 
 
@@ -83,4 +84,8 @@ button#welcome-submit-btn{
 #searchBar {
   width: 400px;
   height: 30px
+}
+
+.answerContain{
+  display: none;
 }

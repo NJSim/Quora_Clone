@@ -28,12 +28,11 @@ block content
             p= answer.content
             button(class='deleteBtn' id=`${answer.id}`) delete the answer 
             button(class='editBtn' id=`editBtn-${answer.id}`) edit the answer
-            div(class='answerContain' id=`${answer.Question.id}`)
-              form(action=`/questions/${answer.Question.id}/answers` method='post')
-                input(type='hidden' name='_csrf' value=csrfToken)
+            div(class=`answerContain-${answer.id}` id=`${answer.id}`)
+              form(action=`/answers/${answer.id}` method='post')
+                input(type='hidden' name='_csrf' value=token)
                 +field('Answer:', 'content')
-                div
-                  button(type='submit') Submit
+                button(type='submit') Submit
           div
             button(class='upvote-answer-button' id=`${answer.id}`) Upvote
             div(class='answer_vote_holder')= answer.Answers_votes.length
