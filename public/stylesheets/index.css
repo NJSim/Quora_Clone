@@ -190,3 +190,8 @@ button.editBtn+div{
 .answerContain{
   display: none;
 }
+
+.searchDiv{
+  display:flex;
+  flex-direction: column;
+}
