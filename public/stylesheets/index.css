@@ -75,6 +75,7 @@ button#welcome-submit-btn{
   display: flex;
   flex-direction: row;
   padding-bottom: 10px;
+  gap: 5px;
 }
 
 .question-buttons {
@@ -91,6 +92,12 @@ button#welcome-submit-btn{
   justify-content: space-between;
   padding-left:15px;
   padding-right: 15px;
+  padding-bottom: 15px;
+}
+
+.answer-container {
+  display: flex;
+  flex-direction:column;
 }
 
 .answer-delete-section {
@@ -116,11 +123,21 @@ button#welcome-submit-btn{
   padding-bottom: 15px;
 }
 
+.question-text-single {
+  font-weight: bold;
+  font-size: 20px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
 .answer-text {
   font-weight: bold;
   font-size: 15px;
   padding-left: 15px;
+  padding-bottom: 15px;
 }
+
+
 #left-nav-container {
   width: 200px;
   display: flex;
