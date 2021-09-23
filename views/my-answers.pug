@@ -8,6 +8,32 @@ append head
 
 block content
   h1(id='dropdownSelect')= title
+  if myAnswers && myAnswers.length > 0
+    //- answer[i] in each myAnswers
+    each answer in myAnswers
+    
+      div
+        div= answer.Question.User.user_name
+        div 
+          a(href=`questions/${answer.Question.id}`)= answer.Question.title
+        div
+          button(class='upvote-question-button' id= `${answer.question_id}`) Upvote
+          div(class='vote_holder')= answer.Question.Questions_votes.length
+        div(class='answer-container' id=`answer-${answer.id}`)
+          div= answer.User.user_name
+          div 
+            p= answer.content
+            button(class='deleteBtn' id=`${answer.id}`) delete the answer 
+            button(class='editBtn' id=`editBtn-${answer.id}`) edit the answer
+            div(class=`answerContain-${answer.id}` id=`${answer.id}`)
+              form(action=`/answers/${answer.id}` method='post')
+                input(type='hidden' name='_csrf' value=token)
+                +field('Answer:', 'content')
+                button(type='submit') Submit
+          div
+            button(class='upvote-answer-button' id=`${answer.id}`) Upvote
+            div(class='answer_vote_holder')= answer.Answers_votes.length
+        div= '*************************'
   div(class='questions-container')
     if myAnswers && myAnswers.length > 0
       //- answer[i] in each myAnswers

@@ -1,13 +1,18 @@
 document.addEventListener("DOMContentLoaded", (e) => {
   /////EDIT ANSWER BUTTON/////
-  const editAnswerBtn = document.querySelector("div button.editBtn");
-  if (editAnswerBtn) {
-    editAnswerBtn.addEventListener("click", async (e) => {
-      const answerContains = document.querySelector(
-        `#answer-${editAnswerBtn.id} .answerContain`
-      );
-      answerContains.style.display = "block";
-    });
+  const editAnswerBtns = document.querySelectorAll("button.editBtn");
+  if (editAnswerBtns) {
+    for (let editAnswerBtn of editAnswerBtns) {
+      editAnswerBtn.addEventListener("click", async (e) => {
+        const answerId=e.target.id.split('-')[1].toString();
+        const answerContains = document.querySelector(`div.answerContain-${answerId}`);
+        answerContains.style.display="block";
+        const input=answerContains.getElementsByTagName('input')[1]
+        const d=document.querySelector(`div#answer-${answerId}`);
+        const p=d.getElementsByTagName('p');
+        input.value=p[0].innerText
+      });
+    }
   }
 
   /////DELETE ANSWER BUTTON/////

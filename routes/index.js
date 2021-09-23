@@ -115,7 +115,7 @@ router.get('/my-questions', requireAuth, asyncHandler(async(req, res, next) => {
 }));
 
 /////GET MY ANSWERS PAGE/////
-router.get('/my-answers', requireAuth, asyncHandler(async(req, res, next) => {
+router.get('/my-answers', requireAuth,csrfProtection, asyncHandler(async(req, res, next) => {
   const myAnswers = await db.Answer.findAll({
     where: { user_id: res.locals.user.id },
     include: [db.User, db.Answers_vote, {
@@ -128,6 +128,7 @@ router.get('/my-answers', requireAuth, asyncHandler(async(req, res, next) => {
   res.render('my-answers', {
     title: 'My Answers',
     myAnswers,
+    token:req.csrfToken()
   })
 }));
 
@@ -223,5 +224,16 @@ router.delete('/questions/:id(\\d+)', requireAuth, asyncHandler(async (req, res,
   const questionToDelete = await db.Question.findByPk(questionId);
   await questionToDelete.destroy();
 }));
+
+
+router.post('/answers/:id(\\d+)', requireAuth,csrfProtection,  asyncHandler(async(req,res,next)=>{
+  console.log('$$$$$$'+req)
+  const {content}=req.body;
+  const answer=await db.Answer.findByPk(req.params.id);
+  answer.content=content;
+  await answer.save();
+  res.redirect('/my-answers') 
+
+}))
 
 module.exports = router;
