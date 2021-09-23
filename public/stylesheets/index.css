@@ -3,6 +3,7 @@ h1 {
 }
 body {
   background-color: rgb(241, 242, 242);
+  padding-top: 37px;
 }
 a#askQuestion {
   color: rgb(185, 43, 39);
@@ -10,6 +11,10 @@ a#askQuestion {
   font-weight: bold;
 }
 #nav_container {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
   background-color: white;
   display:flex;
   justify-content: center;
@@ -47,6 +52,102 @@ button#welcome-submit-btn{
 button.editBtn+div{
   display: none;
 }
+
+.question-container {
+  display: flex;
+  flex-direction: column;
+  border: solid black 2px;
+  width: 50%;
+  background-color: white;
+
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.questions-container {
+  display: flex;
+  background-color: rgb(241, 242, 242);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* width:80%;
+  margin: auto; */
+}
+
+.vote-section {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
+  gap: 5px;
+}
+
+.question-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left:15px;
+  padding-right: 15px;
+}
+
+.answer-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left:15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+}
+
+.answer-container {
+  display: flex;
+  flex-direction:column;
+  border-top: solid red 2px;
+}
+
+.question-offset {
+  padding-bottom: 20px;
+}
+
+.answer-delete-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-text {
+  color: gray;
+  font-weight: bold;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
+.question-text a {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.question-text {
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
+.question-text-single {
+  font-weight: bold;
+  font-size: 20px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
+.answer-text {
+  font-weight: bold;
+  font-size: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
 
 #left-nav-container {
   width: 200px;

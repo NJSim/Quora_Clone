@@ -132,6 +132,13 @@ router.get('/my-answers', requireAuth,csrfProtection, asyncHandler(async(req, re
   })
 }));
 
+/////GET OUR STORY PAGE/////
+router.get('/our-story', asyncHandler(async(req, res, next) => {
+  res.render('our-story', {
+    title: 'My Answers',
+  })
+}));
+
 /////QUESTION VOTE/////
 router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
   const questionId = parseInt(req.params.id,10);

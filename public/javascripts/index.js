@@ -66,10 +66,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const answers = document.getElementsByClassName("answer");
   for (const answer of answers) {
     answer.addEventListener("click", (e) => {
-      console.log(e.target.id + "buttonId");
+      //console.log(e.currentTarget.id + "buttonId");
       const answerContains = document.getElementsByClassName("answerContain");
       for (const answerContain of answerContains) {
-        if (answerContain.id === e.target.id) {
+        if (answerContain.id === e.currentTarget.id) {
           answerContain.style.display = "block";
         }
       }

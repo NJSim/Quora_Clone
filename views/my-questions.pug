@@ -11,21 +11,24 @@ block content
   a(href='/my-answers') My Answers
 
   h1= title
-  if myQuestions && myQuestions.length > 0
-    each question in myQuestions
-      div
-        div= question.User.user_name
-        div 
-          a(href=`questions/${question.id}`)= question.title
-        div
-          button(class='upvote-question-button' id= `${question.id}`) Upvote
-          div(class='vote_holder')= question.Questions_votes.length
-        div
-          if question.Answers && question.Answers.length > 0
-            each answer in question.Answers
-              div= answer.User.user_name
-              div= answer.content
-              div
-                button(class='upvote-answer-button' id=`${answer.id}`) Upvote
-                div(class='answer_vote_holder')= answer.Answers_votes.length
-        div= '*************************'
+  div(class='questions-container')
+    if myQuestions && myQuestions.length > 0
+      each question in myQuestions
+        div(class='question-container')
+          div(class='question-offset')
+            div(class='user-text')= question.User.user_name
+            div(class='question-text')
+              a(href=`questions/${question.id}`)= question.title
+            div(class='question-buttons')
+              div(class='vote-section')
+                button(class='upvote-question-button' id= `${question.id}`) Like
+                div(class='vote_holder')= question.Questions_votes.length
+          div(class='answer-container')
+            if question.Answers && question.Answers.length > 0
+              each answer in question.Answers
+                div(class='user-text')= answer.User.user_name
+                div(class='answer-text')= answer.content
+                div(class='answer-buttons')
+                  div(class='vote-section')
+                    button(class='upvote-answer-button' id=`${answer.id}`) Like
+                    div(class='answer_vote_holder')= answer.Answers_votes.length
