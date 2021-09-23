@@ -5,7 +5,7 @@ html
         title="Express Starter App"
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/index.css')
-
+        script(src="https://kit.fontawesome.com/72b8be2715.js" crossorigin="anonymous")
         script(src="/javascripts/index.js" type="module" defer)
   body
     div(id='nav_container')
@@ -17,8 +17,8 @@ html
       div(id='user_auth_container')
         if locals.authenticated
           select(name='dropDown', id='profileSelect')
-               each val in ['myQuestion' , 'myAnswer' , 'Logout']
-                  option(value=val)=val
+            each val in ['myQuestion' , 'myAnswer' , 'Logout']
+              option(value=val)=val
         else
           span
             a(href='/users/login') Login
@@ -29,5 +29,7 @@ html
           a(href='/my-questions') My Questions
         div(id="nav-answer")
           a(href='/my-answers') My Answers
+        div(id="nav-story")
+          a(href='/our-story') Our Story
       div(id="content-parts")
         block content
