@@ -5,6 +5,7 @@ const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { requireAuth } = require('../auth');
 const Sequelize = require('sequelize');
+
 var router = express.Router();
 
 /////GET HOME PAGE/////
