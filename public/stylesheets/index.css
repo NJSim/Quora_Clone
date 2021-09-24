@@ -80,7 +80,6 @@ li a{
 }
 
 #content-parts {
-  position:fixed;
   margin: 0 auto;
   width: 60%;
 }
@@ -88,4 +87,7 @@ li a{
 .searchDiv{
   display:flex;
   flex-direction: column;
+}
+@media screen and () {
+
 }
