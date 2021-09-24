@@ -5,6 +5,8 @@ h1 {
 body {
   background-color: rgb(241, 242, 242);
   padding-top: 37px;
+  display: flex;
+  flex-direction: row;
 }
 
 a#askQuestion {

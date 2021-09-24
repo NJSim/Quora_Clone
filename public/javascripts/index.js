@@ -154,33 +154,36 @@ document.addEventListener("DOMContentLoaded", (e) => {
   /////ANSWER UPVOTE BUTTON/////
   const answerVote = document.querySelectorAll(".upvote-answer-button");
 
-  for (let i = 0; i < answerVote.length; i++) {
-    answerVote[i].addEventListener("click", async (e) => {
-      // const userid = document.getElementById('userid').value;
-      const answerid = document.getElementsByClassName(`upvote-answer-button`)[i].id;
-      const voteid = document.getElementsByClassName(`answer-vote-holder`)[i];
+  // for (let i = 0; i < answerVote.length; i++) {
+  //   answerVote[i].addEventListener("click", async (e) => {
+  //     // const userid = document.getElementById('userid').value;
+  //     const answerid = document.getElementsByClassName(`upvote-answer-button`)[i].id;
+  //     const voteid = document.getElementsByClassName(`answer-vote-holder`)[i];
 
-      const res = await fetch(`/answers/${answerid}/votes`, {
-        method: "GET",
-      });
-
-      const { voteArray } = await res.json();
-      voteid.innerText = voteArray.length;
-    });
-  }
-
-  // answerVote.forEach((button) => {
-  //   button.addEventListener("click", async (e) => {
-  //     const totalVote = document.getElementsByClassName(`answer-vote-holder-${button.id}`);
-      
-  //     const res = await fetch(`/answers/${button.id}/votes`, {
+  //     const res = await fetch(`/answers/${answerid}/votes`, {
   //       method: "GET",
   //     });
 
   //     const { voteArray } = await res.json();
-  //     totalVote.innerText = voteArray.length;
+  //     voteid.innerText = voteArray.length;
   //   });
-  // });
+  // }
+
+  answerVote.forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      const totalVote = document.getElementsByClassName(`answer-vote-holder-${button.id}`);
+      
+      const res = await fetch(`/answers/${button.id}/votes`, {
+        method: "GET",
+      });
+
+      console.log(button.id)
+
+      const { voteArray } = await res.json();
+      totalVote.innerText = voteArray.length;
+      window.location.reload();
+    });
+  });
 
   /////DELETE QUESTION BUTTON/////
   const deleteQuestion = document.querySelectorAll(".delete-question-button");

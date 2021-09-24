@@ -191,6 +191,7 @@ router.get('/answers/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res
   });
 
   res.json({voteArray});
+  res.send();
 }));
 
 /////SEARCH QUESTIONS/////

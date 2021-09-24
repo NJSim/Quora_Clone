@@ -50,4 +50,4 @@ block content
                     div(class='vote-section')
                       if locals.authenticated
                         button(class='upvote-answer-button' id=`${answer.id}`) Like
-                        div(class=`answer-vote-holder`)= answer.Answers_votes.length
+                        div(class=`answer-vote-holder-${question.id}`)= answer.Answers_votes.length
