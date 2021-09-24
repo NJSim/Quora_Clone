@@ -154,20 +154,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
   /////ANSWER UPVOTE BUTTON/////
   const answerVote = document.querySelectorAll(".upvote-answer-button");
 
-  // for (let i = 0; i < answerVote.length; i++) {
-  //   answerVote[i].addEventListener("click", async (e) => {
-  //     // const userid = document.getElementById('userid').value;
-  //     const answerid = document.getElementsByClassName(`upvote-answer-button`)[i].id;
-  //     const voteid = document.getElementsByClassName(`answer-vote-holder`)[i];
+  for (let i = 0; i < answerVote.length; i++) {
+    answerVote[i].addEventListener("click", async (e) => {
+      // const userid = document.getElementById('userid').value;
+      const answerid = document.getElementsByClassName(`upvote-answer-button`)[i].id;
+      const voteid = document.getElementsByClassName(`answer-vote-holder`)[i];
 
-  //     const res = await fetch(`/answers/${answerid}/votes`, {
-  //       method: "GET",
-  //     });
+      const res = await fetch(`/answers/${answerid}/votes`, {
+        method: "GET",
+      });
 
-  //     const { voteArray } = await res.json();
-  //     voteid.innerText = voteArray.length;
-  //   });
-  // }
+      const { voteArray } = await res.json();
+      voteid.innerText = voteArray.length;
+    });
+  }
 
   answerVote.forEach((button) => {
     button.addEventListener("click", async (e) => {
@@ -177,11 +177,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
         method: "GET",
       });
 
-      console.log(button.id)
-
       const { voteArray } = await res.json();
       totalVote.innerText = voteArray.length;
-      window.location.reload();
+      // window.location.reload();
     });
   });
 
