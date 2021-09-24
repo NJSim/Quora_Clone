@@ -8,6 +8,20 @@ const Sequelize = require('sequelize');
 
 var router = express.Router();
 
+const questionValidators = [
+  check('title')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for question')
+    .isLength({ max: 1000 })
+    .withMessage('User Name must not be more than 50 characters long')
+    .custom((value) => {
+      return db.User.findOne({ where: { user_name: value } })
+        .then((user) => {
+          if (user) {
+            return Promise.reject('The provided user name is already in use by another account');
+          }
+        });
+    })]
 /////GET HOME PAGE/////
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   const questions = await db.Question.findAll({
@@ -233,7 +247,8 @@ router.post('/answers/:id(\\d+)', requireAuth,csrfProtection,  asyncHandler(asyn
   const answer=await db.Answer.findByPk(req.params.id);
   answer.content=content;
   await answer.save();
-  res.redirect('/my-answers') 
+  res.redirect('/my-answers')
+
 }))
 
 

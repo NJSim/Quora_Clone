@@ -26,9 +26,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
         );
         answerContains.style.display = "block";
         const input = answerContains.getElementsByTagName("input")[1];
-        const d = document.querySelector(`div#answer-${answerId}`);
-        const p = d.getElementsByTagName("p");
-        input.value = p[0].innerText;
+        const answerContent = document.querySelector(`div.answer-text-${answerId}`);
+        input.value = answerContent.innerText;
       });
     }
   }
@@ -64,7 +63,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const questions = await res.json();
     const ul = document.getElementById("suggestions");
     ul.innerHTML = "";
-    
+
     if (e.target.value) {
       for (let question of questions) {
         const newli = document.createElement("li");
@@ -145,7 +144,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const res = await fetch(`/questions/${questionid}/votes`, {
         method: "GET",
       });
-      
+
       const { voteArray } = await res.json();
       voteid.innerText = voteArray.length;
     });
@@ -172,7 +171,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // answerVote.forEach((button) => {
   //   button.addEventListener("click", async (e) => {
   //     const totalVote = document.getElementsByClassName(`answer-vote-holder-${button.id}`);
-      
+
   //     const res = await fetch(`/answers/${button.id}/votes`, {
   //       method: "GET",
   //     });
