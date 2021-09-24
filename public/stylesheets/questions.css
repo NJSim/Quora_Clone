@@ -1,7 +1,8 @@
 .question-container {
     display: flex;
     flex-direction: column;
-    border: solid black 2px;
+    border: solid rgb(215, 215, 215) 1px;
+    border-radius: 3px;
     width: 50%;
     background-color: white;
 
@@ -32,12 +33,11 @@
 
 .question-offset {
     padding-bottom: 20px;
-  }
-
+}
 
 .question-text a {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 12px;
 }
 
 .question-text {
@@ -47,7 +47,7 @@
 
 .question-text-single {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 12px;
     padding-left: 15px;
     padding-bottom: 15px;
 }

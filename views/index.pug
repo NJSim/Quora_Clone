@@ -19,7 +19,6 @@ block content
     if questions && questions.length > 0
       each question in questions
         div(id=`question-container-${question.id}` class='question-container')
-
           input(type='hidden' id= `questionid` value= question.id)
           //- input(type='hidden' id= 'userid' value= user.id)
           div(class='question-offset')
@@ -28,8 +27,9 @@ block content
               a(href=`/questions/${question.id}`) #{question.title}
             div(class='question-buttons')
               div(class='vote-section')
-                button(class='upvote-question-button' id= `${question.id}`) Like
-                div(class='vote_holder')= question.Questions_votes.length
+                if locals.authenticated
+                  button(class='upvote-question-button' id= `${question.id}`) Like
+                  div(class='vote_holder')= question.Questions_votes.length
               div(class='answer-delete-section')
                 div
                   button(class='answer' id=`${question.id}`)
@@ -48,5 +48,6 @@ block content
                   div(class='answer-text')= answer.content
                   div(class='answer-buttons')
                     div(class='vote-section')
-                      button(class='upvote-answer-button' id=`${answer.id}`) Like
-                      div(class='answer_vote_holder')= answer.Answers_votes.length
+                      if locals.authenticated
+                        button(class='upvote-answer-button' id=`${answer.id}`) Like
+                        div(class=`answer-vote-holder`)= answer.Answers_votes.length
