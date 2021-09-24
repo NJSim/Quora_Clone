@@ -28,8 +28,10 @@ block content
             div(class='question-buttons')
               div(class='vote-section')
                 if locals.authenticated
-                  button(class='upvote-question-button' id= `${question.id}`) Like
-                  div(class='vote_holder')= question.Questions_votes.length
+                  button(class='upvote-question-button' id= `${question.id}`)
+                    i(class="fa fa-thumbs-up")
+                      div Upvote
+                  div(class='vote_holder voteNum')= question.Questions_votes.length
               div(class='answer-delete-section')
                 div
                   button(class='answer' id=`${question.id}`)
@@ -49,5 +51,7 @@ block content
                   div(class='answer-buttons')
                     div(class='vote-section')
                       if locals.authenticated
-                        button(class='upvote-answer-button' id=`UQ/${answer.id}`) Like
-                        div(id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length
+                        button(class='upvote-answer-button' id=`UQ/${answer.id}`)
+                          i(class="fa fa-thumbs-up")
+                            div Upvote
+                        div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length

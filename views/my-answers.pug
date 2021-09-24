@@ -46,8 +46,10 @@ block content
               a(href=`questions/${answer.Question.id}`)= answer.Question.title
             div(class='question-buttons')
               div(class='vote-section')
-                button(class='upvote-question-button' id= `${answer.question_id}`) Like
-                div(class='vote_holder')= answer.Question.Questions_votes.length
+                button(class='upvote-question-button' id= `${answer.question_id}`)
+                  i(class="fa fa-thumbs-up")
+                      div Upvote
+                div(class='vote_holder voteNum')= answer.Question.Questions_votes.length
           div(class='answer-container' id=`answer-${answer.id}`)
             div(class='user-text')= answer.User.user_name
             div(class='answer-edit-delete')
@@ -62,5 +64,7 @@ block content
                   button(type='submit') Edit
             div(class='answer-buttons')
               div(class='vote-section')
-                button(class='upvote-answer-button' id=`UQ/${answer.id}`) Like
-                div(id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length
+                button(class='upvote-answer-button' id=`UQ/${answer.id}`)
+                  i(class="fa fa-thumbs-up")
+                    div Upvote
+                div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length

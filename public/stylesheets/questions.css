@@ -3,7 +3,7 @@
     flex-direction: column;
     border: solid rgb(215, 215, 215) 1px;
     border-radius: 3px;
-    width: 50%;
+    width: 100%;
     background-color: white;
 
     /* justify-content: center; */
@@ -37,7 +37,7 @@
 
 .question-text a {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 28px;
     overflow-wrap: break-word;
 }
 
@@ -49,7 +49,7 @@
 
 .question-text-single {
     font-weight: bold;
-    font-size: 12px;
+    font-size: 28px;
     overflow-wrap: break-word;
     padding-left: 15px;
     padding-bottom: 15px;
