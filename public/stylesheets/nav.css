@@ -15,3 +15,10 @@
     /* align-content: flex-end;
     display:flex; */
 }
+
+#left-body{
+  display:grid;
+  width:100%;
+  grid-template-columns: 40% 60%;
+  z-index: 1;
+}

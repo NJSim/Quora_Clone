@@ -80,6 +80,7 @@ li a{
 }
 
 #content-parts {
+  /* position:fixed; */
   margin: 0 auto;
   width: 60%;
 }

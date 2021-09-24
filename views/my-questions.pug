@@ -30,5 +30,5 @@ block content
                   div(class='answer-text')= answer.content
                   div(class='answer-buttons')
                     div(class='vote-section')
-                      button(class='upvote-answer-button' id=`${answer.id}`) Like
-                      div(class='answer_vote_holder')= answer.Answers_votes.length
+                      button(class='upvote-answer-button' id=`UQ/${answer.id}`) Like
+                      div(id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length

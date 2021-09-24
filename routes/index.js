@@ -22,6 +22,7 @@ const questionValidators = [
           }
         });
     })]
+    
 /////GET HOME PAGE/////
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   const questions = await db.Question.findAll({
@@ -36,7 +37,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   });
 
   res.render('index', {
-    title: 'Mora Home Page(edit later)',
+    title: 'Mora Home',
     questions,
     token: req.csrfToken(),
   });
@@ -182,7 +183,7 @@ router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, r
 }));
 
 /////ANSWER VOTE/////
-router.get('/answers/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
+router.get('/answers/UQ/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
   const answerId = parseInt(req.params.id,10);
   const userId = res.locals.user.id;
 
