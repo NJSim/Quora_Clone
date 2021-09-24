@@ -29,7 +29,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
 }));
 
 //////GET INDIVIDUAL QUESTION/////
-router.get('/questions/:id(\\d+)',requireAuth,async(req,res,next)=>{
+router.get('/questions/:id(\\d+)',requireAuth,csrfProtection, async(req,res,next)=>{
   const questionId = parseInt(req.params.id,10);
   const question = await db.Question.findByPk(questionId,{
     include:[
@@ -50,7 +50,8 @@ router.get('/questions/:id(\\d+)',requireAuth,async(req,res,next)=>{
   res.render('question-detail',{
     title:'View Question',
     question,
-    answers
+    answers,
+    token:req.csrfToken()
   })
 })
 
@@ -228,13 +229,19 @@ router.delete('/questions/:id(\\d+)', requireAuth, asyncHandler(async (req, res,
 
 
 router.post('/answers/:id(\\d+)', requireAuth,csrfProtection,  asyncHandler(async(req,res,next)=>{
-  console.log('$$$$$$'+req)
   const {content}=req.body;
   const answer=await db.Answer.findByPk(req.params.id);
   answer.content=content;
   await answer.save();
   res.redirect('/my-answers') 
-
 }))
 
+
+router.post('/questions/:id(\\d+)', requireAuth,csrfProtection,  asyncHandler(async(req,res,next)=>{
+  const {title} = req.body;
+  const question = await db.Question.findByPk(req.params.id);
+  question.title = title;
+  await question.save();
+  res.redirect(`/questions/${req.params.id}`);
+}))
 module.exports = router;

@@ -1,0 +1,6 @@
+.vote-section {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+    gap: 5px;
+  }
