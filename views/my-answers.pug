@@ -51,7 +51,7 @@ block content
           div(class='answer-container' id=`answer-${answer.id}`)
             div(class='user-text')= answer.User.user_name
             div(class='answer-edit-delete')
-              div(class=`answer-text-${answer.id}`)= answer.content
+              div(class=`answer-text-${answer.id} answer-text`)= answer.content
               div(class='answer-buttons')
                 button(class='deleteBtn' id=`${answer.id}`) delete the answer
                 button(class='editBtn' id=`editBtn-${answer.id}`) edit the answer

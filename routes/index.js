@@ -108,7 +108,7 @@ router.post('/questions', requireAuth, csrfProtection, questionValidator, asyncH
     const errors = validatorErrors.array().map((error) => error.msg);
     res.render('create-question', {
       errors,
-      csrfToken: req.csrfToken(),
+      token: req.csrfToken(),
     });
   }
 }));
