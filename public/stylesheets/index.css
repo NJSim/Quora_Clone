@@ -49,8 +49,14 @@ button#welcome-submit-btn{
     justify-content: space-between;
 }
 
-button.editBtn+div{
+button.editBtn+div, button.edit-question-button+div{
   display: none;
+}
+li{
+  list-style-type:none;
+}
+li a{
+  text-decoration: none;
 }
 
 .question-container {
