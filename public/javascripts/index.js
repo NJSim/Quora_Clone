@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     console.log(button)
     button.addEventListener("click", async (e) => {
       const totalVote = document.getElementById(`answer-vote-holder-${button.id}`);
-      console.log(totalVote)
+      console.log('test', totalVote)
       const res = await fetch(`/answers/${button.id}/votes`, {
         method: "GET",
       });
