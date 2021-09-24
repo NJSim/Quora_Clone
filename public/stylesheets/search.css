@@ -1,0 +1,17 @@
+#searchBar {
+    width: 400px;
+    height: 30px
+}
+
+.answerContain{
+    display: none;
+}
+
+.searchDiv{
+    display:flex;
+    flex-direction: column;
+}
+
+#search-container{
+    justify-content: space-between;
+}
