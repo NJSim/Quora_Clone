@@ -1,5 +1,6 @@
 h1 {
   color: #555555;
+  text-align: center;
 }
 
 body {
@@ -75,10 +76,7 @@ li a{
 }
 
 #main-body{
-  display:grid;
-  grid-template-columns: 40% 60%;
-  
-
+  display: flex;
 }
 
 #content-parts {
@@ -90,6 +88,7 @@ li a{
   display:flex;
   flex-direction: column;
 }
+
 @media screen and () {
 
 }
