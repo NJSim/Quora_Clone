@@ -11,12 +11,6 @@ block content
         div(class='question-offset')
           div(class='user-text')= question.User.user_name
           div(class='question-text-single') #{question.title}
-          button(class='edit-question-button' id= `${question.id}`) Edit Question
-          div(class=`questionContain-${question.id}` id=`${question.id}`)
-              form(action=`/questions/${question.id}` method='post')
-                input(type='hidden' name='_csrf' value=token)
-                +field('Question:', 'title')
-                button(type='submit') Submit
           div(class='question-buttons')
             div(class='vote-section')
               button(class='upvote-question-button' id= `${question.id}`) Like
