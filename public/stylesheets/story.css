@@ -1,6 +1,8 @@
 .developer-Jessi,
 .developer-Nick {
     background-color: lightgray;
+    display:flex;
+    flex-direction:row;
 }
 
 .developer-Kristy,.developer-Jack{
@@ -9,5 +11,14 @@
 
 .developers-container {
     margin-right: 0px;
-    width: 100%
+    width: 100%;
+    position: relative
 }
+
+.developer-image img{
+    border-radius: 50%;
+}
+
+
+
+
