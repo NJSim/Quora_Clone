@@ -1,0 +1,13 @@
+.developer-Jessi,
+.developer-Nick {
+    background-color: lightgray;
+}
+
+.developer-Kristy,.developer-Jack{
+    background-color: white
+}
+
+.developers-container {
+    margin-right: 0px;
+    width: 100%
+}
