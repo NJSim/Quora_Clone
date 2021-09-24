@@ -65,7 +65,7 @@ router.get('/signup', csrfProtection, (req, res) => {
   res.render('user-signup', {
     title: 'Sign up',
     user,
-    csrfToken: req.csrfToken(),
+    token: req.csrfToken(),
   });
 });
 
@@ -99,7 +99,7 @@ router.post('/signup', csrfProtection, userValidators,
         title: 'Sign up',
         user,
         errors,
-        csrfToken: req.csrfToken(),
+        token: req.csrfToken(),
       });
     }
 }));
@@ -118,7 +118,7 @@ const loginValidators = [
 router.get('/login', csrfProtection, (req, res) => {
   res.render('user-login', {
     title: 'Log in',
-    csrfToken: req.csrfToken(),
+    token: req.csrfToken(),
   });
 });
 
@@ -155,7 +155,7 @@ router.post('/login', csrfProtection, loginValidators,
       title: 'Login',
       user_name,
       errors,
-      csrfToken: req.csrfToken(),
+      token: req.csrfToken(),
     });
 }));
 
