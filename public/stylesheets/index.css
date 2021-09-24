@@ -5,6 +5,8 @@ h1 {
 body {
   background-color: rgb(241, 242, 242);
   padding-top: 37px;
+  display:flex;
+  flex-direction: column;
 }
 
 a#askQuestion {
@@ -72,11 +74,11 @@ li a{
   padding-bottom: 15px;
 }
 
-#left-body{
+#main-body{
   display:grid;
-  width:100%;
   grid-template-columns: 40% 60%;
-  z-index: 1;
+  
+
 }
 
 #content-parts {
