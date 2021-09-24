@@ -1,12 +1,13 @@
 h1 {
   color: #555555;
+  text-align: center;
 }
 
 body {
   background-color: rgb(241, 242, 242);
   padding-top: 37px;
-  display: flex;
-  flex-direction: row;
+  display:flex;
+  flex-direction: column;
 }
 
 a#askQuestion {
@@ -74,11 +75,8 @@ li a{
   padding-bottom: 15px;
 }
 
-#left-body{
-  display:grid;
-  width:100%;
-  grid-template-columns: 40% 60%;
-  z-index: 1;
+#main-body{
+  display: flex;
 }
 
 #content-parts {
@@ -90,4 +88,8 @@ li a{
 .searchDiv{
   display:flex;
   flex-direction: column;
+}
+
+@media screen and () {
+
 }

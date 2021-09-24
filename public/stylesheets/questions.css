@@ -37,17 +37,21 @@
 
 .question-text a {
     font-weight: bold;
-    font-size: 12px;
+    font-size: 16px;
+    overflow-wrap: break-word;
 }
 
 .question-text {
     padding-left: 15px;
     padding-bottom: 15px;
+    padding-right: 15px;
 }
 
 .question-text-single {
     font-weight: bold;
     font-size: 12px;
+    overflow-wrap: break-word;
     padding-left: 15px;
     padding-bottom: 15px;
+    padding-right: 15px;
 }
