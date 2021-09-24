@@ -4,10 +4,10 @@ include utils.pug
 
 block content
   form(action='/users/login' method='post')
-    input(type='hidden' name='_csrf' value=csrfToken)
+    input(type='hidden' name='_csrf' value=token)
     +field('User Name', 'user_name', user_name)
     +field('Password', 'password', password, 'password')
     div
       button(type='submit') Log in
-  form(action='/users/demo-login' method='post')   
+  form(action='/users/demo-login' method='post')
     button(type='submit') Demo User

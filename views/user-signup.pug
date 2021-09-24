@@ -4,7 +4,7 @@ include utils.pug
 
 block content
   form(action='/users/signup' method='post')
-    input(type='hidden' name='_csrf' value=csrfToken)
+    input(type='hidden' name='_csrf' value=token)
     +field('User Name', 'user_name', user.user_name)
     +field('Email', 'email', user.email)
     +field('Occuption', 'occupation', user.occupation)
@@ -12,5 +12,5 @@ block content
     +field('Confirm Password', 'confirmPassword', '', 'password')
     div
       button(type='submit') Sign Up
-  form(action='/users/demo-login' method='post')   
+  form(action='/users/demo-login' method='post')
     button(type='submit') Demo User

@@ -21,7 +21,7 @@ block content
                   <i class="far fa-comment answer"> Answer</i>
           div(class='answerContain' id=`${question.id}`)
               form(action=`/questions/${question.id}/answers` method='post')
-                  input(type='hidden' name='_csrf' value=csrfToken)
+                  input(type='hidden' name='_csrf' value=token)
                   +field('Answer:', 'content')
                   div
                       button(type='submit') Submit
