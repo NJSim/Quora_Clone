@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     editQuestionBtn.addEventListener("click", async (e) => {
       const questionId = parseInt(e.target.id, 10);
       const questionContain = document.querySelector(
-        `div.questionContain-${questionId}`
+        `div.question-edit-contain`
       );
       questionContain.style.display = "block";
 
