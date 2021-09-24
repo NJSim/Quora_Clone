@@ -1,0 +1,53 @@
+body {
+  background-image: url('../image/loginBackground.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: rgb(67, 67, 67);
+  font-weight: bold;
+
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 3px;
+  background-color: white;
+  width: 700px;
+  margin: auto;
+  margin-top: 25px;
+}
+
+#logo {
+  color: rgb(185, 43, 39);
+  text-decoration: none;
+  font-family: serif;
+  font-size: 55px;
+  font-weight: bold;
+}
+
+.login-form {
+  margin-top: 20px;
+  display: block;
+}
+
+.loginbutton {
+  background-color: #2E69ff;
+  color: white;
+  border-radius: 20px;
+  width: 120px;
+  height: 30px;
+  border: none; 
+  margin-top: 5px;
+  margin-left: 15px;
+}
+
+.form-control {
+  margin-top: 5px;
+  display: block;
+}
+

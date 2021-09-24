@@ -35,7 +35,8 @@ a#askQuestion {
 a#logo {
   color: rgb(185, 43, 39);
   text-decoration: none;
-  font-family: sans-serif;
+  font-family: serif;
+  font-weight: bold;
   font-size: xx-large;
   justify-content: space-between;
 }
