@@ -49,5 +49,5 @@ block content
                   div(class='answer-buttons')
                     div(class='vote-section')
                       if locals.authenticated
-                        button(class='upvote-answer-button' id=`${answer.id}`) Like
-                        div(class=`answer-vote-holder-${question.id}`)= answer.Answers_votes.length
+                        button(class='upvote-answer-button' id=`UQ/${answer.id}`) Like
+                        div(id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length

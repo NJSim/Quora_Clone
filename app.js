@@ -24,6 +24,7 @@ app.use(cookieParser(sessionSecret));
 // set up session middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/favicon.ico', express.static('public/favicon.ico'));
 app.use(
   session({
     secret: 'superSecret',

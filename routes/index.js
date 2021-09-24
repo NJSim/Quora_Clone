@@ -168,7 +168,7 @@ router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, r
 }));
 
 /////ANSWER VOTE/////
-router.get('/answers/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
+router.get('/answers/UQ/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
   const answerId = parseInt(req.params.id,10);
   const userId = res.locals.user.id;
 
@@ -191,7 +191,6 @@ router.get('/answers/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res
   });
 
   res.json({voteArray});
-  res.send();
 }));
 
 /////SEARCH QUESTIONS/////
