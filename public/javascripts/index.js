@@ -152,7 +152,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   /////ANSWER UPVOTE BUTTON/////
   const answerVote = document.querySelectorAll(".upvote-answer-button");
-  console.log(answerVote)
   // for (let i = 0; i < answerVote.length; i++) {
   //   answerVote[i].addEventListener("click", async (e) => {
   //     // const userid = document.getElementById('userid').value;
@@ -169,10 +168,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // }
 
   answerVote.forEach((button) => {
-    console.log(button)
     button.addEventListener("click", async (e) => {
       const totalVote = document.getElementById(`answer-vote-holder-${button.id}`);
-      console.log('test', totalVote)
       const res = await fetch(`/answers/${button.id}/votes`, {
         method: "GET",
       });
