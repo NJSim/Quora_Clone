@@ -5,6 +5,7 @@ const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { requireAuth } = require('../auth');
 const Sequelize = require('sequelize');
+
 var router = express.Router();
 
 /////GET HOME PAGE/////
@@ -142,7 +143,7 @@ router.get('/our-story', asyncHandler(async(req, res, next) => {
 
 /////QUESTION VOTE/////
 router.get('/questions/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res, next) => {
-  const questionId = parseInt(req.params.id,10);
+  const questionId = parseInt(req.params.id, 10);
   const userId = res.locals.user.id;
 
   const alreadyVoted = await db.Questions_vote.findOne({

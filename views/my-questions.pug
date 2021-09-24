@@ -25,9 +25,10 @@ block content
           div(class='answer-container')
             if question.Answers && question.Answers.length > 0
               each answer in question.Answers
-                div(class='user-text')= answer.User.user_name
-                div(class='answer-text')= answer.content
-                div(class='answer-buttons')
-                  div(class='vote-section')
-                    button(class='upvote-answer-button' id=`${answer.id}`) Like
-                    div(class='answer_vote_holder')= answer.Answers_votes.length
+                div(class='answer-container')
+                  div(class='user-text')= answer.User.user_name
+                  div(class='answer-text')= answer.content
+                  div(class='answer-buttons')
+                    div(class='vote-section')
+                      button(class='upvote-answer-button' id=`${answer.id}`) Like
+                      div(class='answer_vote_holder')= answer.Answers_votes.length
