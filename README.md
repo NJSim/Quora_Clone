@@ -9,9 +9,13 @@ Use this project skeleton as a starting point for structuring your app. Things t
 
 Welcome to Mora!
 Live Link: * [Mora](https://afternoon-fjord-07018.herokuapp.com/)
-Mora, a Quora clone, is a popular social media website that allows users to publicly share questions, leave comments and vote on questions and answers
+Mora, a Quora clone, is a popular social media website that allows users to publicly share questions, leave comments and vote on questions and answers.
 
-Prerequisites
+## Getting Started
+
+
+
+### Prerequisites
 Before you begin, please check the following Wiki documents:
 
 *Feature List
@@ -19,81 +23,94 @@ Before you begin, please check the following Wiki documents:
 *API Routes
 *Frontend Routes
 
+### Installation
 
-Technologies used:
-backend:
+1. Clone the repo
+   ```sh
+   git clone https://github.com/NJSim/Quora_Clone.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Create a .env file at the root directory with correct credentials
+    ```
+    DB_USERNAME=<<db_username>>
+    DB_PASSWORD=<<db_password>>
+    DB_DATABASE=<<db_database>>
+    DB_HOST=localhost
+    ```
+
+### Technologies used:
+## Backend:
 PostgreSQL
 express.js
 JavaScript
 csrfProtection
 Sequelize
+Express-Sessions
+regex
 
-frontend:
-Pug
+## Frontend:
+Pug.js
+HTML
 Vanilla CSS
 AJAX
 Heroku (for hosting services)
+Material UI Icons (Font Awesome)
 
 
-Code Highlights / Challenges
-Highlights
-These code shows how to correctly determine the join condition between parent/child tables when having multiple foreign keys that are referencing the same table. In this case, the Post model below have two foreign keys user_id and wall_id that are pointing to the users.id in the User model. By explicitly adding foreign_keys argument on both relationships will help SQLAlchemy know how to handle these conditions and not throw an AmbiguousForeignKeysError.
-app/models/user.py
+### Code Highlights / Challenges
+## Highlights
 
-post_sender = db.relationship(
-    'Post',
-    back_populates='post_user_id',
-    foreign_keys=Post.user_id,
-    cascade='all, delete-orphan'
-)
+When a user types in the search bar up above we make a POST request based on the information typed and append below. Uses regex to correctly find the question the user is looking for.
 
-post_receiver = db.relationship(
-    'Post',
-    back_populates='post_wall_id',
-    foreign_keys=Post.wall_id,
-    cascade='all, delete-orphan'
-)
-app/models/post.py
+```
+const searchBar = document.getElementById("searchBar");
+  searchBar.addEventListener("keyup", async (e) => {
+    const res = await fetch("/search-question", {
+      method: "POST",
+      body: JSON.stringify({
+        title: e.target.value,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const questions = await res.json();
+    const ul = document.getElementById("suggestions");
+    ul.innerHTML = "";
 
-user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-wall_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    if (e.target.value) {
+      for (let question of questions) {
+        const newli = document.createElement("li");
+        const newa = document.createElement("a");
+        const newaText = document.createTextNode(question.title);
+        newa.appendChild(newaText);
+        newa.setAttribute("href", `/questions/${question.id}`);
+        newli.appendChild(newa);
+        ul.appendChild(newli);
+      }
+    }
+  });
+```
 
-post_user_id = db.relationship(
-    'User',
-    back_populates='post_sender',
-    foreign_keys=user_id
-)
+## Challenges
 
-post_wall_id = db.relationship(
-    'User',
-    back_populates='post_receiver',
-    foreign_keys=wall_id
-)
-When a user activates the search bar, the search dropdown will show. Based on the search input values, the handleSearch() function is invoked when an onChange() event occurs. It uses .filter() to iterate through the channels and dynamically displays and returns what matches the search input value. When a user clicks on the search result, they will be redirected to the user profile.
-react-app/src/components/NavBar.js
+The biggest challenge was understanding the concepts of votes in general. We initially added it as a data type in our questions and answers table- but it was much more complex and realized we needed separate tables for each question_votes and answer_votes. These tables needed to hold information on who made the upvote/like and what question it was in relation to. More on what question the upvote was related to challenged us to look at the hidden elements in our .pug file and we realized that hidden information about the question and user stored in each file was essential to tackling this problem.
 
-const handleSearch = (e) => {
-    if (e.target.value === "") {
-      setSearchInput("");
-      setSearchResults([]);
-    };
+## Future Implementations
+Comments on answers.
+Add topics or categories to questions.
+Search questions by categories.
+Add Friends via Friend Request.
+Notifications.
 
-    if (e.target.value.length > 0) { 
-      let filteredResults = Object.values(users).filter(user => 
-        user['firstname']?.toLowerCase().includes(e.target.value.toLowerCase())
-        || user['lastname']?.toLowerCase().includes(e.target.value.toLowerCase())
-      );
-      setSearchInput(e.target.value);
-      setSearchResults(filteredResults);
-    };
-  };
-Challenges
-My biggest challenge was getting an AmbiguousForeignKeysError by not setting the proper foreign key relationship between User and Post models. In the Post model, I have two foreign keys user_id and wall_id that are both referencing the users.id in the User model. After parsing through SQLAlchemy documentation, I was able to setup the proper relationship by explicitly adding foreign_keys argument on both models and correctly determined the join condition between parent/child tables. See code snippet above.
-Future Implementations
-Friend Requests
-Notifications
-Dark mode
-Responsive design
 Mora Developer
-@rsdimatulac 🚁
+
+https://www.linkedin.com/in/jingyuan-zhang-708ab763/
+https://www.linkedin.com/in/nicolas-sim-156422170/
+https://www.linkedin.com/in/wylin94/
+https://www.linkedin.com/in/yingjia-zhuo-25a474170/
+
 © 2021 Mora. No rights reserved.
