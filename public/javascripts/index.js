@@ -93,14 +93,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   ////PROFILE DROPDOWN/////
   const profile = document.getElementById("profileSelect");
-  const title = document.getElementById("dropdownSelect");
-  if (title) {
-    if (title.innerText === "My Answers") {
-      profile.value = "myAnswer";
-    } else if (title.innerText === "My Questions") {
-      profile.value = "myQuestion";
-    }
-  }
+  // const title = document.getElementById("dropdownSelect");
+  // if (title) {
+  //   if (title.innerText === "My Answers") {
+  //     profile.value = "myAnswer";
+  //   } else if (title.innerText === "My Questions") {
+  //     profile.value = "myQuestion";
+  //   }
+  // }
 
   if (profile) {
     profile.addEventListener("change", async (e) => {

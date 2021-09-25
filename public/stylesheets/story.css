@@ -48,3 +48,17 @@
 h1{
   margin-top:50px;
 }
+
+#developer-name-right {
+  text-align: right;
+}
+
+#developer-name-left{
+  text-align: left;
+}
+
+#developer-link-right {
+  display: flex;
+  justify-content: flex-end;
+}
+

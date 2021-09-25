@@ -7,8 +7,8 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  div(id='welcome_container')
-    if locals.authenticated
+  if locals.authenticated
+    div(id='welcome_container')
       p Welcome #{locals.user.user_name}!
       form(method="post" action="/questions")
         input(type="hidden" name="_csrf" value=token)
@@ -27,17 +27,17 @@ block content
               p(class='date')= question.date
             div(class='question-text')
               a(href=`/questions/${question.id}`) #{question.title}
-            div(class='question-buttons')
-              div(class='vote-section')
-                if locals.authenticated
+            if locals.authenticated
+              div(class='question-buttons')
+                div(class='vote-section')
                   button(class='upvote-question-button' id= `${question.id}`)
                     i(class="fa fa-thumbs-up")
                       div Upvote
                   div(class='vote_holder voteNum')= question.Questions_votes.length
-              div(class='answer-delete-section')
-                div
-                  button(class='answer' id=`${question.id}`)
-                    <i class="far fa-comment answer"> Answer</i>
+                div(class='answer-delete-section')
+                  div
+                    button(class='answer' id=`${question.id}`)
+                      <i class="far fa-comment answer"> Answer</i>
             div(class='answerContain' id=`${question.id}`)
               form(action=`/questions/${question.id}/answers` method='post')
                 input(type='hidden' name='_csrf' value=token)
