@@ -9,6 +9,10 @@
     /* justify-content: center; */
     /* align-items: center; */
 }
+.date{
+    color: grey;
+    font-size: 15px;
+}
 
 .questions-container {
     display: flex;
