@@ -19,14 +19,14 @@ body {
   border-radius: 3px;
   background-color: white;
   width: 702px;
-  height: 550px;
+  height: 815px;
   margin: auto;
   margin-top: 24px;
 }
 
 #logo {
   position: relative;
-  color: rgb(185, 43, 39);
+  color: #b92b27;
   text-decoration: none;
   font-family: serif;
   font-size: 63px;

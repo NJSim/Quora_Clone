@@ -1,16 +1,36 @@
-extends layout
-
 include utils.pug
 
-block content
-  form(action='/users/signup' method='post')
-    input(type='hidden' name='_csrf' value=token)
-    +field('User Name', 'user_name', user.user_name)
-    +field('Email', 'email', user.email)
-    +field('Occuption', 'occupation', user.occupation)
-    +field('Password', 'password', user.password, 'password')
-    +field('Confirm Password', 'confirmPassword', '', 'password')
-    div
-      button(type='submit') Sign Up
-  form(action='/users/demo-login' method='post')
-    button(type='submit') Demo User
+doctype html
+html
+  head
+      block head
+        title="Mora"
+        link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel='stylesheet' href='/stylesheets/sign-up.css')
+        script(src="https://kit.fontawesome.com/72b8be2715.js" crossorigin="anonymous")
+        script(src="/javascripts/index.js" type="module" defer)
+  body
+    div(class='login-container') 
+      a(id='logo' href='/') Mora
+      div(id='logo-desc') A place to share movie knowledge and better understand the Hollywood
+      div(id='login-title-container')
+        div(id='login-title') Sign Up
+      div(class='login-form')
+        form(action='/users/signup' method='post')
+          input(type='hidden' name='_csrf' value=token)
+          +field('User Name', 'user_name', user.user_name, '', 'Your user name')
+          +field('Email', 'email', user.email, '', 'Your email')
+          +field('Occupation', 'occupation', user.occupation, '', 'Your occupation')
+          +field('Password', 'password', user.password, 'password', 'Your password')
+          +field('Confirm Password', 'confirmPassword', '', 'password', 'Your password')
+          div
+            button(type='submit' class='button' id='login-button') Sign Up
+        div(class='demo-button')
+          form(action='/users/demo-login' method='post')
+            button(type='submit' class='button') Demo
+      p: a(href='/users/login' class='already') Already have an account?
+      p(class='agree') By continuing you indicate that you agree to Mora’s Terms of Service <br/>and Privacy Policy, which we do not have any at the moment.
+      div(class='login-footer')
+        a(href='/our-story' class='our-story') Our Story
+        div · 
+        div @ 2021. No rights reserverd.

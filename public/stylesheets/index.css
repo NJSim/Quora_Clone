@@ -14,26 +14,44 @@ body {
   flex-direction: column;
 }
 
-a#askQuestion {
-  color: rgb(185, 43, 39);
+a#askQuestion, #nav-login {
+  position: relative;
+  color: white;
   text-decoration: none;
   font-weight: bold;
+  font-size: 12px;
+  background-color: #b92b27;
+  padding: 6px 15px;
+  border-radius: 20px;
+  bottom: 2px;
+}
+
+#profileSelect{
+  -webkit-appearance: none;
+  font-size: 15px;
+  color: grey;
+  border: none;
+  outline: 0px;
 }
 
 #nav_container {
   overflow: hidden;
   position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: white;
   display:flex;
   justify-content: center;
   align-items: center;
-  gap:10px
+  top: 0;
+  width: 100%;
+  /* height: 50px; */
+  gap: 100px;
+  z-index: 1;
+  background-color: white;
+  border-bottom: 1px solid #dee0e1;
+  box-shadow: 0px 1px 5px #dee0e1;
 }
 
 a#logo {
-  color: rgb(185, 43, 39);
+  color: #b92b27;
   text-decoration: none;
   font-family: serif;
   font-weight: bold;
@@ -57,16 +75,19 @@ button#welcome-submit-btn{
 
 #user_auth_container{
   justify-content: space-between;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 button.editBtn+div, button.edit-question-button+div{
   display: none;
 }
+
 li{
   list-style-type:none;
 }
+
 li a{
   text-decoration: none;
 }

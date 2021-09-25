@@ -2,7 +2,7 @@ doctype html
 html
   head
       block head
-        title="Express Starter App"
+        title="Mora"
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/questions.css')
         link(rel='stylesheet' href='/stylesheets/answers.css')
@@ -17,19 +17,24 @@ html
     div(id='nav_container')
       a(id='logo' href='/') Mora
       div(class="searchDiv")
-        input(type=text id="searchBar" placeholder='Search Mora')
+        div(class='input-icons')
+          i(class="fas fa-search icon")
+          input(type=text id="searchBar" placeholder='Search Mora' class='search-mora')
         ul(id="suggestions")
-      div(id='search-container')
-        a(id='askQuestion' href='/questions/new') Ask Question
       div(id='user_auth_container')
         if locals.authenticated
           select(name='dropDown', id='profileSelect')
+            option(selected disabled hidden)=`Welcome ${locals.user.user_name}`
             each val in ['myQuestion' , 'myAnswer' , 'Logout']
               option(value=val)=val
+          div(id='search-container')
+            a(id='askQuestion' href='/questions/new') Add Question
         else
           span
-            a(href='/users/login') Login
-            a(href='/users/signup') Sign Up
+            a(href='/users/login' id='nav-login') Login
+      //- if locals.authenticated
+      //-   div(id='search-container')
+      //-     a(id='askQuestion' href='/questions/new') Add Question
     div(id="main-body")
       div(id="left-nav-container")
         div(id="nav-home")
