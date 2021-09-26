@@ -31,6 +31,54 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        user_id: 3,
+        answer_id: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 3,
+        answer_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 3,
+        answer_id: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 4,
+        answer_id: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 4,
+        answer_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 5,
+        answer_id: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 7,
+        answer_id: 6,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 8,
+        answer_id: 7,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], {});
   },
 

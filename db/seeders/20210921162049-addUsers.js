@@ -47,7 +47,58 @@ module.exports = {
         hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
         createdAt: new Date(),
         updatedAt: new Date()
-      }
+      },
+      {
+        user_name: 'ILoveFriends90', //6th id user
+        email: 'rosschandler@friends.com',
+        hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_name: 'Simpsons4Life',
+        email: 'bartsimpson@simpsons.com',
+        hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_name: 'IhateAllMoveis',
+        email: 'hater@haters.com',
+        hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_name: 'LoveThatMovie4Real',
+        email: 'movielover@gmail.com',
+        hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_name: 'yay1999',
+        email: 'youngguy@gmail.com',
+        hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_name: 'moviesAllday',
+        email: 'movielover2@gmail.com',
+        hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_name: 'MovieExpert2',
+        email: 'movieexpert@gmail.com',
+        hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+
+
     ], {});
   },
 
