@@ -6,7 +6,9 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  h1= title
+  div(id='welcome_container')
+    p(class='welcome-user') #{locals.user.user_name}
+    h1(class='my-questions-title')= title
   div(class='questions-container')
     if myQuestions && myQuestions.length > 0
       each question in myQuestions
@@ -21,10 +23,11 @@ block content
               div(class='vote-section')
                 button(class='upvote-question-button' id= `${question.id}`)
                   i(class="fa fa-thumbs-up")
-                      div Upvote
                 div(class='vote_holder voteNum')= question.Questions_votes.length
-              div
-                button(class='delete-question-button' id= `${question.id}`) Delete
+              //- button(class="edit-question-button") 
+              //-   i(class="fas fa-edit")
+              button(class='delete-question-button' id= `${question.id}`)
+                i(class="fas fa-trash-alt")
           div(class='answer-container')
             if question.Answers && question.Answers.length > 0
               each answer in question.Answers
@@ -37,5 +40,4 @@ block content
                     div(class='vote-section')
                       button(class='upvote-answer-button' id=`UQ/${answer.id}`)
                         i(class="fa fa-thumbs-up")
-                          div Upvote
                       div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length

@@ -6,7 +6,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const questionContain = document.querySelector(
         `div.question-edit-contain`
       );
-      questionContain.style.display = "block";
+
+      if (!questionContain.style.display) {
+        questionContain.style.display = "block";
+      }
+
+      if (questionContain.style.display === "none") {
+        questionContain.style.display = "block";
+      } else {
+        questionContain.style.display = 'none';
+      }
 
       const existQuestion = document.querySelector(
         "div.question-text-single"
@@ -24,7 +33,17 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const answerContains = document.querySelector(
           `div.answerContain-${answerId}`
         );
-        answerContains.style.display = "block";
+
+        if (!answerContains.style.display) {
+          answerContains.style.display = "block";
+        }
+
+        if (answerContains.style.display === "none") {
+          answerContains.style.display = "block";
+        } else {
+          answerContains.style.display = 'none';
+        }
+
         const input = answerContains.getElementsByTagName("input")[1];
         const answerContent = document.querySelector(`div.answer-text-${answerId}`);
         input.value = answerContent.innerText;
@@ -78,14 +97,22 @@ document.addEventListener("DOMContentLoaded", (e) => {
   });
 
   ////ANSWER BUTTON/////
-  const answers = document.getElementsByClassName("answer");
+  const answers = document.getElementsByClassName("answer-button");
   for (const answer of answers) {
     answer.addEventListener("click", (e) => {
-      //console.log(e.currentTarget.id + "buttonId");
       const answerContains = document.getElementsByClassName("answerContain");
       for (const answerContain of answerContains) {
         if (answerContain.id === e.currentTarget.id) {
-          answerContain.style.display = "block";
+
+          if (!answerContain.style.display) {
+            answerContain.style.display = "block";
+          }
+
+          if (answerContain.style.display === "none") {
+            answerContain.style.display = "block";
+          } else {
+            answerContain.style.display = 'none';
+          }
         }
       }
     });
@@ -108,7 +135,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         await fetch("/my-questions", {
           method: "GET",
         }).then((response) => {
-          console.log(response);
           window.location.href = response.url;
           return;
         });

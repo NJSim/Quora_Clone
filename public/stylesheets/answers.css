@@ -1,33 +1,83 @@
 .answer-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-left:15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 15px;
+  padding-right: 15px;
+  
 }
 
 .answer-container {
-    display: flex;
-    flex-direction:column;
-    background-color: rgb(248, 248, 248);
-    border-top: solid rgb(215, 215, 215) 1px;
+  display: flex;
+  flex-direction:column;
+  background-color: rgb(248, 248, 248);
+  border-top: solid rgb(215, 215, 215) 1px;
 }
 
 div.answer-buttons+div{
-    display:none;
+  display:none;
 }
 
 .answer-delete-section {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .answer-text {
-    font-size: 16px;
-    padding-top: 5px;
-    padding-left: 15px;
-    padding-bottom: 15px;
-    padding-right: 15px;
-    overflow-wrap: break-word;
+  font-size: 16px;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  padding-right: 15px;
+  overflow-wrap: break-word;
+}
+
+.answer-button, .editBtn, .deleteBtn, .edit-question-button {
+  background-color: white;
+  border: none;
+  color: grey;
+  font-size: 20px;
+  width: 40px;
+  height: 30px;
+  text-align: center;
+}
+
+.editBtn, .deleteBtn, .edit-question-button {
+  position: relative;
+  background-color: rgb(248, 248, 248);
+  left: 470px;
+}
+
+.edit-question-button {
+  background-color: white;
+}
+
+.answer-button:hover, .editBtn:hover, .deleteBtn:hover{
+  border: 1px solid rgb(241, 242, 242);;
+  border-radius: 20px; 
+  background-color: rgb(235, 235, 235);
+}
+
+.form-control {
+  position: relative;
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 10px;
+  height: 35px;
+  top: 13px;
+  width: 540px;
+  left: 15px;
+  text-indent: 5px;
+  outline: none;
+}
+
+.answer-submit-button, .edit-submit-button {
+  position: relative;
+  left: 570px;
+  bottom: 22px;
+  background-color: #2E69ff;
+  color: white;
+  border-radius: 20px;
+  width: 115px;
+  height: 35px;
+  border: none; 
+  font-weight: bold;
 }

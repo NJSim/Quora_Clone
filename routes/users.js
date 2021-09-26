@@ -162,12 +162,9 @@ router.post('/login', csrfProtection, loginValidators,
 /////DEMO LOGIN/////
 router.post('/demo-login',
   asyncHandler(async (req, res) => {
-    console.log(111111111)
 
     const user = await db.User.findOne({ where: { user_name: 'demoUser' } });
-    console.log('%%%%%%%%%%%%%%%%%%%%%%%%')
-    console.log(user)
-    console.log('%%%%%%%%%%%%%%%%%%%%%%%%')
+
     loginUser(req, res, user);
       return req.session.save(() => {
       res.redirect('/');

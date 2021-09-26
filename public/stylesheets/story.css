@@ -1,10 +1,9 @@
 .developer-Jessi,
 .developer-Nick {
-  margin-top: 20px;
-  background-color: lightgray;
+  margin-top: 10px;
+  background-color: rgb(248, 248, 248);
   display: flex;
   flex-direction: row;
-  margin-bottom: 20px;
 }
 
 .developer-link {
@@ -21,23 +20,24 @@
 .developer-Kristy,
 .developer-Jack {
   background-color: white;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
 }
 
 .developers-container {
   margin-right: 0px;
-  margin-top:50px;
+  /* margin-top: 50px; */
   width: 100%;
   position: relative;
 }
 
 .developer-name {
-  text-align: center;
-  font-size: 30px;
+  text-align: left;
+  font-size: 25px;
+  font-weight: bold;
   margin-bottom: 15px;
+  color: rgb(185, 43, 39);;
 }
 
 .developer-intr, .developer-image img{
@@ -51,20 +51,47 @@
   border-radius: 50%;
 }
 
-h1{
-  margin-top:50px;
+.developer-story {
+  color: grey;
+  f
 }
 
-#developer-name-right {
-  text-align: right;
+.github-icon:hover {
+ color: rgb(106, 43, 208);
 }
 
-#developer-name-left{
-  text-align: left;
+.linkedIn-icon:hover {
+ color: #0A66C2;
 }
 
-#developer-link-right {
+/* .login-footer {
+  position: absolute;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: white;
+  width: 100%;
+  height: 52px;
+  bottom: -60px;
+  font-size: 10px;
 }
 
+.our-story {
+  text-decoration: none;
+}
+
+.our-story:hover {
+  text-decoration: underline;
+}
+
+.linkedIn {
+  color: rgb(185, 43, 39);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.linkedIn:hover {
+  color: #c66d6a;
+} */
