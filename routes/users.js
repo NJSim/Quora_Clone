@@ -163,7 +163,7 @@ router.post('/login', csrfProtection, loginValidators,
 router.post('/demo-login',
   asyncHandler(async (req, res) => {
 
-    const user = await db.User.findOne({ where: { user_name: 'demoUser' } });
+    const user = await db.User.findOne({ where: { user_name: 'Brad' } });
 
     loginUser(req, res, user);
       return req.session.save(() => {
