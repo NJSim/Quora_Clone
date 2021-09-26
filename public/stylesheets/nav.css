@@ -4,10 +4,10 @@
   gap: 52px;
   flex-direction: column;
   justify-content: start;
-  margin-left: 30px;
-  margin-right: 0;
-  margin-top: 200px;
-  transform: translateX(30%);
+  /* margin-left: 30px; */
+  /* margin-right: 0; */
+  margin-top: 50px;
+  /* transform: translateX(30%); */
   text-align: center;
 }
 
@@ -19,9 +19,17 @@
   display:flex; */
 }
 
-#left-body{
+/* #left-body{
   display: grid;
-  width:100%;
+  width: 100%;
   grid-template-columns: 40% 60%;
   z-index: 1;
+} */
+
+#nav-home, #nav-question, #nav-answer, #nav-story {
+  color: grey;
+}
+
+#nav-home:hover, #nav-question:hover, #nav-answer:hover, #nav-story:hover {
+  color: rgb(165, 165, 165);
 }

@@ -14,44 +14,45 @@ html
         script(src="https://kit.fontawesome.com/72b8be2715.js" crossorigin="anonymous")
         script(src="/javascripts/index.js" type="module" defer)
   body
-    div(id='nav_container')
-      a(id='logo' href='/') Mora
-      div(class="searchDiv")
-        div(class='input-icons')
-          i(class="fas fa-search icon")
-          input(type=text id="searchBar" placeholder='Search Mora' class='search-mora')
-        ul(id="suggestions")
-      div(id='user_auth_container')
-        if locals.authenticated
-          select(name='dropDown', id='profileSelect')
-            option(selected disabled hidden)=`Welcome ${locals.user.user_name}`
-            each val in ['myQuestion' , 'myAnswer' , 'Logout']
-              option(value=val)=val
-          div(id='search-container')
-            a(id='askQuestion' href='/questions/new') Add Question
-        else
-          span
-            a(href='/users/login' id='nav-login') Login
-      //- if locals.authenticated
-      //-   div(id='search-container')
-      //-     a(id='askQuestion' href='/questions/new') Add Question
-    div(id="main-body")
-      div(id="left-nav-container")
-        div(id="nav-home")
-          a(href='/')
-            i(class="fas fa-home")
-            div Home
-        div(id="nav-question")
-          a(href='/my-questions')
-            i(class="fas fa-question-circle")
-            div My Questions
-        div(id="nav-answer")
-          a(href='/my-answers')
-            i(class="fas fa-edit")
-            div My Answers
-        div(id="nav-story")
-          a(href='/our-story')
-            i(class="fas fa-book-open")
-            div Our Story
-      div(id="content-parts")
-        block content
+    div(id='body-div')
+      div(id='nav_container')
+        a(id='logo' href='/') Mora
+        div(class="searchDiv")
+          div(class='input-icons')
+            i(class="fas fa-search icon")
+            input(type=text id="searchBar" placeholder='Search Mora' class='search-mora')
+          ul(id="suggestions")
+        div(id='user_auth_container')
+          if locals.authenticated
+            select(name='dropDown', id='profileSelect')
+              option(selected disabled hidden)=`Welcome ${locals.user.user_name}`
+              each val in ['myQuestion' , 'myAnswer' , 'Logout']
+                option(value=val)=val
+            div(id='search-container')
+              a(id='askQuestion' href='/questions/new') Add Question
+          else
+            span
+              a(href='/users/login' id='nav-login') Login
+        //- if locals.authenticated
+        //-   div(id='search-container')
+        //-     a(id='askQuestion' href='/questions/new') Add Question
+      div(id="main-body")
+        div(id="left-nav-container")
+          div(id="nav-home")
+            a(href='/')
+              i(class="fas fa-home")
+              div Home
+          div(id="nav-question")
+            a(href='/my-questions')
+              i(class="fas fa-question-circle")
+              div My Questions
+          div(id="nav-answer")
+            a(href='/my-answers')
+              i(class="fas fa-edit")
+              div My Answers
+          div(id="nav-story")
+            a(href='/our-story')
+              i(class="fas fa-book-open")
+              div Our Story
+        div(id="content-parts")
+          block content

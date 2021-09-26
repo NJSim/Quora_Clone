@@ -34,6 +34,10 @@ body {
   top: 15px;
 }
 
+a#logo:hover {
+  color: #c66d6a;
+}
+
 #logo-desc {
   position: relative;
   font-weight: bold;

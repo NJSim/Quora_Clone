@@ -1,9 +1,8 @@
 extends layout
 include utils.pug
 append head
-  //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
-  //- add page specific js
+  link(rel="stylesheet" href="/stylesheets/nav-home.css")
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
@@ -14,7 +13,6 @@ block content
         input(type="hidden" name="_csrf" value=token)
         input(name="title" type="text" placeholder="What is your question?" required)
         button(id="welcome-submit-btn" type="submit") Submit
-  h1= title
   div(class='questions-container')
     if questions && questions.length > 0
       each question in questions
