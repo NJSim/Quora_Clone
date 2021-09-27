@@ -63,3 +63,14 @@
 div.question-edit-contain {
     display: none
 }
+
+#edit-question-button-css {
+    display:flex;
+    justify-content: flex-start;
+    padding:5px
+}
+
+.edit-question-button{
+    margin-left: 11px;
+    margin-top: -10px;
+}

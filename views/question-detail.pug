@@ -13,7 +13,7 @@ block content
             p(class='userName')= question.User.user_name
             p(class='date')= question.date
           div(class='question-text-single') #{question.title}
-          div
+          div(id="edit-question-button-css")
             button(class="edit-question-button") Edit
           div(class=`question-edit-contain` id=`${question.id}`)
                 form(action=`/questions/${question.id}` method='post')

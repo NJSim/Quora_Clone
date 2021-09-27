@@ -352,6 +352,7 @@ router.post(
   requireAuth,
   csrfProtection,
   asyncHandler(async (req, res, next) => {
+    console.log(req)
     const { content } = req.body;
     const answer = await db.Answer.findByPk(req.params.id);
     answer.content = content;
