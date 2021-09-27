@@ -1,20 +1,18 @@
 extends layout
 include utils.pug
 append head
-  //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
-  //- add page specific js
+  link(rel="stylesheet" href="/stylesheets/nav-home.css")
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
   if locals.authenticated
     div(id='welcome_container')
-      p Welcome #{locals.user.user_name}!
-      form(method="post" action="/questions")
+      p(class='welcome-user') #{locals.user.user_name}
+      form(method="post" action="/questions" class='welcome-question')
         input(type="hidden" name="_csrf" value=token)
-        input(name="title" type="text" placeholder="What is your question?" required)
-        button(id="welcome-submit-btn" type="submit") Submit
-  h1= title
+        input(name="title" type="text" placeholder="What is your question?" required class='welcome-input')
+        button(id="welcome-submit-btn" type="submit" hidden) Submit
   div(class='questions-container')
     if questions && questions.length > 0
       each question in questions
@@ -26,24 +24,23 @@ block content
               p(class='userName')= question.User.user_name
               p(class='date')= question.date
             div(class='question-text')
-              a(href=`/questions/${question.id}`) #{question.title}
+              a(href=`/questions/${question.id}` class='question-title') #{question.title}
             if locals.authenticated
               div(class='question-buttons')
                 div(class='vote-section')
                   button(class='upvote-question-button' id= `${question.id}`)
                     i(class="fa fa-thumbs-up")
-                      div Upvote
                   div(class='vote_holder voteNum')= question.Questions_votes.length
                 div(class='answer-delete-section')
                   div
-                    button(class='answer' id=`${question.id}`)
-                      <i class="far fa-comment answer"> Answer</i>
+                    button(class='answer-button' id=`${question.id}`)
+                      i(class="far fa-comment answer")
             div(class='answerContain' id=`${question.id}`)
               form(action=`/questions/${question.id}/answers` method='post')
                 input(type='hidden' name='_csrf' value=token)
-                +field('Answer:', 'content')
+                +field('', 'content', '', 'text', 'Add a comment...' )
                 div
-                  button(type='submit') Submit
+                  button(type='submit' class='answer-submit-button') Add Comment
           div(class='answers-container')
             if question.Answers && question.Answers.length > 0
               each answer in question.Answers
@@ -57,5 +54,4 @@ block content
                       if locals.authenticated
                         button(class='upvote-answer-button' id=`UQ/${answer.id}`)
                           i(class="fa fa-thumbs-up")
-                            div Upvote
                         div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length

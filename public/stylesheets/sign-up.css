@@ -34,6 +34,10 @@ body {
   top: 15px;
 }
 
+a#logo:hover {
+  color: #c66d6a;
+}
+
 #logo-desc {
   position: relative;
   font-weight: bold;
@@ -155,4 +159,15 @@ body {
 
 .our-story:hover {
   text-decoration: underline;
+}
+
+.linkedIn {
+  color: rgb(185, 43, 39);
+  font-weight: bold;
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+}
+
+.linkedIn:hover {
+  transform: scale(1.5);
 }

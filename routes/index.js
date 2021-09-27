@@ -92,7 +92,6 @@ router.get(
       answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
 
     }
-    //console.log(question.json())
     res.render("question-detail", {
       title: "View Question",
       question,

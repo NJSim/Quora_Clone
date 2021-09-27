@@ -1,22 +1,27 @@
 extends layout
 
+append head
+  link(rel="stylesheet" href="/stylesheets/nav-story.css")
 
 block content
-  h1= 'Our Story'
+  div(id='welcome_container')
+    if locals.authenticated
+      p(class='welcome-user') #{locals.user.user_name}
+    else 
+      p(class='welcome-user') Welcome!
+    h1= 'Our Story'
   div(class='developers-container')
-
 
     div(class='developer-Jessi')
       div(class='developer-intr')
         div(class='developer-name', id='developer-name-right') Jessi Zhuo
         div(class='developer-story') Jessi's story goes here, blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.......
         div(class='developer-link' id='developer-link-right')
-          a(href='https://github.com/zyingzhuo')
+          a(href='https://github.com/zyingzhuo' class='github-icon')
             i(class="fab fa-github")
-          a(href='')
-            i(class="fab fa-linkedin-in")
       div(class='developer-image')
         img(src='../image/jessi.jpeg', width='200' height='200' alt='image of a developer named Nick')
+    
     div(class='developer-Kristy')
       div(class='developer-image')
         img(src='../image/kristy.jpeg', width='200' height='200' alt='image of a developer named Nick')
@@ -24,30 +29,31 @@ block content
         div(class='developer-name' id='developer-name-left') Kristy Zhang
         div(class='developer-story')   My name is Kristy Zhang. I’ve been working on software design and development related work for 4 years. My experience includes communicating and analyzing user requirements, authoring functional requirement documentation and workflows, building data frames and interactive prototypes, implementing web applications within a team. 
         div(class='developer-link')
-          a(href='https://github.com/KristyCS')
+          a(href='https://github.com/KristyCS' class='github-icon')
             i(class="fab fa-github")
-          a(href='https://www.linkedin.com/in/jingyuan-zhang-708ab763/')
+          a(href='https://www.linkedin.com/in/jingyuan-zhang-708ab763/' class='linkedIn-icon')
             i(class="fab fa-linkedin-in")
+    
     div(class='developer-Nick')
       div(class='developer-intr')
         div(class='developer-name' id='developer-name-right') Nick Sim
         div(class='developer-story') Nick's story goes here, blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
         div(class='developer-link' id='developer-link-right')
-          a(href='https://github.com/NJSim')
+          a(href='https://github.com/NJSim' class='github-icon')
             i(class="fab fa-github")
-          a(href='https://www.linkedin.com/in/nicolas-sim-156422170/')
+          a(href='https://www.linkedin.com/in/nicolas-sim-156422170/' class='linkedIn-icon')
             i(class="fab fa-linkedin-in")
       div(class='developer-image')
         img(src='../image/nick.JPG', width='200' height='200' alt='image of a developer named Nick')
+    
     div(class='developer-Jack')
       div(class='developer-image')
         img(src='../image/jack.jpeg', width='200' height='200' alt='image of a developer named Jack')
       div(class='developer-intr')
         div(class='developer-name' id='developer-name-left') Wei-Yang(Jack) Lin
-        div(class='developer-story') Jack's story goes, here blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.......
+        div(class='developer-story') I am a software engineer currently based in Santa Clara, CA. I am many things in this lifetime, a CPA, and a wedding photographer. There are no shortage of cause to problems in this world today, and my goal is to use the skills I have to solve these problems.
         div(class='developer-link')
-          a(href='https://github.com/wylin94')
+          a(href='https://github.com/wylin94' class='github-icon')
             i(class="fab fa-github")
-          a(href='https://www.linkedin.com/in/wylin94/')
+          a(href='https://www.linkedin.com/in/wylin94/' class='linkedIn-icon')
             i(class="fab fa-linkedin-in")
-            
