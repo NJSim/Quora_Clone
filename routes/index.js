@@ -186,7 +186,7 @@ router.get(
           answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
         }
       }
-      
+
     };
     res.render("my-questions", {
       title: "My Questions",
