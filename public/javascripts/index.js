@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   if (editAnswerBtns) {
     for (let editAnswerBtn of editAnswerBtns) {
       editAnswerBtn.addEventListener("click", async (e) => {
-        const answerId = e.target.id.split("-")[1].toString();
+        const answerId = e.currentTarget.id.split("-")[1].toString();
         const answerContains = document.querySelector(
           `div.answerContain-${answerId}`
         );
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   if (deleteAnswerBtns) {
     for (const deleteAnswerBtn of deleteAnswerBtns) {
       deleteAnswerBtn.addEventListener("click", async (e) => {
-        const deleteAnswerId = parseInt(e.target.id, 10);
+        const deleteAnswerId = parseInt(e.currentTarget.id, 10);
         const res = await fetch(`/answers/${deleteAnswerId}`, {
           method: "DELETE",
         });
@@ -69,32 +69,35 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   /////SEARCH BAR/////
   const searchBar = document.getElementById("searchBar");
-  searchBar.addEventListener("keyup", async (e) => {
-    const res = await fetch("/search-question", {
-      method: "POST",
-      body: JSON.stringify({
-        title: e.target.value,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const questions = await res.json();
-    const ul = document.getElementById("suggestions");
-    ul.innerHTML = "";
+  if (searchBar){
+    searchBar.addEventListener("keyup", async (e) => {
+      const res = await fetch("/search-question", {
+        method: "POST",
+        body: JSON.stringify({
+          title: e.target.value,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const questions = await res.json();
+      const ul = document.getElementById("suggestions");
+      ul.innerHTML = "";
 
-    if (e.target.value) {
-      for (let question of questions) {
-        const newli = document.createElement("li");
-        const newa = document.createElement("a");
-        const newaText = document.createTextNode(question.title);
-        newa.appendChild(newaText);
-        newa.setAttribute("href", `/questions/${question.id}`);
-        newli.appendChild(newa);
-        ul.appendChild(newli);
+      if (e.target.value) {
+        for (let question of questions) {
+          const newli = document.createElement("li");
+          const newa = document.createElement("a");
+          const newaText = document.createTextNode(question.title);
+          newa.appendChild(newaText);
+          newa.setAttribute("href", `/questions/${question.id}`);
+          newli.appendChild(newa);
+          ul.appendChild(newli);
+        }
       }
-    }
-  });
+    });
+
+  }
 
   ////ANSWER BUTTON/////
   const answers = document.getElementsByClassName("answer-button");
