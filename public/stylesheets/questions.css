@@ -49,8 +49,8 @@
 
 .question-text a:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
-
 
 .question-buttons {
   display: flex;
@@ -80,4 +80,9 @@ div.question-edit-contain {
   border: 1px solid rgb(241, 242, 242);;
   border-radius: 20px; 
   background-color: rgb(235, 235, 235);
+  cursor: pointer;
+}
+
+.delete-question-button:active {
+  color: rgb(170, 170, 170)
 }

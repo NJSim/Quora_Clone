@@ -53,15 +53,14 @@
 
 .developer-story {
   color: grey;
-  f
 }
 
 .github-icon:hover {
- color: rgb(106, 43, 208);
+  color: rgb(106, 43, 208);
 }
 
 .linkedIn-icon:hover {
- color: #0A66C2;
+  color: #0A66C2;
 }
 
 /* .login-footer {

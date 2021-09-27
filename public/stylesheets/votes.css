@@ -15,6 +15,11 @@
   text-indent: 10px;
   border-left: 1px solid rgb(205, 205, 205);
   height: 23px;
+  color: grey;
+}
+
+.voteNum:hover {
+  cursor: default;
 }
 
 .upvote-question-button, .upvote-answer-button {
@@ -31,5 +36,9 @@
 
 .upvote-question-button:hover, .upvote-answer-button:hover {
   background-color: rgb(225, 225, 225);
+  cursor: pointer;
 }
 
+.upvote-question-button:active, .upvote-answer-button:active {
+  color: #5d89f9;
+}

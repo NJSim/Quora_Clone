@@ -36,6 +36,7 @@ body {
 
 a#logo:hover {
   color: #c66d6a;
+  cursor: pointer;
 }
 
 #logo-desc {
@@ -85,6 +86,7 @@ a#logo:hover {
 
 .form-control:hover {
   border-color: #2E69ff;
+  cursor: text;
 }
 
 .form-control:focus {
@@ -105,6 +107,7 @@ a#logo:hover {
 
 .button:hover {
   background-color: #0040e1;
+  cursor: pointer;
 }
 
 .button:active {
@@ -129,6 +132,7 @@ a#logo:hover {
 
 .already:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .agree {
@@ -159,6 +163,7 @@ a#logo:hover {
 
 .our-story:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .linkedIn {
@@ -170,4 +175,5 @@ a#logo:hover {
 
 .linkedIn:hover {
   transform: scale(1.5);
+  cursor: pointer;
 }

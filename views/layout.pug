@@ -41,19 +41,22 @@ html
           div(id="nav-home")
             a(href='/')
               i(class="fas fa-home")
-              div Home
+              span(class='icon-text') Home
           div(id="nav-question")
             a(href='/my-questions')
               i(class="fas fa-question-circle")
-              div My Questions
+              span(class='icon-text') My Questions
           div(id="nav-answer")
             a(href='/my-answers')
               i(class="fas fa-edit")
-              div My Answers
+              span(class='icon-text') My Answers
+
+          div(class='line')
+  
           div(id="nav-story")
             a(href='/our-story')
               i(class="fas fa-book-open")
-              div Our Story
+              span(class='icon-text') Our Story
         div(id="content-parts")
           block content
     //- div(class='login-footer')
