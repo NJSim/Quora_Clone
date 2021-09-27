@@ -14,36 +14,36 @@ block content
         input(name="title" type="text" placeholder="What is your question?" required class='welcome-input')
         button(id="welcome-submit-btn" type="submit" hidden) Submit
   div(class='questions-container')
-    if questions && questions.length > 0
-      each question in questions
-        div(id=`question-container-${question.id}` class='question-container')
-          input(type='hidden' id= `questionid` value= question.id)
+    if data && data.length > 0
+      each d in data
+        div(id=`question-container-${d.question.id}` class='question-container')
+          input(type='hidden' id= `d.questionid` value= d.question.id)
           //- input(type='hidden' id= 'userid' value= user.id)
           div(class='question-offset')
             div(class='user-text')
-              p(class='userName')= question.User.user_name
-              p(class='date')= question.date
+              p(class='userName')= d.question.User.user_name
+              p(class='date')= d.question.date
             div(class='question-text')
-              a(href=`/questions/${question.id}` class='question-title') #{question.title}
+              a(href=`/questions/${d.question.id}` class='question-title') #{d.question.title}
             if locals.authenticated
               div(class='question-buttons')
                 div(class='vote-section')
-                  button(class='upvote-question-button' id= `${question.id}`)
+                  button(class='upvote-question-button' id= `${d.question.id}`)
                     i(class="fa fa-thumbs-up")
-                  div(class='vote_holder voteNum')= question.Questions_votes.length
+                  div(class='vote_holder voteNum')= d.question.Questions_votes.length
                 div(class='answer-delete-section')
                   div
-                    button(class='answer-button' id=`${question.id}`)
+                    button(class='answer-button' id=`${d.question.id}`)
                       i(class="far fa-comment answer")
-            div(class='answerContain' id=`${question.id}`)
-              form(action=`/questions/${question.id}/answers` method='post')
+            div(class='answerContain' id=`${d.question.id}`)
+              form(action=`/questions/${d.question.id}/answers` method='post')
                 input(type='hidden' name='_csrf' value=token)
                 +field('', 'content', '', 'text', 'Add a comment...' )
                 div
                   button(type='submit' class='answer-submit-button') Add Comment
           div(class='answers-container')
-            if question.Answers && question.Answers.length > 0
-              each answer in question.Answers
+            if d.answers && d.answers.length > 0
+              each answer in d.answers
                 div(class='answer-container')
                   div(class='user-text')
                     p(class='userName')= answer.User.user_name
