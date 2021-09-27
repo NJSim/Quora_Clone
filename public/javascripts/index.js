@@ -7,11 +7,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
         `div.question-edit-contain`
       );
 
-      if (!questionContain.style.display) {
-        questionContain.style.display = "block";
-      }
 
-      if (questionContain.style.display === "none") {
+      if (questionContain.style.display === ""||questionContain.style.display === "none") {
         questionContain.style.display = "block";
       } else {
         questionContain.style.display = 'none';
@@ -34,11 +31,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
           `div.answerContain-${answerId}`
         );
 
-        if (!answerContains.style.display) {
-          answerContains.style.display = "block";
-        }
-
-        if (answerContains.style.display === "none") {
+        // if (!answerContains.style.display) {
+        //   answerContains.style.display = "block";
+        // }
+        
+        if (answerContains.style.display === ""||answerContains.style.display === "none") {
           answerContains.style.display = "block";
         } else {
           answerContains.style.display = 'none';
@@ -100,21 +97,22 @@ document.addEventListener("DOMContentLoaded", (e) => {
   }
 
   ////ANSWER BUTTON/////
-  const answers = document.getElementsByClassName("answer-button");
+  const answers = document.querySelectorAll("div.answer-delete-section");
   for (const answer of answers) {
     answer.addEventListener("click", (e) => {
+      console.log("!!!!!!!!", e.currentTarget)
       const answerContains = document.getElementsByClassName("answerContain");
       for (const answerContain of answerContains) {
-        if (answerContain.id === e.currentTarget.id) {
-
-          if (!answerContain.style.display) {
-            answerContain.style.display = "block";
-          }
-
-          if (answerContain.style.display === "none") {
+        const questionId = e.currentTarget.getElementsByTagName('button')[0].id;
+        console.log(questionId,"%%%%%%%%%%")
+        if (answerContain.id === questionId) {
+          console.log("12345",answerContain.style.display,"54321")
+          if (answerContain.style.display === ""||answerContain.style.display === "none") {
+            console.log(answerContain.style.display,'first situ***&&%^%$$')
             answerContain.style.display = "block";
           } else {
-            answerContain.style.display = 'none';
+            console.log(answerContain.style.display,'else now is block situation')
+            answerContain.style.display = "none";
           }
         }
       }
