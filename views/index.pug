@@ -32,10 +32,10 @@ block content
                     i(class="fa fa-thumbs-up")
                   div(class='vote_holder voteNum')= d.question.Questions_votes.length
                 div(class='answer-delete-section')
-                  div
+                  div(class = `answer-button-${d.question.id}`)
                     button(class='answer-button' id=`${d.question.id}`)
                       i(class="far fa-comment answer")
-            div(class='answerContain' id=`${d.question.id}`)
+            div(class=`answerContain` id=`${d.question.id}`)
               form(action=`/questions/${d.question.id}/answers` method='post')
                 input(type='hidden' name='_csrf' value=token)
                 +field('', 'content', '', 'text', 'Add a comment...' )
