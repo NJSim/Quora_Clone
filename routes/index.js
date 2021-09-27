@@ -33,6 +33,7 @@ router.get(
     const questions = await db.Question.findAll({
       include: [
         db.Questions_vote,
+        db.Answer,
         db.User,
         {
           model: db.Answer,
@@ -41,25 +42,35 @@ router.get(
       ],
       order: [["createdAt", "DESC"]],
     });
-
+    
     var options = {
       weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
     };
-    for(let question of questions){
+    for (let question of questions) {
       question.date = question.updatedAt.toLocaleDateString("en-US", options);
       let answers = question.Answers;
-      if(answers){
-        for(let answer of answers){
+      if (answers) {
+        for (let answer of answers) {
           answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
         }
       }
     }
+    const data = [];
+    for (let question of questions) {
+      const answers = await db.Answer.findAll({
+        where: { question_id: question.id },
+        include: [{ model: db.User }, { model: db.Answers_vote }],
+        order: [["createdAt", "DESC"]],
+      });
+      data.push({question:question,answers:answers});
+    }
+
     res.render("index", {
       title: "Mora Home",
-      questions,
+      data,
       token: req.csrfToken(),
     });
   })
@@ -88,9 +99,8 @@ router.get(
       include: [{ model: db.User }, { model: db.Answers_vote }],
       order: [["createdAt", "DESC"]],
     });
-    for(let answer of answers){
+    for (let answer of answers) {
       answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
-
     }
     res.render("question-detail", {
       title: "View Question",
@@ -178,7 +188,7 @@ router.get(
       month: "long",
       day: "numeric",
     };
-    for(let question of myQuestions){
+    for (let question of myQuestions) {
       question.date = question.updatedAt.toLocaleDateString("en-US", options);
       const answers = question.Answers;
       if (answers) {
@@ -186,8 +196,7 @@ router.get(
           answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
         }
       }
-
-    };
+    }
     res.render("my-questions", {
       title: "My Questions",
       myQuestions,
@@ -220,7 +229,7 @@ router.get(
       month: "long",
       day: "numeric",
     };
-    for(let answer of myAnswers){
+    for (let answer of myAnswers) {
       answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
       const question = answer.Question;
       question.date = question.updatedAt.toLocaleDateString("en-US", options);
