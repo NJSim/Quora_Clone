@@ -67,7 +67,7 @@ a#logo:hover {
   cursor: pointer;
 }
 
-a#askQuestion, #nav-login {
+a#askQuestion, #nav-login, #modal-button {
   position: relative;
   color: white;
   text-decoration: none;
@@ -79,16 +79,21 @@ a#askQuestion, #nav-login {
   top: 4px;
 }
 
+#modal-button {
+  border: none;
+  top: 2px;
+}
+
 #nav-login {
   top: -1px;
 }
 
-a#askQuestion:hover, #nav-login:hover {
+a#askQuestion:hover, #nav-login:hover, #modal-button:hover {
   background-color: #9f2723;
   cursor: pointer;
 }
 
-a#askQuestion:active, #nav-login:active {
+a#askQuestion:active, #nav-login:active, #modal-button:active {
   color: rgb(210, 210, 210);
 }
 
@@ -176,4 +181,98 @@ li a{
   margin: 0 auto;
   width: 70%;
   top: 45px;
+}
+
+
+
+
+
+
+
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: white;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 620px; /* Could be more or less, depending on screen size */
+  height: 400px;
+}
+
+/* The Close Button */
+.close {
+  color: grey;
+  font-size: 24px;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 0px 5px 2px 5px;
+}
+
+.close:hover,
+.close:focus {
+  background-color: rgb(235, 235, 235);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.modal-username {
+  position: relative;
+  color: grey;
+  top: 25px;
+}
+
+.modal-form-container {
+  position: relative;
+  margin: 10% auto;
+  height: 250px;
+}
+
+.modal-input {
+  border: none;
+  border-bottom: 1px solid rgb(211, 211, 211); 
+  width: 578px;
+  height: 35px;
+  font-size: 20px;
+  outline: none;
+  color: grey;
+}
+
+.modal-input:hover {
+  border-bottom: 1px solid #2E69ff;
+}
+
+
+.modal-submit {
+  position: relative;
+  top: 50px;
+  background-color: #2E69ff;
+  color: white;
+  border-radius: 20px;
+  width: 120px;
+  height: 35px;
+  border: none; 
+  font-weight: bold;
+  left: 470px;
+  top: 180px;
+}
+
+.modal-submit:hover {
+  background-color: #0040e1;
+}
+
+.modal-submit:active {
+  color: rgb(210, 210, 210);
 }

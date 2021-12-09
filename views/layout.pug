@@ -20,8 +20,9 @@ html
         div(class="searchDiv")
           div(class='input-icons')
             i(class="fas fa-search icon")
-            input(type=text id="searchBar" placeholder='Search Mora' class='search-mora')
-          ul(id="suggestions")
+            input(type=email id="searchBar" placeholder='Search Mora' class='search-mora')
+          div(class="suggestions-container")
+            ul(id="suggestions")
         div(id='user_auth_container')
           if locals.authenticated
             select(name='dropDown', id='profileSelect')
@@ -29,7 +30,17 @@ html
               each val in ['myQuestion' , 'myAnswer' , 'Logout']
                 option(value=val)=val
             div(id='search-container')
-              a(id='askQuestion' href='/questions/new') Add Question
+              button(id="modal-button") Add Question
+              div(id="myModal" class="modal")
+                div(class="modal-content")
+                  span(class="close") &times;
+                  p(class='modal-username') #{locals.user.user_name} asked
+                  div(class='modal-form-container')
+                    form(method="post" action="/questions")
+                      input(type="hidden" name="_csrf" value=token) 
+                      input(name="title" type="text" required class='modal-input' placeholder='Start your question with "What", "How", "Why", etc.')
+                      button(type="submit" class='modal-submit') Add Question
+          
           else
             span
               a(href='/users/login' id='nav-login') Login
@@ -50,7 +61,6 @@ html
             a(href='/my-answers')
               i(class="fas fa-edit")
               span(class='icon-text') My Answers
-
           div(class='line')
   
           div(id="nav-story")
