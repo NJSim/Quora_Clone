@@ -1,0 +1,62 @@
+
+
+
+.answer-button, .editBtn, .deleteBtn {
+  background-color: white;
+  border: none;
+  color: grey;
+  font-size: 20px;
+  width: 40px;
+  height: 30px;
+  text-align: center;
+}
+
+.editBtn, .deleteBtn {
+  position: relative;
+  background-color: rgb(248, 248, 248);
+  left: 520px;
+}
+
+.questionEditBtn {
+  background-color: white;
+}
+
+.answer-button:hover, .editBtn:hover, .deleteBtn:hover {
+  border: 1px solid rgb(241, 242, 242);;
+  border-radius: 20px; 
+  background-color: rgb(235, 235, 235);
+  cursor: pointer;
+}
+
+.answer-button:active, .editBtn:active, .deleteBtn:active {
+  color: rgb(170, 170, 170);
+}
+
+.form-control {
+  position: relative;
+  border: 1px solid #f7f7f8;
+  /* border: none; */
+  border-radius: 100px;
+  height: 35px;
+  width: 535px;
+  text-indent: 5px;
+  outline: none;
+}
+
+.answer-submit-button, .edit-submit-button {
+  background-color: #2E69ff;
+  color: white;
+  border-radius: 20px;
+  width: 115px;
+  height: 30px;
+  border: none; 
+  font-weight: bold;
+}
+
+.answer-submit-button:hover, .edit-submit-button:hover {
+  background-color: #0040e1;
+}
+
+.answer-submit-button:active, .edit-submit-button:active {
+  color: rgb(210, 210, 210);
+}

@@ -3,15 +3,14 @@ extends layout
 include utils.pug
 
 append head
-  //- add page specific styles by appending to the head
-  link(rel="stylesheet" href="/stylesheets/index.css")
   link(rel="stylesheet" href="/stylesheets/nav-answer.css")
-  //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
   div(id='welcome_container')
-    p(class='welcome-user') #{locals.user.user_name}
+    div(class='welcome-user-container')
+      img(class='welcome-user-image' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
+      div(class='welcome-user') #{locals.user.user_name}
     h1(id='dropdownSelect')= title
   //- if myAnswers && myAnswers.length > 0
     //- each answer in myAnswers
@@ -36,15 +35,17 @@ block content
       //-     div
       //-       button(class='upvote-answer-button' id=`${answer.id}`) Upvote
       //-       div(class='answer_vote_holder')= answer.Answers_votes.length
-      //-   div= '*************************'
   div(class='questions-container')
     if myAnswers && myAnswers.length > 0
       each answer in myAnswers
         div(class='question-container')
+
           div(class='question-offset')
             div(class='user-text')
-              p(class='userName')= answer.Question.User.user_name
-              p(class='date')= answer.Question.date
+              img(class='user-text-picture' src=`${answer.Question.User.profile_picture}`, alt=`${answer.Question.User.user_name}`)
+              div(class='userName-container')
+                div(class='userName')= answer.Question.User.user_name
+                div(class='date')= answer.Question.date
             div(class='question-text')
               a(href=`questions/${answer.Question.id}`)= answer.Question.title
             div(class='question-buttons')
@@ -52,10 +53,13 @@ block content
                 button(class='upvote-question-button' id= `${answer.question_id}`)
                   i(class="fa fa-thumbs-up")
                 div(class='vote_holder voteNum')= answer.Question.Questions_votes.length
+
           div(class='answer-container' id=`answer-${answer.id}`)
             div(class='user-text')
-              p(class='userName')= answer.User.user_name
-              p(class='date')= answer.date
+              img(class='user-text-picture' src=`${answer.User.profile_picture}`, alt=`${answer.User.user_name}`)
+              div(class='userName-container')
+                div(class='userName')= answer.User.user_name
+                div(class='date')= answer.date
             div(class='answer-edit-delete')
               div(class=`answer-text-${answer.id} answer-text`)= answer.content
             div(class='answer-buttons')
@@ -67,8 +71,9 @@ block content
                 i(class="fas fa-edit")
               button(class='deleteBtn' id=`${answer.id}`) 
                 i(class="fas fa-trash-alt")
-            div(class=`answerContain-${answer.id}` id=`${answer.Question.id}`)
-              form(action=`/answers/${answer.id}` method='post')
-                input(type='hidden' name='_csrf' value=token)
-                +field('', 'content', '', 'text', 'asdfasfsfasdf')
-                button(type='submit' class='edit-submit-button') Edit Question
+          div(class=`answerContain-${answer.id} answerContain` id=`${answer.Question.id}`)
+            img(class='user-text-picture' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
+            form(class='answerContain-form' action=`/answers/${answer.id}` method='post')
+              input(type='hidden' name='_csrf' value=token)
+              +field('', 'content', '', 'text')
+              button(type='submit' class='edit-submit-button') Edit Answer

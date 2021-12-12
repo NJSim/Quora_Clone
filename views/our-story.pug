@@ -5,10 +5,13 @@ append head
 
 block content
   div(id='welcome_container')
+
     if locals.authenticated
-      p(class='welcome-user') #{locals.user.user_name}
+      div(class='welcome-user-container')
+        img(class='welcome-user-image' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
+        div(class='welcome-user') #{locals.user.user_name}
     else
-      p(class='welcome-user') Welcome!
+      div(class='welcome-user') Welcome!
     h1= 'Our Story'
   div(class='developers-container')
 
@@ -17,8 +20,12 @@ block content
         div(class='developer-name', id='developer-name-right') Jessi Zhuo
         div(class='developer-story') I'm Jessi. I graduated from UC Berkeley with a business degree in 2019. During my career in the financial field in the last 2 years. software technologies is implemented everyday and improved efficiency . When I graduated from a/A, I’m interested in the finch tech industry and excited for the path ahead!
         div(class='developer-link' id='developer-link-right')
+          a(href='https://zyingzhuo.github.io/' class='portfolio-icon')
+            i(class="fas fa-user-circle")
           a(href='https://github.com/zyingzhuo' class='github-icon')
             i(class="fab fa-github")
+          a(href='https://www.linkedin.com/in/yingjia-zhuo-25a474170/' class='linkedIn-icon')
+            i(class="fab fa-linkedin")
       div(class='developer-image')
         img(src='../image/jessi.jpeg', width='200' height='200' alt='image of a developer named Nick')
 
@@ -32,17 +39,19 @@ block content
           a(href='https://github.com/KristyCS' class='github-icon')
             i(class="fab fa-github")
           a(href='https://www.linkedin.com/in/jingyuan-zhang-708ab763/' class='linkedIn-icon')
-            i(class="fab fa-linkedin-in")
+            i(class="fab fa-linkedin")
 
     div(class='developer-Nick')
       div(class='developer-intr')
         div(class='developer-name' id='developer-name-right') Nick Sim
         div(class='developer-story')  Hey! I'm Nick Sim. I'm a software engineer based in Portland, OR. I've worked as a freelance web developer creating static pages for businesses, and as a manager of a korean bbq restaurant. I love to solve daily problems by creating small yet functional applications using my software development skills.
         div(class='developer-link' id='developer-link-right')
+          a(href='https://njsim.github.io/' class='portfolio-icon')
+            i(class="fas fa-user-circle")
           a(href='https://github.com/NJSim' class='github-icon')
             i(class="fab fa-github")
           a(href='https://www.linkedin.com/in/nicolas-sim-156422170/' class='linkedIn-icon')
-            i(class="fab fa-linkedin-in")
+            i(class="fab fa-linkedin")
       div(class='developer-image')
         img(src='../image/nick.JPG', width='200' height='200' alt='image of a developer named Nick')
 
@@ -50,10 +59,12 @@ block content
       div(class='developer-image')
         img(src='../image/jack.jpeg', width='200' height='200' alt='image of a developer named Jack')
       div(class='developer-intr')
-        div(class='developer-name' id='developer-name-left') Wei-Yang(Jack) Lin
+        div(class='developer-name' id='developer-name-left') Wei-Yang Lin(Jack)
         div(class='developer-story') I am a software engineer currently based in Santa Clara, CA. I am many things in this lifetime, a CPA, and a wedding photographer. There are no shortage of cause to problems in this world today, and my goal is to use the skills I have to solve these problems.
         div(class='developer-link')
+          a(href='https://wylin94.github.io' class='portfolio-icon')
+            i(class="fas fa-user-circle")
           a(href='https://github.com/wylin94' class='github-icon')
             i(class="fab fa-github")
           a(href='https://www.linkedin.com/in/wylin94/' class='linkedIn-icon')
-            i(class="fab fa-linkedin-in")
+            i(class="fab fa-linkedin")

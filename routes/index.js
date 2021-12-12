@@ -51,12 +51,6 @@ router.get(
     };
     for (let question of questions) {
       question.date = question.updatedAt.toLocaleDateString("en-US", options);
-      let answers = question.Answers;
-      if (answers) {
-        for (let answer of answers) {
-          answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
-        }
-      }
     }
     const data = [];
     for (let question of questions) {
@@ -65,9 +59,14 @@ router.get(
         include: [{ model: db.User }, { model: db.Answers_vote }],
         order: [["createdAt", "DESC"]],
       });
+      if (answers) {
+        for (let answer of answers) {
+          answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
+        }
+      }
       data.push({question:question,answers:answers});
+      console.log('answers', answers)
     }
-
     res.render("index", {
       title: "Mora Home",
       data,
@@ -169,6 +168,7 @@ router.post(
 router.get(
   "/my-questions",
   requireAuth,
+  csrfProtection,
   asyncHandler(async (req, res, next) => {
     const myQuestions = await db.Question.findAll({
       where: { user_id: res.locals.user.id },
@@ -200,6 +200,7 @@ router.get(
     res.render("my-questions", {
       title: "My Questions",
       myQuestions,
+      token: req.csrfToken(),
     });
   })
 );

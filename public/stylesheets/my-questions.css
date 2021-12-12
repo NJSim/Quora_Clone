@@ -1,0 +1,32 @@
+
+
+div.question-edit-contain {
+    display: none
+}
+
+.delete-question-button {
+  position: relative;
+  background-color: white;
+  border: none;
+  color: grey;
+  font-size: 20px;
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  left: 520px;
+}
+
+.delete-question-button:hover {
+  border: 1px solid rgb(241, 242, 242);;
+  border-radius: 20px; 
+  background-color: rgb(235, 235, 235);
+  cursor: pointer;
+}
+
+.delete-question-button:active {
+  color: rgb(170, 170, 170)
+}
+
+.edit-question-button {
+  background-color: white;
+}
