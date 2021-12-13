@@ -80,6 +80,7 @@ router.post('/signup', csrfProtection, userValidators,
       user_name,
       email,
       occupation,
+      profile_picture: 'https://wyl-mora.s3.us-west-1.amazonaws.com/quora_avatar.png',
     });
 
     const validatorErrors = validationResult(req);

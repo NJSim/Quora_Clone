@@ -31,10 +31,11 @@ block content
             //-   div
             //-     button(class='answer-button' id=`${question.id}`)
             //-       i(class="far fa-comment answer")
-            button(class="edit-question-button editBtn questionEditBtn")
-              i(class="fas fa-edit")
-            button(class='delete-question-button' id=`${question.id}`)
-              i(class="fas fa-trash-alt")
+            if locals.user.user_name === question.User.user_name
+              button(class="edit-question-button editBtn questionEditBtn")
+                i(class="fas fa-edit")
+              button(class='delete-question-button' id=`${question.id}`)
+                i(class="fas fa-trash-alt")
         div(class=`question-edit-contain answerContain` id=`${question.id}`)
           img(class='user-text-picture' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
           form(class='answerContain-form' action=`/questions/${question.id}` method='post')

@@ -109,6 +109,22 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        user_name: 'DemoUser2',
+        email: 'demoUser2@demoUser.com',
+        hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
+        profile_picture: 'https://wyl-mora.s3.us-west-1.amazonaws.com/quora_avatar.png',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_name: 'DemoUser3',
+        email: 'demoUser3@demoUser.com',
+        hashed_password: '$2a$10$Ynt8Q9MAlBIWpv1pEA/TNeDqtWp0sMoB6caPxZ.gFEiTU50VDNYZy',
+        profile_picture: 'https://wyl-mora.s3.us-west-1.amazonaws.com/quora_avatar.png',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
 
 
     ], {});

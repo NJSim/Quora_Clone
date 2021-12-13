@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   /////SEARCH BAR/////
   const searchBar = document.getElementById("searchBar");
+  const suggestionsContainer = document.getElementById("suggestions-container");
   if (searchBar) {
     searchBar.addEventListener("keyup", async (e) => {
       const res = await fetch("/search-question", {
@@ -87,11 +88,19 @@ document.addEventListener("DOMContentLoaded", (e) => {
           "Content-type": "application/json",
         },
       });
+
+      if (e.target.value.length) {
+        suggestionsContainer.style.display = "flex";
+      } else {
+        suggestionsContainer.style.display = "none";
+      }
+
       const questions = await res.json();
+      const displayFiveQuestions = questions.slice(0, 5); //display up to 5 questions
       const ul = document.getElementById("suggestions");
       ul.innerHTML = "";
       if (e.target.value) {
-        for (let question of questions) {
+        for (let question of displayFiveQuestions) {
           const newli = document.createElement("li");
           newli.setAttribute("class", "single-suggestion");
           const newa = document.createElement("a");
@@ -110,6 +119,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     function () {
       const ul = document.getElementById("suggestions");
       ul.innerHTML = "";
+      suggestionsContainer.style.display = "none";
     },
     false
   );
@@ -236,6 +246,21 @@ document.addEventListener("DOMContentLoaded", (e) => {
   });
 
 
+  /////PROFILE DROPDOWN/////
+  var profileImage = document.getElementById("profileImage");
+  var profileDropdownBackground = document.getElementById("profile-dropdown-modal");
+  var profileDropdown = document.getElementById("profile-dropdown-container");
+  profileImage.onclick = function() {
+    profileDropdownBackground.style.display = 'block';
+  }
+  profileDropdownBackground.onclick = function(event) {
+    profileDropdownBackground.style.display = "none";
+  }
+  profileDropdown.onclick = function(event) {
+    event.stopPropagation();
+  }
+
+
   /////ASK QUESTION MODAL/////
   var modal = document.getElementById("myModal");
   // Get the button that opens the modal
@@ -244,7 +269,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   var span = document.getElementsByClassName("close")[0];
   // When the user clicks the button, open the modal 
   btn.onclick = function() {
-    modal.style.display = "block";
+    modal.style.display = "flex";
   }
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
