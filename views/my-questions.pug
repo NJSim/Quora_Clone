@@ -25,6 +25,9 @@ block content
                 div(class='userName')= question.User.user_name
                 div(class='date')= question.date
             div(class='question-text')
+              div(class='space-container')
+                each s in question.Spaces
+                  p(class='single-space-in-question')=s.tag
               a(href=`/questions/${question.id}`) 
                 div(class='question-text-single') #{question.title}
             div(class='question-buttons')

@@ -30,3 +30,25 @@ div.question-edit-contain {
 .edit-question-button {
   background-color: white;
 }
+
+.space-container{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap:5px;
+ 
+}
+
+.single-space-in-question{
+  background-color: rgb(247, 247, 248);
+  color:#636466;
+  padding:2px 4px;
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.single-space-in-question:hover{
+  color:rgb(63,104,246)
+  
+}

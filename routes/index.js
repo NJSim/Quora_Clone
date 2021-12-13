@@ -1,6 +1,5 @@
 var express = require("express");
 const { check, validationResult } = require("express-validator");
-
 const db = require("../db/models");
 const { csrfProtection, asyncHandler } = require("./utils");
 const { requireAuth } = require("../auth");
@@ -30,10 +29,17 @@ router.get(
   "/",
   csrfProtection,
   asyncHandler(async (req, res, next) => {
+    const spaceObjects = await db.Space.findAll();
+    const spaceSet = new Set();
+    for (const space of spaceObjects) {
+      spaceSet.add(space.dataValues.tag);
+    }
+    const spaces = [...spaceSet]
     const questions = await db.Question.findAll({
       include: [
         db.Questions_vote,
         db.Answer,
+        db.Space,
         db.User,
         {
           model: db.Answer,
@@ -42,7 +48,7 @@ router.get(
       ],
       order: [["createdAt", "DESC"]],
     });
-    
+
     var options = {
       weekday: "long",
       year: "numeric",
@@ -64,23 +70,69 @@ router.get(
           answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
         }
       }
-      data.push({question:question,answers:answers});
-      console.log('answers', answers)
+      data.push({ question: question, answers: answers });
     }
+    console.log("answers!!!!!!", data);
     res.render("index", {
       title: "Mora Home",
       data,
+      spaces,
       token: req.csrfToken(),
     });
   })
 );
+//////GET QUESTIONS IN SPACE//////
+router.get(
+  "/questions-in-space/:space",
+  requireAuth,
+  csrfProtection,
+  async (req, res, next) => {
+    const spaceObjects = await db.Space.findAll();
+    const spaceSet = new Set()
+    for (const space of spaceObjects) {
+      spaceSet.add(space.dataValues.tag);
+    }
+    const spaces = [...spaceSet]
+    let space = req.params.space;
+    let questions = [];
+    questions = await db.Question.findAll({
+      include: [
+        { model: db.User },
+        { model: db.Questions_vote },
+        {
+          model: db.Answer,
+          include: [db.User, db.Answers_vote],
+        },
+        {
+          model: db.Space,
+          where: {
+            tag: space,
+          },
+        },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
 
+    res.render("my-questions", {
+      title: `All Questions in ${space}`,
+      myQuestions: questions,
+      spaces,
+      token: req.csrfToken(),
+    });
+  }
+);
 //////GET INDIVIDUAL QUESTION/////
 router.get(
   "/questions/:id(\\d+)",
   requireAuth,
   csrfProtection,
   async (req, res, next) => {
+    const spaceObjects = await db.Space.findAll();
+    const spaceSet = new Set()
+    for (const space of spaceObjects) {
+      spaceSet.add(space.dataValues.tag);
+    }
+    const spaces = [...spaceSet]
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, {
       include: [{ model: db.User }, { model: db.Questions_vote }],
@@ -105,6 +157,7 @@ router.get(
       title: "View Question",
       question,
       answers,
+      spaces,
       token: req.csrfToken(),
     });
   }

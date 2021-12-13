@@ -103,7 +103,7 @@ a#logo:hover {
 
 #suggestions {
     display: flex;
-    flex-direction: column; */
+    flex-direction: column; 
 }
 
 /* #suggestions::-webkit-scrollbar {
