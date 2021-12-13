@@ -107,9 +107,14 @@ html
               a(href='/our-story')
                 i(class="fas fa-book")
                 span(class='icon-text') Our Story
-
-        div(id="content-parts")
-          block content
+            div(id="content-parts")
+              if spaces && spaces.length > 0
+                each s in spaces
+                  div(class='spaces-with-img')
+                    img(src='' alt='' class='space-img')
+                    a(class='single-space' href=`/questions-in-space/${s}`)
+                      span(class='icon-text')=s
+        block content
     //- div(class='login-footer')
     //-   a(href='/our-story' class='our-story') Our Story
     //-   div · 
