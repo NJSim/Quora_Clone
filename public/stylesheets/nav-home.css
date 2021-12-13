@@ -1,7 +1,7 @@
-#nav-home {
-  color: #9f2723;;
+#nav-home, #nav-home-top {
+  color: #b92b27;
 }
 
-#nav-home:hover {
+/* #nav-home:hover {
   color: #c66d6a;
-}
+} */

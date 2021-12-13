@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", (e) => {
+
+  /////EDIT QUESTON BUTTON/////
   const editQuestionBtn = document.querySelector("button.edit-question-button");
   if (editQuestionBtn) {
     editQuestionBtn.addEventListener("click", async (e) => {
@@ -6,22 +8,31 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const questionContain = document.querySelector(
         `div.question-edit-contain`
       );
-      if (
-        questionContain.style.display === "" ||
-        questionContain.style.display === "none"
-      ) {
-        questionContain.style.display = "block";
+      if (questionContain.style.display === "" || questionContain.style.display === "none") {
+        questionContain.style.display = "flex";
       } else {
         questionContain.style.display = "none";
       }
-      const existQuestion = document.querySelector(
-        "div.question-text-single"
-      ).innerHTML;
+      const existQuestion = document.querySelector("div.question-text-single").innerHTML;
       const inputBar = document.querySelector("input.form-control");
       inputBar.value = existQuestion;
     });
   }
 
+
+  /////DELETE QUESTION BUTTON/////
+  const deleteQuestion = document.querySelectorAll(".delete-question-button");
+  deleteQuestion.forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      document.querySelector(`#question-container-${button.id}`).remove();
+      const res = await fetch(`/questions/${button.id}`, {
+        method: "DELETE",
+      });
+    });
+  });
+
+
+  /////EDIT ANSWER BUTTON/////
   const editAnswerBtns = document.querySelectorAll("button.editBtn");
   if (editAnswerBtns) {
     for (let editAnswerBtn of editAnswerBtns) {
@@ -33,23 +44,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
         // if (!answerContains.style.display) {
         //   answerContains.style.display = "block";
         // }
-        if (
-          answerContains.style.display === "" ||
-          answerContains.style.display === "none"
-        ) {
-          answerContains.style.display = "block";
+        if (answerContains.style.display === "" || answerContains.style.display === "none") {
+          answerContains.style.display = "flex";
         } else {
           answerContains.style.display = "none";
         }
         const input = answerContains.getElementsByTagName("input")[1];
-        const answerContent = document.querySelector(
-          `div.answer-text-${answerId}`
-        );
+        const answerContent = document.querySelector(`div.answer-text-${answerId}`);
         input.value = answerContent.innerText;
       });
     }
   }
   
+
+  /////DELETE ANSWER BUTTON/////
   const deleteAnswerBtns = document.querySelectorAll("div button.deleteBtn");
   if (deleteAnswerBtns) {
     for (const deleteAnswerBtn of deleteAnswerBtns) {
@@ -65,8 +73,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
   }
 
+
   /////SEARCH BAR/////
   const searchBar = document.getElementById("searchBar");
+  const suggestionsContainer = document.getElementById("suggestions-container");
   if (searchBar) {
     searchBar.addEventListener("keyup", async (e) => {
       const res = await fetch("/search-question", {
@@ -78,11 +88,19 @@ document.addEventListener("DOMContentLoaded", (e) => {
           "Content-type": "application/json",
         },
       });
+
+      if (e.target.value.length) {
+        suggestionsContainer.style.display = "flex";
+      } else {
+        suggestionsContainer.style.display = "none";
+      }
+
       const questions = await res.json();
+      const displayFiveQuestions = questions.slice(0, 5); //display up to 5 questions
       const ul = document.getElementById("suggestions");
       ul.innerHTML = "";
       if (e.target.value) {
-        for (let question of questions) {
+        for (let question of displayFiveQuestions) {
           const newli = document.createElement("li");
           newli.setAttribute("class", "single-suggestion");
           const newa = document.createElement("a");
@@ -101,6 +119,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     function () {
       const ul = document.getElementById("suggestions");
       ul.innerHTML = "";
+      suggestionsContainer.style.display = "none";
     },
     false
   );
@@ -113,34 +132,33 @@ document.addEventListener("DOMContentLoaded", (e) => {
   //   false
   // );
 
+
   ////ANSWER BUTTON/////
   const answers = document.querySelectorAll("div.answer-delete-section");
   for (const answer of answers) {
     answer.addEventListener("click", (e) => {
-      console.log("!!!!!!!!", e.currentTarget);
+      // console.log("!!!!!!!!", e.currentTarget);
       const answerContains = document.getElementsByClassName("answerContain");
       for (const answerContain of answerContains) {
         const questionId = e.currentTarget.getElementsByTagName("button")[0].id;
-        console.log(questionId, "%%%%%%%%%%");
+        // console.log(questionId, "%%%%%%%%%%");
         if (answerContain.id === questionId) {
-          console.log("12345", answerContain.style.display, "54321");
-          if (
-            answerContain.style.display === "" ||
-            answerContain.style.display === "none"
-          ) {
-            console.log(answerContain.style.display, "first situ***&&%^%$$");
-            answerContain.style.display = "block";
+          // console.log("12345", answerContain.style.display, "54321");
+          if (answerContain.style.display === "" || answerContain.style.display === "none") {
+            // console.log(answerContain.style.display, "first situ***&&%^%$$");
+            answerContain.style.display = "flex";
           } else {
-            console.log(
-              answerContain.style.display,
-              "else now is block situation"
-            );
+            // console.log(
+            //   answerContain.style.display,
+            //   "else now is block situation"
+            // );
             answerContain.style.display = "none";
           }
         }
       }
     });
   }
+
 
   ////PROFILE DROPDOWN/////
   const profile = document.getElementById("profileSelect");
@@ -152,7 +170,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
   //     profile.value = "myQuestion";
   //   }
   // }
-
   if (profile) {
     profile.addEventListener("change", async (e) => {
       if (e.target.value === "myQuestion") {
@@ -182,6 +199,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
+
   /////QUESTION UPVOTE BUTTON/////
   const vote = document.querySelectorAll(".upvote-question-button");
   for (let i = 0; i < vote.length; i++) {
@@ -199,6 +217,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
+  
   /////ANSWER UPVOTE BUTTON/////
   const answerVote = document.querySelectorAll(".upvote-answer-button");
   // for (let i = 0; i < answerVote.length; i++) {
@@ -213,7 +232,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
   //     voteid.innerText = voteArray.length;
   //   });
   // }
-
   answerVote.forEach((button) => {
     button.addEventListener("click", async (e) => {
       const totalVote = document.getElementById(
@@ -227,16 +245,21 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   });
 
-  /////DELETE QUESTION BUTTON/////
-  const deleteQuestion = document.querySelectorAll(".delete-question-button");
-  deleteQuestion.forEach((button) => {
-    button.addEventListener("click", async (e) => {
-      document.querySelector(`#question-container-${button.id}`).remove();
-      const res = await fetch(`/questions/${button.id}`, {
-        method: "DELETE",
-      });
-    });
-  });
+
+  /////PROFILE DROPDOWN/////
+  var profileImage = document.getElementById("profileImage");
+  var profileDropdownBackground = document.getElementById("profile-dropdown-modal");
+  var profileDropdown = document.getElementById("profile-dropdown-container");
+  profileImage.onclick = function() {
+    profileDropdownBackground.style.display = 'block';
+  }
+  profileDropdownBackground.onclick = function(event) {
+    profileDropdownBackground.style.display = "none";
+  }
+  profileDropdown.onclick = function(event) {
+    event.stopPropagation();
+  }
+
 
   /////ASK QUESTION MODAL/////
   var modal = document.getElementById("myModal");
@@ -246,7 +269,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   var span = document.getElementsByClassName("close")[0];
   // When the user clicks the button, open the modal 
   btn.onclick = function() {
-    modal.style.display = "block";
+    modal.style.display = "flex";
   }
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {

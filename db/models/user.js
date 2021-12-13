@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     user_name: DataTypes.STRING(50),
     email: DataTypes.STRING(255),
     occupation: DataTypes.STRING(100),
-    hashed_password: DataTypes.STRING(255)
+    hashed_password: DataTypes.STRING(255),
+    profile_picture: DataTypes.STRING(255)
   }, {});
   User.associate = function(models) {
     User.hasMany(models.Question, { foreignKey: 'user_id' });

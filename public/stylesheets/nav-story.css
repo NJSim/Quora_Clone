@@ -1,7 +1,7 @@
-#nav-story {
-  color: #9f2723;;
+#nav-story, #nav-story-top {
+  color: #b92b27;
 }
 
-#nav-story:hover {
+/* #nav-story:hover {
   color: #c66d6a;
-}
+} */

@@ -1,7 +1,7 @@
-#nav-question {
-  color: #9f2723;;
+#nav-question, #nav-question-top {
+  color: #b92b27;
 }
-
+/* 
 #nav-question:hover {
   color: #c66d6a;
-}
+} */

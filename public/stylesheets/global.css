@@ -1,0 +1,25 @@
+h1 {
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 5px;
+}
+
+body {
+    background-color: rgb(241, 242, 242);
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+li{
+    list-style-type:none;
+}
+
+a{
+    text-decoration: none;
+}
+
+

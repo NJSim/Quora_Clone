@@ -1,72 +1,113 @@
 doctype html
 html
   head
-      block head
-        title="Mora"
-        link(rel='stylesheet' href='/stylesheets/reset.css')
-        link(rel='stylesheet' href='/stylesheets/questions.css')
-        link(rel='stylesheet' href='/stylesheets/answers.css')
-        link(rel='stylesheet' href='/stylesheets/votes.css')
-        link(rel='stylesheet' href='/stylesheets/search.css')
-        link(rel='stylesheet' href='/stylesheets/nav.css')
-        link(rel='stylesheet' href='/stylesheets/index.css')
-        link(rel='stylesheet' href='/stylesheets/story.css')
-        script(src="https://kit.fontawesome.com/72b8be2715.js" crossorigin="anonymous")
-        script(src="/javascripts/index.js" type="module" defer)
+    block head
+      title="Mora"
+      meta(name="theme-color" content="#000000")
+      meta(name="description" content="Mora")
+      meta(name="title" property="og:title" content="Mora")
+      meta(property="og:type" content="Website")
+      meta(name="image" property="og:image" content="https://wyl-mora.s3.us-west-1.amazonaws.com/LoginScreenShot.png")
+      meta(name="description" property="og:description" content="Mora, a full stack Quora Clone where users can post questions, answers, and like questions and answers posted by others.")
+      meta(name="author" content="Jessi Zhuo, Kristy Zhang, Nick Sim, Wei-Yang Lin(Jack)")
+      link(rel='stylesheet' href='/stylesheets/reset.css')
+      link(rel='stylesheet' href='/stylesheets/global.css')
+      link(rel='stylesheet' href='/stylesheets/layout.css')
+      link(rel="stylesheet" href="/stylesheets/index.css")
+      link(rel='stylesheet' href='/stylesheets/my-questions.css')
+      link(rel='stylesheet' href='/stylesheets/my-answers.css')
+      link(rel='stylesheet' href='/stylesheets/our-story.css')
+      script(src="https://kit.fontawesome.com/72b8be2715.js" crossorigin="anonymous")
+      script(src="/javascripts/index.js" type="module" defer)
   body
     div(id='body-div')
       div(id='nav_container')
         a(id='logo' href='/') Mora
+        div(id="nav-home-top")
+          a(href='/')
+            i(class="fas fa-home")
+        div(id="nav-question-top")
+          a(href='/my-questions')
+            i(class="fas fa-question-circle")
+        div(id="nav-answer-top")
+          a(href='/my-answers')
+            i(class="fas fa-edit")
+        div(id="nav-story-top")
+          a(href='/our-story')
+            i(class="fas fa-book")
         div(class="searchDiv")
           div(class='input-icons')
             i(class="fas fa-search icon")
             input(type=email id="searchBar" placeholder='Search Mora' class='search-mora')
-          div(class="suggestions-container")
+          div(class="suggestions-container" id="suggestions-container")
             ul(id="suggestions")
         div(id='user_auth_container')
           if locals.authenticated
-            select(name='dropDown', id='profileSelect')
-              option(selected disabled hidden)=`Welcome ${locals.user.user_name}`
-              each val in ['myQuestion' , 'myAnswer' , 'Logout']
-                option(value=val)=val
-            div(id='search-container')
-              button(id="modal-button") Add Question
-              div(id="myModal" class="modal")
-                div(class="modal-content")
+            //- select(name='dropDown', id='profileSelect')
+            //-   option(selected disabled hidden)=`Welcome ${locals.user.user_name}`
+            //-   each val in ['myQuestion' , 'myAnswer' , 'Logout']
+            //-     option(value=val)=val
+            div(class='profileImage-container')
+              img(id='profileImage' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
+            div(id="profile-dropdown-modal" class="profile-dropdown-modal-class")
+              div(id='profile-dropdown-container')
+                div(class='profile-dropdown-user-container')
+                  img(class='user-text-picture' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
+                  div(class='profile-dropdown-name') #{locals.user.user_name}
+                form(class='profile-dropdown-logout' action='/users/logout' method='post')
+                  button(class='profile-dropdown-logout-button' type='submit' class='button') Logout
+                div(class='profile-about')
+                  div
+                    a(href='/our-story' class='our-story') Our Story
+                    span  · 
+                    a(href='https://www.linkedin.com/in/wylin94/' class='linkedIn') Wei-Yang Lin(Jack)
+                    span  · 
+                  div
+                    a(href='https://github.com/zyingzhuo' class='linkedIn') Jessi Zhuo
+                    span  · 
+                    a(href='https://www.linkedin.com/in/nicolas-sim-156422170/' class='linkedIn') Nick Sim
+                    span  · 
+                    a(href='https://www.linkedin.com/in/kristy-zhang-708ab763/' class='linkedIn') Kristy Zhang
+            button(id="modal-button") Add Question
+            div(id="myModal" class="modal")
+              div(class="modal-content")
+                div(class='modal-head')
                   span(class="close") &times;
-                  p(class='modal-username') #{locals.user.user_name} asked
-                  div(class='modal-form-container')
-                    form(method="post" action="/questions")
-                      input(type="hidden" name="_csrf" value=token) 
-                      input(name="title" type="text" required class='modal-input' placeholder='Start your question with "What", "How", "Why", etc.')
+                  div(class='modal-head-text') Add question
+                div(class='modal-name')
+                  img(class='welcome-user-image' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
+                  div(class='modal-username') #{locals.user.user_name} asked
+                div(class='modal-form-container')
+                  form(method="post" action="/questions")
+                    input(type="hidden" name="_csrf" value=token) 
+                    input(name="title" type="text" required class='modal-input' placeholder='Start your question with "What", "How", "Why", etc.')
+                    div(class='modal-sumit-button-container')
                       button(type="submit" class='modal-submit') Add Question
-          
           else
-            span
-              a(href='/users/login' id='nav-login') Login
+            a(href='/users/login' id='nav-login') Login
         //- if locals.authenticated
         //-   div(id='search-container')
         //-     a(id='askQuestion' href='/questions/new') Add Question
       div(id="main-body")
         div(id="left-nav-container")
-          div(id="nav-home")
-            a(href='/')
-              i(class="fas fa-home")
-              span(class='icon-text') Home
-          div(id="nav-question")
-            a(href='/my-questions')
-              i(class="fas fa-question-circle")
-              span(class='icon-text') My Questions
-          div(id="nav-answer")
-            a(href='/my-answers')
-              i(class="fas fa-edit")
-              span(class='icon-text') My Answers
-          div(class='line')
-  
-          div(id="nav-story")
-            a(href='/our-story')
-              i(class="fas fa-book-open")
-              span(class='icon-text') Our Story
+          div(id="nav-container")
+            div(id="nav-home")
+              a(href='/')
+                i(class="fas fa-home")
+                span(class='icon-text') Home
+            div(id="nav-question")
+              a(href='/my-questions')
+                i(class="fas fa-question-circle")
+                span(class='icon-text') My Questions
+            div(id="nav-answer")
+              a(href='/my-answers')
+                i(class="fas fa-edit")
+                span(class='icon-text') My Answers
+            div(id="nav-story")
+              a(href='/our-story')
+                i(class="fas fa-book")
+                span(class='icon-text') Our Story
+
         div(id="content-parts")
           block content
     //- div(class='login-footer')

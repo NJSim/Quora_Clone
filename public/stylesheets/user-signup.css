@@ -1,4 +1,7 @@
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-image: url('../image/loginBackground.png');
   background-position: center center;
   background-size: cover;
@@ -7,6 +10,7 @@ body {
   color: #636466;
   font-family: sans-serif;
   font-weight: bold;
+  height: 100vh;
 }
 
 .login-container {
@@ -20,8 +24,8 @@ body {
   background-color: white;
   width: 702px;
   height: 815px;
-  margin: auto;
-  margin-top: 24px;
+  /* margin: auto;
+  margin-top: 24px; */
 }
 
 #logo {
