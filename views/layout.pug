@@ -47,7 +47,8 @@ html
             //-   option(selected disabled hidden)=`Welcome ${locals.user.user_name}`
             //-   each val in ['myQuestion' , 'myAnswer' , 'Logout']
             //-     option(value=val)=val
-            img(id='profileImage' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
+            div(class='profileImage-container')
+              img(id='profileImage' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
             div(id="profile-dropdown-modal" class="profile-dropdown-modal-class")
               div(id='profile-dropdown-container')
                 div(class='profile-dropdown-user-container')
