@@ -34,7 +34,7 @@ router.get(
     for (const space of spaceObjects) {
       spaceSet.add(space.dataValues.tag);
     }
-    const spaces = [...spaceSet]
+    const spaces = [...spaceSet];
     const questions = await db.Question.findAll({
       include: [
         db.Questions_vote,
@@ -87,32 +87,38 @@ router.get(
   requireAuth,
   csrfProtection,
   async (req, res, next) => {
-    const spaceObjects = await db.Space.findAll();
-    const spaceSet = new Set()
+    let spaceObjects = await db.Space.findAll();
+    let spaceSet = new Set();
     for (const space of spaceObjects) {
       spaceSet.add(space.dataValues.tag);
     }
-    const spaces = [...spaceSet]
+    const spaces = [...spaceSet];
     let space = req.params.space;
-    let questions = [];
-    questions = await db.Question.findAll({
-      include: [
-        { model: db.User },
-        { model: db.Questions_vote },
-        {
-          model: db.Answer,
-          include: [db.User, db.Answers_vote],
-        },
-        {
-          model: db.Space,
-          where: {
-            tag: space,
-          },
-        },
-      ],
-      order: [["createdAt", "DESC"]],
-    });
 
+    spaceObjects = await db.Space.findAll({
+      where: {
+        tag: space,
+      },
+    });
+    let questions = [];
+    for (const s of spaceObjects) {
+      question = await db.Question.findByPk(s.question_id,{
+        include: [
+          { model: db.User },
+          { model: db.Questions_vote },
+          {
+            model: db.Answer,
+            include: [db.User, db.Answers_vote],
+          },
+          {
+            model: db.Space,
+          },
+        ],
+        order: [["createdAt", "DESC"]],
+      });
+      questions.push(question)
+    }
+    console.log(questions,"&&&&&&&&&&&&&&&&")
     res.render("my-questions", {
       title: `All Questions in ${space}`,
       myQuestions: questions,
@@ -128,11 +134,11 @@ router.get(
   csrfProtection,
   async (req, res, next) => {
     const spaceObjects = await db.Space.findAll();
-    const spaceSet = new Set()
+    const spaceSet = new Set();
     for (const space of spaceObjects) {
       spaceSet.add(space.dataValues.tag);
     }
-    const spaces = [...spaceSet]
+    const spaces = [...spaceSet];
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, {
       include: [{ model: db.User }, { model: db.Questions_vote }],
