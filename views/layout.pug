@@ -109,11 +109,12 @@ html
                 span(class='icon-text') Our Story
             div(id="content-parts")
               if spaces && spaces.length > 0
-                each s in spaces
+                each s,i in spaces
                   div(class='spaces-with-img')
-                    img(src='' alt='' class='space-img')
-                    a(class='single-space' href=`/questions-in-space/${s}`)
-                      span(class='icon-text')=s
+                    if images
+                      img(src=`${images[i]}` alt='' class='space-img')
+                      a(class='single-space' href=`/questions-in-space/${s}`)
+                        span(class='icon-text')=s
         block content
     //- div(class='login-footer')
     //-   a(href='/our-story' class='our-story') Our Story
