@@ -218,13 +218,13 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          question_id: 10,
+          question_id: 7,
           tag: "Latino Movies",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          question_id: 10,
+          question_id: 7,
           tag: "Black Leading Actors",
           createdAt: new Date(),
           updatedAt: new Date(),

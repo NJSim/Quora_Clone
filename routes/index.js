@@ -4,6 +4,26 @@ const db = require("../db/models");
 const { csrfProtection, asyncHandler } = require("./utils");
 const { requireAuth } = require("../auth");
 const Sequelize = require("sequelize");
+const images = [
+  "https://i.imgur.com/hES7D98.jpeg",
+  "https://images.unsplash.com/photo-1581390114939-946f9a890a7f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062&q=80",
+  "https://www.gannett-cdn.com/presto/2021/01/07/USAT/0d87949b-7f95-4318-a7f7-72f2b6893d05-marvel-shows.png",
+  "https://i.imgur.com/JBxmIGv.jpeg",
+  "https://images.unsplash.com/photo-1503160865267-af4660ce7bf2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  "https://images.unsplash.com/photo-1598386651573-9232cc0c2f7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  "https://fdn.gsmarena.com/imgroot/news/20/10/netflix-india-free-weekend/-1200/gsmarena_001.jpg",
+  "https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1718&q=80",
+  "https://images.unsplash.com/photo-1633613286991-611fe299c4be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  "http://ielanguages.com/blog/wp-content/uploads/2015/10/loimp.jpeg?x26507",
+  "https://wp-denverite.s3.amazonaws.com/wp-content/uploads/sites/4/2017/09/160821-CINEMA-LATINO-KEVINJBEATY-05.gif",
+  "https://image.cnbcfm.com/api/v1/image/102129219-544fe3109623b.jpg?v=1497046818&w=1600&h=900",
+];
+var options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
 
 var router = express.Router();
 
@@ -49,17 +69,10 @@ router.get(
       order: [["createdAt", "DESC"]],
     });
 
-    var options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
     for (let question of questions) {
       question.date = question.updatedAt.toLocaleDateString("en-US", options);
     }
     const data = [];
-    const images=['https://i.imgur.com/hES7D98.jpeg','https://images.unsplash.com/photo-1581390114939-946f9a890a7f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062&q=80', 'https://www.gannett-cdn.com/presto/2021/01/07/USAT/0d87949b-7f95-4318-a7f7-72f2b6893d05-marvel-shows.png', 'https://i.imgur.com/JBxmIGv.jpeg', 'https://images.unsplash.com/photo-1503160865267-af4660ce7bf2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80', 'https://images.unsplash.com/photo-1598386651573-9232cc0c2f7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80', 'https://fdn.gsmarena.com/imgroot/news/20/10/netflix-india-free-weekend/-1200/gsmarena_001.jpg' , 'https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1718&q=80', 'https://images.unsplash.com/photo-1633613286991-611fe299c4be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80', 'http://ielanguages.com/blog/wp-content/uploads/2015/10/loimp.jpeg?x26507', 'https://wp-denverite.s3.amazonaws.com/wp-content/uploads/sites/4/2017/09/160821-CINEMA-LATINO-KEVINJBEATY-05.gif', 'https://image.cnbcfm.com/api/v1/image/102129219-544fe3109623b.jpg?v=1497046818&w=1600&h=900']
     for (let question of questions) {
       const answers = await db.Answer.findAll({
         where: { question_id: question.id },
@@ -71,7 +84,7 @@ router.get(
           answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
         }
       }
-      data.push({ question: question, answers: answers, images:images});
+      data.push({ question: question, answers: answers });
     }
     console.log("answers!!!!!!", data);
     res.render("index", {
@@ -102,9 +115,10 @@ router.get(
         tag: space,
       },
     });
-    let questions = [];
+    // let questions = [];
+    let data = [];
     for (const s of spaceObjects) {
-      question = await db.Question.findByPk(s.question_id,{
+      const question = await db.Question.findByPk(s.question_id, {
         include: [
           { model: db.User },
           { model: db.Questions_vote },
@@ -118,13 +132,21 @@ router.get(
         ],
         order: [["createdAt", "DESC"]],
       });
-      questions.push(question)
+      
+      question.date = question.updatedAt.toLocaleDateString("en-US", options);
+      if (question.Answers) {
+        for (let answer of question.Answers) {
+          answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
+        }
+      }
+      data.push({ question: question, answers: question.Answers });
     }
-    console.log(questions,"&&&&&&&&&&&&&&&&")
-    res.render("my-questions", {
+    // console.log(questions, "&&&&&&&&&&&&&&&&");
+    res.render("index", {
       title: `All Questions in ${space}`,
-      myQuestions: questions,
+      data,
       spaces,
+      images,
       token: req.csrfToken(),
     });
   }
