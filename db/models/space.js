@@ -1,12 +1,22 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Space = sequelize.define('Space', {
-    tag: DataTypes.STRING,
-    question_id: DataTypes.INTEGER
-  }, {});
-  Space.associate = function(models) {
+  const Space = sequelize.define(
+    "Space",
+    {
+      tag: DataTypes.STRING,
+      img: DataTypes.TEXT,
+    },
+    {}
+  );
+  Space.associate = function (models) {
     // associations can be defined here
-    Space.belongsTo(models.Question, { foreignKey: "question_id" });
+    const columnMapping = {
+      through: "Questionspace",
+      otherKey: "question_id",
+      foreignKey: "space_id",
+    };
+
+    Space.belongsToMany(models.Question, columnMapping);
   };
   return Space;
 };
