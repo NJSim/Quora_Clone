@@ -103,7 +103,11 @@ router.get(
   requireAuth,
   csrfProtection,
   async (req, res, next) => {
-    const spaces = await db.Space.findAll();
+    const spaceObjs = await db.Space.findAll();
+    const spaces = []
+    for(const s of spaceObjs){
+      spaces.push(s.tag)
+    }
 
     let space = req.params.space;
 
