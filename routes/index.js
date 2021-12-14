@@ -68,9 +68,10 @@ router.get(
       ],
       order: [["createdAt", "DESC"]],
     });
-
+    // console.log("######################",questions)
     for (let question of questions) {
       question.date = question.updatedAt.toLocaleDateString("en-US", options);
+      console.log("######################", question);
     }
     const data = [];
     for (let question of questions) {
@@ -102,23 +103,19 @@ router.get(
   requireAuth,
   csrfProtection,
   async (req, res, next) => {
-    let spaceObjects = await db.Space.findAll();
-    let spaceSet = new Set();
-    for (const space of spaceObjects) {
-      spaceSet.add(space.dataValues.tag);
-    }
-    const spaces = [...spaceSet];
+    const spaces = await db.Space.findAll();
+
     let space = req.params.space;
 
-    spaceObjects = await db.Space.findAll({
-      where: {
-        tag: space,
-      },
-    });
-    // let questions = [];
     let data = [];
-    for (const s of spaceObjects) {
-      const question = await db.Question.findByPk(s.question_id, {
+    const questionspaces = await db.Question.findAll({
+      include:[{
+        model:db.Space,
+        where:{tag:space}
+      }]
+    });
+    for (const questionspace of questionspaces) {
+      const question = await db.Question.findByPk(questionspace.id, {
         include: [
           { model: db.User },
           { model: db.Questions_vote },
@@ -132,7 +129,7 @@ router.get(
         ],
         order: [["createdAt", "DESC"]],
       });
-      
+
       question.date = question.updatedAt.toLocaleDateString("en-US", options);
       if (question.Answers) {
         for (let answer of question.Answers) {

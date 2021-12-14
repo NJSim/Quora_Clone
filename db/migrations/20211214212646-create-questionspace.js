@@ -1,17 +1,17 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Spaces', {
+    return queryInterface.createTable('Questionspaces', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      tag: {
-        type: Sequelize.STRING
-      },
       question_id: {
+        type: Sequelize.INTEGER
+      },
+      space_id: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -25,6 +25,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Spaces');
+    return queryInterface.dropTable('Questionspaces');
   }
 };
