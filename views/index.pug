@@ -7,64 +7,65 @@ append head
 
 block content
   if locals.authenticated
-    div(id='welcome_container')
-      div(class='welcome-user-container')
-        img(class='welcome-user-image' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
-        div(class='welcome-user') #{locals.user.user_name}
-      form(method="post" action="/questions" class='welcome-question')
-        input(type="hidden" name="_csrf" value=token)
-        input(name="title" type="text" placeholder="What do you want to ask or share?" required class='welcome-input')
-        button(id="welcome-submit-btn" type="submit" hidden) Submit
-  div(class='questions-container')
-    if data && data.length > 0
-      each d in data
-        div(id=`question-container-${d.question.id}` class='question-container')
-          input(type='hidden' id=`d.questionid` value= d.question.id)
-          //- input(type='hidden' id= 'userid' value= user.id)
-          
-          div(class='question-offset')
-            div(class='user-text')
-              img(class='user-text-picture' src=`${d.question.User.profile_picture}`, alt=`${d.question.User.user_name}`)
-              div(class='userName-container')
-                div(class='userName')= d.question.User.user_name
-                div(class='date')= d.question.date
-            div(class='question-text')
-              div(class='space-container')
-                each s in d.question.Spaces
-                  p(class='single-space-in-question')=s.tag
-              a(href=`/questions/${d.question.id}` class='question-title') #{d.question.title}
-            if locals.authenticated
-              div(class='question-buttons')
-                div(class='vote-section')
-                  button(class='upvote-question-button' id= `${d.question.id}`)
-                    i(class="fa fa-thumbs-up")
-                  div(class='vote_holder voteNum')= d.question.Questions_votes.length
-                div(class='answer-delete-section')
-                  div(class = `answer-button-${d.question.id}`)
-                    button(class='answer-button' id=`${d.question.id}`)
-                      i(class="far fa-comment answer")
-
-          div(class=`answerContain` id=`${d.question.id}`)
-            if locals.authenticated
-              img(class='user-text-picture' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
-              form(class='answerContain-form' action=`/questions/${d.question.id}/answers` method='post')
-                input(type='hidden' name='_csrf' value=token)
-                +field('', 'content', '', 'text', 'Add a comment...' )
-                button(type='submit' class='answer-submit-button') Add Comment
-          
-          div(class='answers-container')
-            if d.answers && d.answers.length > 0
-              each answer in d.answers
-                div(class='answer-container')
-                  div(class='user-text')
-                    img(class='user-text-picture' src=`${answer.User.profile_picture}`, alt=`${answer.User.user_name}`)
-                    div(class='userName-container')
-                      div(class='userName')= answer.User.user_name
-                      div(class='date')= answer.date
-                  div(class='answer-text')= answer.content
-                  div(class='answer-buttons')
+    div(id='welcome_question_container')
+      div(id='welcome_container')
+        div(class='welcome-user-container')
+          img(class='welcome-user-image' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
+          div(class='welcome-user') #{locals.user.user_name}
+        form(method="post" action="/questions" class='welcome-question')
+          input(type="hidden" name="_csrf" value=token)
+          input(name="title" type="text" placeholder="What do you want to ask or share?" required class='welcome-input')
+          button(id="welcome-submit-btn" type="submit" hidden) Submit
+      div(class='questions-container')
+        if data && data.length > 0
+          each d in data
+            div(id=`question-container-${d.question.id}` class='question-container')
+              input(type='hidden' id=`d.questionid` value= d.question.id)
+              //- input(type='hidden' id= 'userid' value= user.id)
+              
+              div(class='question-offset')
+                div(class='user-text')
+                  img(class='user-text-picture' src=`${d.question.User.profile_picture}`, alt=`${d.question.User.user_name}`)
+                  div(class='userName-container')
+                    div(class='userName')= d.question.User.user_name
+                    div(class='date')= d.question.date
+                div(class='question-text')
+                  div(class='space-container')
+                    each s in d.question.Spaces
+                      p(class='single-space-in-question')=s.tag
+                  a(href=`/questions/${d.question.id}` class='question-title') #{d.question.title}
+                if locals.authenticated
+                  div(class='question-buttons')
                     div(class='vote-section')
-                      if locals.authenticated
-                        button(class='upvote-answer-button' id=`UQ/${answer.id}`)
-                          i(class="fa fa-thumbs-up")
-                        div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length
+                      button(class='upvote-question-button' id= `${d.question.id}`)
+                        i(class="fa fa-thumbs-up")
+                      div(class='vote_holder voteNum')= d.question.Questions_votes.length
+                    div(class='answer-delete-section')
+                      div(class = `answer-button-${d.question.id}`)
+                        button(class='answer-button' id=`${d.question.id}`)
+                          i(class="far fa-comment answer")
+
+              div(class=`answerContain` id=`${d.question.id}`)
+                if locals.authenticated
+                  img(class='user-text-picture' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
+                  form(class='answerContain-form' action=`/questions/${d.question.id}/answers` method='post')
+                    input(type='hidden' name='_csrf' value=token)
+                    +field('', 'content', '', 'text', 'Add a comment...' )
+                    button(type='submit' class='answer-submit-button') Add Comment
+              
+              div(class='answers-container')
+                if d.answers && d.answers.length > 0
+                  each answer in d.answers
+                    div(class='answer-container')
+                      div(class='user-text')
+                        img(class='user-text-picture' src=`${answer.User.profile_picture}`, alt=`${answer.User.user_name}`)
+                        div(class='userName-container')
+                          div(class='userName')= answer.User.user_name
+                          div(class='date')= answer.date
+                      div(class='answer-text')= answer.content
+                      div(class='answer-buttons')
+                        div(class='vote-section')
+                          if locals.authenticated
+                            button(class='upvote-answer-button' id=`UQ/${answer.id}`)
+                              i(class="fa fa-thumbs-up")
+                            div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length
