@@ -7,7 +7,8 @@ html
       meta(name="description" content="Mora")
       meta(name="title" property="og:title" content="Mora")
       meta(property="og:type" content="Website")
-      meta(name="image" property="og:image" content="https://wyl-mora.s3.us-west-1.amazonaws.com/LoginScreenShot.png")
+      //- meta(name="image" property="og:image" content="https://wyl-mora.s3.us-west-1.amazonaws.com/LoginScreenShot.png")
+      <meta name="image" property="og:image" content="https://wyl-mora.s3.us-west-1.amazonaws.com/LoginScreenShot.png">
       meta(name="description" property="og:description" content="Mora, a full stack Quora Clone where users can post questions, answers, and like questions and answers posted by others.")
       meta(name="author" content="Jessi Zhuo, Kristy Zhang, Nick Sim, Wei-Yang Lin(Jack)")
       link(rel='stylesheet' href='/stylesheets/reset.css')
@@ -91,40 +92,32 @@ html
       div(id="main-body")
         div(id="left-nav-container")
           div(id="nav-container")
-            div(id="nav-home")
-              a(href='/')
-                i(class="fas fa-home")
-                span(class='icon-text') Home
-            div(id="nav-question")
-              a(href='/my-questions')
-                i(class="fas fa-question-circle")
-                span(class='icon-text') My Questions
-            div(id="nav-answer")
-              a(href='/my-answers')
-                i(class="fas fa-edit")
-                span(class='icon-text') My Answers
-            div(id="nav-story")
-              a(href='/our-story')
-                i(class="fas fa-book")
-                span(class='icon-text') Our Story
-            div(id="content-parts")
+            div(class='nav-page-section')
+              div(id="nav-home")
+                a(href='/')
+                  i(class="fas fa-home")
+                  span(class='icon-text') Home
+              div(id="nav-question")
+                a(href='/my-questions')
+                  i(class="fas fa-question-circle")
+                  span(class='icon-text') My Questions
+              div(id="nav-answer")
+                a(href='/my-answers')
+                  i(class="fas fa-edit")
+                  span(class='icon-text') My Answers
+              div(id="nav-story")
+                a(href='/our-story')
+                  i(class="fas fa-book")
+                  span(class='icon-text') Our Story
+                  
+            div(class='nav-space-section')
+              //- div(id="content-parts")
               if spaces && spaces.length > 0
                 each s,i in spaces
                   div(class='spaces-with-img')
                     if images
-                      img(src=`${images[i]}` alt='' class='space-img')
                       a(class='single-space' href=`/questions-in-space/${s}`)
+                        img(src=`${images[i]}` alt='' class='space-img')
                         span(class='icon-text')=s
-        block content
-    //- div(class='login-footer')
-    //-   a(href='/our-story' class='our-story') Our Story
-    //-   div · 
-    //-   a(href='https://www.linkedin.com/in/wylin94/' class='linkedIn') J
-    //-   div ·
-    //-   a(href='https://github.com/zyingzhuo' class='linkedIn') J
-    //-   div · 
-    //-   a(href='https://www.linkedin.com/in/nicolas-sim-156422170/' class='linkedIn') N
-    //-   div · 
-    //-   a(href='https://www.linkedin.com/in/jingyuan-zhang-708ab763/' class='linkedIn') K
-    //-   div · 
-    //-   div @ 2021. No rights reserverd. 
+        div(id="right-nav-container")
+          block content
