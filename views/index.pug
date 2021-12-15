@@ -32,7 +32,7 @@ block content
             div(class='question-text')
               div(class='space-container')
                 each s in d.question.Spaces
-                  p(class='single-space-in-question')=s.tag
+                  p(class='single-space-in-question' id=`${s.tag}`)=s.tag
               a(href=`/questions/${d.question.id}` class='question-title') #{d.question.title}
             if locals.authenticated
               div(class='question-buttons')

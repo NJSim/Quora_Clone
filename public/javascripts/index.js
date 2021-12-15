@@ -284,10 +284,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
     };
   }
   // When the user clicks on <span> (x), close the modal
-  if(span){
-  span.onclick = function () {
-    modal.style.display = "none";
-  };}
+  if (span) {
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+  }
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target === modal) {
@@ -295,3 +296,18 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
   };
 });
+
+/////////click the space tag///////////
+const spaceClicks = document.getElementsByClassName("single-space-in-question");
+for (const s of spaceClicks) {
+  s.addEventListener("click", () => {
+    if (!window.location.href.includes("questions-in-space/")) {
+      window.location.href = `questions-in-space/${s.id}`;
+    }
+    else{
+      window.location.replace(`${s.id}`)
+
+
+    }
+  });
+}

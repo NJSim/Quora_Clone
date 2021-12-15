@@ -28,7 +28,7 @@ block content
               if question.Spaces
                 div(class='space-container')
                   each s in question.Spaces
-                    p(class='single-space-in-question')=s.tag
+                    p(class='single-space-in-question' id=`${s.tag}`)=s.tag
               a(href=`/questions/${question.id}`) 
                 div(class='question-text-single') #{question.title}
             div(class='question-buttons')
