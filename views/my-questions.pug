@@ -40,20 +40,45 @@ block content
                 i(class="fas fa-edit")
               button(class="editBtn questionEditBtn edit-question-button" id="addTag") 
                 i(class="fas fa-hashtag")
+
               div(id="addTag-container" class="modal")
                 div(class="modal-content")
-                  div(class='modal-head')
+                  div(class='space-modal-head')
                     span(class="close") &times;
-                    div(class='modal-head-text') Edit topics
-                  div(class='modal-name')
-                    img(class='welcome-user-image' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
-                    div(class='modal-username') #{locals.user.user_name} asked
-                  div(class='modal-form-container')
-                    form(method="post" action="/questions")
-                      input(type="hidden" name="_csrf" value=token) 
-                      input(name="title" type="text" required class='modal-input' placeholder='Start your question with "What", "How", "Why", etc.')
-                      div(class='modal-sumit-button-container')
-                        button(type="submit" class='modal-submit') Add Question
+                    div(class='modal-head-text') Edit Spaces
+                  div(class='modal-line')
+                  div(class='modal-topic-container')
+                      p(class='modal-tag-suggestion')="Make sure this question has the right topics:"
+                      p(class='model-tag-question-title')=`${question.title}`
+                      div(class='modal-tag-form-container')
+                        form(method="post" action=`/questions/${question.id}/questionSpaces`)
+                          input(type="hidden" name="_csrf" value=token) 
+                          div(class='existing-tops-suggestion')
+                            div(class="existing-tops-suggestion-1") 1
+                            p='Verify that these topics describe your question'
+                          div(class='modal-line')
+                          div(class='tops-checkbox-container')
+                            each s in question.Spaces 
+                              div(class='tops-single-checkbox-container')
+                                input(type='checkbox' name=`${s.tag.split(" ").join("_")}` checked)
+                                label=s.tag
+                          div(class='existing-tops-suggestion')
+                            p(class="existing-tops-suggestion-1")='2'
+                            p='Select any topics that also describe your question'
+                          div(class='modal-line')
+                          div(class='new-tops-checkbox-container')
+                            each s in question.newSpaces 
+                              div(class='tops-single-checkbox-container')
+                                input(type='checkbox' name=`${s.split(" ").join("_")}` )
+                                label=s
+
+                          div(class='modal-sumit-button-container')
+                            button(type="submit" class='modal-submit') Edit Spaces
+
+
+
+
+
               button(class='delete-question-button' id=`${question.id}`)
                 i(class="fas fa-trash-alt")
           div(class=`question-edit-contain answerContain` id=`${question.id}`)

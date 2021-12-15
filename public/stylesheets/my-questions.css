@@ -1,7 +1,5 @@
-
-
 div.question-edit-contain {
-    display: none
+  display: none;
 }
 
 .delete-question-button {
@@ -17,22 +15,22 @@ div.question-edit-contain {
 }
 
 .delete-question-button:hover {
-  border: 1px solid rgb(241, 242, 242);;
-  border-radius: 20px; 
+  border: 1px solid rgb(241, 242, 242);
+  border-radius: 20px;
   background-color: rgb(235, 235, 235);
   cursor: pointer;
 }
 
 .delete-question-button:active {
-  color: rgb(170, 170, 170)
+  color: rgb(170, 170, 170);
 }
 
 .edit-question-button {
-  background-color: white;
+  /* background-color: white; */
 }
 
-.space-container{
-  display:flex;
+.space-container {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5px;
@@ -40,16 +38,79 @@ div.question-edit-contain {
   /* background-color: lightcyan; */
 }
 
-.single-space-in-question{
+.single-space-in-question {
   background-color: rgb(247, 247, 248);
-  color:#636466;
-  padding:2px 4px;
+  color: #636466;
+  padding: 2px 4px;
   font-weight: 500;
   font-size: 13px;
   margin-bottom: 2px;
 }
 
-.single-space-in-question:hover{
-  color:rgb(63,104,246)
-  
+.single-space-in-question:hover {
+  color: rgb(63, 104, 246);
+  cursor: pointer;
+}
+
+.modal-line {
+  border-bottom: solid 1px rgb(223, 224, 225);
+  width: 100%;
+}
+
+.space-modal-head {
+  display: flex;
+  align-items: center;
+  gap: 250px;
+  margin: 10px 10px 10px 10px;
+}
+
+.modal-topic-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.modal-tag-suggestion {
+  color: black;
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+.modal-tag-suggestion + p {
+  font-weight: 900;
+  margin-top: 5px;
+}
+.existing-tops-suggestion {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+}
+.existing-tops-suggestion-1 {
+  /* border-radius: 50%; */
+  background-color: rgb(79, 148, 91);
+  color: white;
+  padding: 4px 4px;
+  width: 25px;
+  text-align: center;
+  height: 25px;
+}
+.tops-checkbox-container {
+  display: flex;
+  flex-direction: column;
+}
+.tops-single-checkbox-container {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+.new-tops-checkbox-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: white;
+  height:150px;
+  overflow: scroll;
+}
+.new-tops-checkbox-container::-webkit-scrollbar {
+  display: none;
 }
