@@ -270,7 +270,23 @@ document.addEventListener("DOMContentLoaded", (e) => {
       event.stopPropagation();
     };
   }
-
+  /////ADD TAG MODAL/////
+  var addTagmodal = document.getElementById("addTag-container");
+  // Get the button that opens the modal
+  var addTagbtn = document.getElementById("addTag");
+  // Get the <span> element that closes the modal
+  var addTagspan = document.getElementsByClassName("close")[1];
+  // When the user clicks the button, open the modal
+  if (addTagbtn) {
+    addTagbtn.onclick = function () {
+      addTagmodal.style.display = "flex";
+    };
+  }
+  if (addTagspan) {
+    addTagspan.onclick = function () {
+      addTagmodal.style.display = "none";
+    };
+  }
   /////ASK QUESTION MODAL/////
   var modal = document.getElementById("myModal");
   // Get the button that opens the modal
@@ -287,12 +303,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
   if (span) {
     span.onclick = function () {
       modal.style.display = "none";
+      
     };
   }
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
+    }
+    if (event.target === addTagmodal) {
+      addTagmodal.style.display = "none";
     }
   };
 });

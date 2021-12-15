@@ -38,13 +38,13 @@ block content
                 div(class='vote_holder voteNum')= question.Questions_votes.length
               button(class="edit-question-button editBtn questionEditBtn")
                 i(class="fas fa-edit")
-              button(class="editBtn questionEditBtn edit-question-button") 
+              button(class="editBtn questionEditBtn edit-question-button" id="addTag") 
                 i(class="fas fa-hashtag")
-              div(id="myModal" class="modal")
+              div(id="addTag-container" class="modal")
                 div(class="modal-content")
                   div(class='modal-head')
                     span(class="close") &times;
-                    div(class='modal-head-text') Add question
+                    div(class='modal-head-text') Edit topics
                   div(class='modal-name')
                     img(class='welcome-user-image' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
                     div(class='modal-username') #{locals.user.user_name} asked
