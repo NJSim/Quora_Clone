@@ -38,6 +38,22 @@ block content
                 div(class='vote_holder voteNum')= question.Questions_votes.length
               button(class="edit-question-button editBtn questionEditBtn")
                 i(class="fas fa-edit")
+              button(class="editBtn questionEditBtn edit-question-button") 
+                i(class="fas fa-hashtag")
+              div(id="myModal" class="modal")
+                div(class="modal-content")
+                  div(class='modal-head')
+                    span(class="close") &times;
+                    div(class='modal-head-text') Add question
+                  div(class='modal-name')
+                    img(class='welcome-user-image' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
+                    div(class='modal-username') #{locals.user.user_name} asked
+                  div(class='modal-form-container')
+                    form(method="post" action="/questions")
+                      input(type="hidden" name="_csrf" value=token) 
+                      input(name="title" type="text" required class='modal-input' placeholder='Start your question with "What", "How", "Why", etc.')
+                      div(class='modal-sumit-button-container')
+                        button(type="submit" class='modal-submit') Add Question
               button(class='delete-question-button' id=`${question.id}`)
                 i(class="fas fa-trash-alt")
           div(class=`question-edit-contain answerContain` id=`${question.id}`)

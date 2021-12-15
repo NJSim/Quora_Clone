@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   });
 
   /////EDIT ANSWER BUTTON/////
-  const editAnswerBtns = document.querySelectorAll("button.editBtn");
+  const editAnswerBtns = document.querySelectorAll("button.editAnswerBtn");
   if (editAnswerBtns) {
     for (let editAnswerBtn of editAnswerBtns) {
       editAnswerBtn.addEventListener("click", async (e) => {
@@ -303,11 +303,8 @@ for (const s of spaceClicks) {
   s.addEventListener("click", () => {
     if (!window.location.href.includes("questions-in-space/")) {
       window.location.href = `questions-in-space/${s.id}`;
-    }
-    else{
-      window.location.replace(`${s.id}`)
-
-
+    } else {
+      window.location.replace(`${s.id}`);
     }
   });
 }
