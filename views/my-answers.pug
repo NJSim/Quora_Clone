@@ -47,6 +47,10 @@ block content
                 div(class='userName')= answer.Question.User.user_name
                 div(class='date')= answer.Question.date
             div(class='question-text')
+              if answer.Question.Spaces
+                div(class='space-container')
+                  each s in answer.Question.Spaces
+                    p(class='single-space-in-question' id=`${s.tag}`)=s.tag
               a(href=`questions/${answer.Question.id}`)= answer.Question.title
             div(class='question-buttons')
               div(class='vote-section')
@@ -67,7 +71,7 @@ block content
                 button(class='upvote-answer-button' id=`UQ/${answer.id}`)
                   i(class="fa fa-thumbs-up")
                 div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length
-              button(class='editBtn' id=`editBtn-${answer.id}`) 
+              button(class='editAnswerBtn editBtn' id=`editBtn-${answer.id}`) 
                 i(class="fas fa-edit")
               button(class='deleteBtn' id=`${answer.id}`) 
                 i(class="fas fa-trash-alt")

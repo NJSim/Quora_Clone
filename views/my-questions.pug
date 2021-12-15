@@ -16,8 +16,7 @@ block content
   div(class='questions-container')
     if myQuestions && myQuestions.length > 0
       each question in myQuestions
-        p=question
-        //- div(id=`question-container-${question.id}` class='question-container')
+        div(id=`question-container-${question.id}` class='question-container')
 
           div(class='question-offset')
             div(class='user-text')
@@ -26,9 +25,10 @@ block content
                 div(class='userName')= question.User.user_name
                 div(class='date')= question.date
             div(class='question-text')
-              div(class='space-container')
-                each s in question.Spaces
-                  p(class='single-space-in-question')=s.tag
+              if question.Spaces
+                div(class='space-container')
+                  each s in question.Spaces
+                    p(class='single-space-in-question' id=`${s.tag}`)=s.tag
               a(href=`/questions/${question.id}`) 
                 div(class='question-text-single') #{question.title}
             div(class='question-buttons')
@@ -38,6 +38,47 @@ block content
                 div(class='vote_holder voteNum')= question.Questions_votes.length
               button(class="edit-question-button editBtn questionEditBtn")
                 i(class="fas fa-edit")
+              button(class="editBtn questionEditBtn edit-question-button" id="addTag") 
+                i(class="fas fa-hashtag")
+
+              div(id="addTag-container" class="modal")
+                div(class="modal-content")
+                  div(class='space-modal-head')
+                    span(class="close") &times;
+                    div(class='modal-head-text') Edit Spaces
+                  div(class='modal-line')
+                  div(class='modal-topic-container')
+                      p(class='modal-tag-suggestion')="Make sure this question has the right topics:"
+                      p(class='model-tag-question-title')=`${question.title}`
+                      div(class='modal-tag-form-container')
+                        form(method="post" action=`/questions/${question.id}/questionSpaces`)
+                          input(type="hidden" name="_csrf" value=token) 
+                          div(class='existing-tops-suggestion')
+                            div(class="existing-tops-suggestion-1") 1
+                            p='Verify that these topics describe your question'
+                          div(class='modal-line')
+                          div(class='tops-checkbox-container')
+                            each s in question.Spaces 
+                              div(class='tops-single-checkbox-container')
+                                input(type='checkbox' name=`${s.tag.split(" ").join("_")}` checked)
+                                label=s.tag
+                          div(class='existing-tops-suggestion')
+                            p(class="existing-tops-suggestion-1")='2'
+                            p='Select any topics that also describe your question'
+                          div(class='modal-line')
+                          div(class='new-tops-checkbox-container')
+                            each s in question.newSpaces 
+                              div(class='tops-single-checkbox-container')
+                                input(type='checkbox' name=`${s.split(" ").join("_")}` )
+                                label=s
+
+                          div(class='modal-sumit-button-container')
+                            button(type="submit" class='modal-submit') Edit Spaces
+
+
+
+
+
               button(class='delete-question-button' id=`${question.id}`)
                 i(class="fas fa-trash-alt")
           div(class=`question-edit-contain answerContain` id=`${question.id}`)

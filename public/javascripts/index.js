@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", (e) => {
-
   /////EDIT QUESTON BUTTON/////
   const editQuestionBtn = document.querySelector("button.edit-question-button");
   if (editQuestionBtn) {
@@ -8,17 +7,21 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const questionContain = document.querySelector(
         `div.question-edit-contain`
       );
-      if (questionContain.style.display === "" || questionContain.style.display === "none") {
+      if (
+        questionContain.style.display === "" ||
+        questionContain.style.display === "none"
+      ) {
         questionContain.style.display = "flex";
       } else {
         questionContain.style.display = "none";
       }
-      const existQuestion = document.querySelector("div.question-text-single").innerHTML;
+      const existQuestion = document.querySelector(
+        "div.question-text-single"
+      ).innerHTML;
       const inputBar = document.querySelector("input.form-control");
       inputBar.value = existQuestion;
     });
   }
-
 
   /////DELETE QUESTION BUTTON/////
   const deleteQuestion = document.querySelectorAll(".delete-question-button");
@@ -31,9 +34,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   });
 
-
   /////EDIT ANSWER BUTTON/////
-  const editAnswerBtns = document.querySelectorAll("button.editBtn");
+  const editAnswerBtns = document.querySelectorAll("button.editAnswerBtn");
   if (editAnswerBtns) {
     for (let editAnswerBtn of editAnswerBtns) {
       editAnswerBtn.addEventListener("click", async (e) => {
@@ -44,18 +46,22 @@ document.addEventListener("DOMContentLoaded", (e) => {
         // if (!answerContains.style.display) {
         //   answerContains.style.display = "block";
         // }
-        if (answerContains.style.display === "" || answerContains.style.display === "none") {
+        if (
+          answerContains.style.display === "" ||
+          answerContains.style.display === "none"
+        ) {
           answerContains.style.display = "flex";
         } else {
           answerContains.style.display = "none";
         }
         const input = answerContains.getElementsByTagName("input")[1];
-        const answerContent = document.querySelector(`div.answer-text-${answerId}`);
+        const answerContent = document.querySelector(
+          `div.answer-text-${answerId}`
+        );
         input.value = answerContent.innerText;
       });
     }
   }
-  
 
   /////DELETE ANSWER BUTTON/////
   const deleteAnswerBtns = document.querySelectorAll("div button.deleteBtn");
@@ -72,7 +78,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
       });
     }
   }
-
 
   /////SEARCH BAR/////
   const searchBar = document.getElementById("searchBar");
@@ -132,7 +137,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
   //   false
   // );
 
-
   ////ANSWER BUTTON/////
   const answers = document.querySelectorAll("div.answer-delete-section");
   for (const answer of answers) {
@@ -144,7 +148,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
         // console.log(questionId, "%%%%%%%%%%");
         if (answerContain.id === questionId) {
           // console.log("12345", answerContain.style.display, "54321");
-          if (answerContain.style.display === "" || answerContain.style.display === "none") {
+          if (
+            answerContain.style.display === "" ||
+            answerContain.style.display === "none"
+          ) {
             // console.log(answerContain.style.display, "first situ***&&%^%$$");
             answerContain.style.display = "flex";
           } else {
@@ -158,7 +165,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
       }
     });
   }
-
 
   ////PROFILE DROPDOWN/////
   const profile = document.getElementById("profileSelect");
@@ -199,7 +205,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
-
   /////QUESTION UPVOTE BUTTON/////
   const vote = document.querySelectorAll(".upvote-question-button");
   for (let i = 0; i < vote.length; i++) {
@@ -217,7 +222,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
-  
   /////ANSWER UPVOTE BUTTON/////
   const answerVote = document.querySelectorAll(".upvote-answer-button");
   // for (let i = 0; i < answerVote.length; i++) {
@@ -245,43 +249,82 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   });
 
-
   /////PROFILE DROPDOWN/////
   var profileImage = document.getElementById("profileImage");
-  var profileDropdownBackground = document.getElementById("profile-dropdown-modal");
+  var profileDropdownBackground = document.getElementById(
+    "profile-dropdown-modal"
+  );
   var profileDropdown = document.getElementById("profile-dropdown-container");
-  profileImage.onclick = function() {
-    profileDropdownBackground.style.display = 'block';
+  if (profileImage) {
+    profileImage.onclick = function () {
+      profileDropdownBackground.style.display = "block";
+    };
   }
-  profileDropdownBackground.onclick = function(event) {
-    profileDropdownBackground.style.display = "none";
+  if (profileDropdownBackground) {
+    profileDropdownBackground.onclick = function (event) {
+      profileDropdownBackground.style.display = "none";
+    };
   }
-  profileDropdown.onclick = function(event) {
-    event.stopPropagation();
+  if (profileDropdown) {
+    profileDropdown.onclick = function (event) {
+      event.stopPropagation();
+    };
   }
-
-
+  /////ADD TAG MODAL/////
+  var addTagmodal = document.getElementById("addTag-container");
+  // Get the button that opens the modal
+  var addTagbtn = document.getElementById("addTag");
+  // Get the <span> element that closes the modal
+  var addTagspan = document.getElementsByClassName("close")[1];
+  // When the user clicks the button, open the modal
+  if (addTagbtn) {
+    addTagbtn.onclick = function () {
+      addTagmodal.style.display = "flex";
+    };
+  }
+  if (addTagspan) {
+    addTagspan.onclick = function () {
+      addTagmodal.style.display = "none";
+    };
+  }
   /////ASK QUESTION MODAL/////
   var modal = document.getElementById("myModal");
   // Get the button that opens the modal
   var btn = document.getElementById("modal-button");
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
-  // When the user clicks the button, open the modal 
-  btn.onclick = function() {
-    modal.style.display = "flex";
+  // When the user clicks the button, open the modal
+  if (btn) {
+    btn.onclick = function () {
+      modal.style.display = "flex";
+    };
   }
   // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
+  if (span) {
+    span.onclick = function () {
+      modal.style.display = "none";
+      
+    };
   }
   // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
     }
-  }
-
+    if (event.target === addTagmodal) {
+      addTagmodal.style.display = "none";
+    }
+  };
 });
 
-
+/////////click the space tag///////////
+const spaceClicks = document.getElementsByClassName("single-space-in-question");
+for (const s of spaceClicks) {
+  s.addEventListener("click", () => {
+    if (!window.location.href.includes("questions-in-space/")) {
+      window.location.href = `questions-in-space/${s.id}`;
+    } else {
+      window.location.replace(`${s.id}`);
+    }
+  });
+}

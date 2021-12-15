@@ -68,10 +68,8 @@ router.get(
       ],
       order: [["createdAt", "DESC"]],
     });
-    // console.log("######################",questions)
     for (let question of questions) {
       question.date = question.updatedAt.toLocaleDateString("en-US", options);
-      console.log("######################", question);
     }
     const data = [];
     for (let question of questions) {
@@ -87,7 +85,6 @@ router.get(
       }
       data.push({ question: question, answers: answers });
     }
-    console.log("answers!!!!!!", data);
     res.render("index", {
       title: "Mora Home",
       data,
@@ -100,23 +97,24 @@ router.get(
 //////GET QUESTIONS IN SPACE//////
 router.get(
   "/questions-in-space/:space",
-  requireAuth,
   csrfProtection,
   async (req, res, next) => {
     const spaceObjs = await db.Space.findAll();
-    const spaces = []
-    for(const s of spaceObjs){
-      spaces.push(s.tag)
+    const spaces = [];
+    for (const s of spaceObjs) {
+      spaces.push(s.tag);
     }
 
     let space = req.params.space;
 
     let data = [];
     const questionspaces = await db.Question.findAll({
-      include:[{
-        model:db.Space,
-        where:{tag:space}
-      }]
+      include: [
+        {
+          model: db.Space,
+          where: { tag: space },
+        },
+      ],
     });
     for (const questionspace of questionspaces) {
       const question = await db.Question.findByPk(questionspace.id, {
@@ -142,7 +140,6 @@ router.get(
       }
       data.push({ question: question, answers: question.Answers });
     }
-    // console.log(questions, "&&&&&&&&&&&&&&&&");
     res.render("index", {
       title: `All Questions in ${space}`,
       data,
@@ -159,11 +156,10 @@ router.get(
   csrfProtection,
   async (req, res, next) => {
     const spaceObjects = await db.Space.findAll();
-    const spaceSet = new Set();
+    const spaces = [];
     for (const space of spaceObjects) {
-      spaceSet.add(space.dataValues.tag);
+      spaces.push(space.dataValues.tag);
     }
-    const spaces = [...spaceSet];
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, {
       include: [{ model: db.User }, { model: db.Questions_vote }],
@@ -189,6 +185,7 @@ router.get(
       question,
       answers,
       spaces,
+      images,
       token: req.csrfToken(),
     });
   }
@@ -229,7 +226,7 @@ router.post(
   csrfProtection,
   questionValidator,
   asyncHandler(async (req, res) => {
-    const { title } = req.body;
+    const { ...spaces } = req.body;
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
@@ -248,16 +245,85 @@ router.post(
   })
 );
 
+/////POST NEW QUESTIONSPACE/////
+router.post(
+  "/questions/:id(\\d+)/questionSpaces",
+  requireAuth,
+  csrfProtection,
+  asyncHandler(async (req, res) => {
+    const questionId = parseInt(req.params.id, 10);
+    const spaceObjects = await db.Space.findAll();
+    const spaces = [];
+    for (const space of spaceObjects) {
+      spaces.push(space.dataValues.tag);
+    }
+    const {
+      Actors_and_Actresses,
+      Hollywood,
+      Marvel_Cinematic_Universe,
+      Movie_Lists,
+      Bollywood,
+      Acting,
+      Netflix_Lists_Hot,
+      Oscar_Winners,
+      Movie_Reviews,
+      Spanish_Soap_Opra,
+      Latino_Movies,
+      Black_Leading_Actors,
+    } = req.body;
+    const spacesForm = [
+      Actors_and_Actresses,
+      Hollywood,
+      Marvel_Cinematic_Universe,
+      Movie_Lists,
+      Bollywood,
+      Acting,
+      Netflix_Lists_Hot,
+      Oscar_Winners,
+      Movie_Reviews,
+      Spanish_Soap_Opra,
+      Latino_Movies,
+      Black_Leading_Actors,
+    ];
+    console.log("$$$$$$$$$$$$$$$",spacesForm)
+    for (let i=0;i<spacesForm.length;i++) {
+      const questionSpace = await db.Questionspace.findOne({
+        where: {
+          question_id: questionId,
+          space_id: i + 1,
+        },
+      });
+      if (spacesForm[i] && !questionSpace) {
+          await db.Questionspace.create({
+            space_id: i + 1,
+            question_id: questionId,
+          });
+      }
+      else if(!spacesForm[i] && questionSpace){
+          await questionSpace.destroy();
+      }
+    }
+
+    res.redirect("/my-questions");
+  })
+);
+
 /////GET MY QUESTIONS PAGE/////
 router.get(
   "/my-questions",
   requireAuth,
   csrfProtection,
   asyncHandler(async (req, res, next) => {
+    const spaceObjects = await db.Space.findAll();
+    const spaces = [];
+    for (const space of spaceObjects) {
+      spaces.push(space.dataValues.tag);
+    }
     const myQuestions = await db.Question.findAll({
       where: { user_id: res.locals.user.id },
       include: [
         db.Questions_vote,
+        db.Space,
         db.User,
         {
           model: db.Answer,
@@ -273,6 +339,14 @@ router.get(
       day: "numeric",
     };
     for (let question of myQuestions) {
+      const newSpaces = [...spaces];
+      if (question.Spaces) {
+        for (const s of question.Spaces) {
+          const spaceIdx = newSpaces.indexOf(s.tag);
+          newSpaces.splice(spaceIdx, 1);
+        }
+      }
+      question.newSpaces = newSpaces;
       question.date = question.updatedAt.toLocaleDateString("en-US", options);
       const answers = question.Answers;
       if (answers) {
@@ -284,6 +358,8 @@ router.get(
     res.render("my-questions", {
       title: "My Questions",
       myQuestions,
+      spaces,
+      images,
       token: req.csrfToken(),
     });
   })
@@ -295,6 +371,11 @@ router.get(
   requireAuth,
   csrfProtection,
   asyncHandler(async (req, res, next) => {
+    const spaceObjects = await db.Space.findAll();
+    const spaces = [];
+    for (const space of spaceObjects) {
+      spaces.push(space.dataValues.tag);
+    }
     const myAnswers = await db.Answer.findAll({
       where: { user_id: res.locals.user.id },
       include: [
@@ -302,7 +383,7 @@ router.get(
         db.Answers_vote,
         {
           model: db.Question,
-          include: [db.User, db.Questions_vote],
+          include: [db.User, db.Space, db.Questions_vote],
         },
       ],
       order: [["createdAt", "DESC"]],
@@ -323,20 +404,26 @@ router.get(
     res.render("my-answers", {
       title: "My Answers",
       myAnswers,
+      spaces,
+      images,
       token: req.csrfToken(),
     });
   })
 );
 
 /////GET OUR STORY PAGE/////
-router.get(
-  "/our-story",
-  asyncHandler(async (req, res, next) => {
-    res.render("our-story", {
-      title: "Our Story",
-    });
-  })
-);
+router.get("/our-story", async (req, res, next) => {
+  const spaceObjects = await db.Space.findAll();
+  const spaces = [];
+  for (const space of spaceObjects) {
+    spaces.push(space.dataValues.tag);
+  }
+  res.render("our-story", {
+    title: "Our Story",
+    spaces,
+    images,
+  });
+});
 
 /////QUESTION VOTE/////
 router.get(
