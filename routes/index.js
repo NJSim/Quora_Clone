@@ -100,7 +100,6 @@ router.get(
 //////GET QUESTIONS IN SPACE//////
 router.get(
   "/questions-in-space/:space",
-  requireAuth,
   csrfProtection,
   async (req, res, next) => {
     const spaceObjs = await db.Space.findAll();
@@ -258,6 +257,7 @@ router.get(
       where: { user_id: res.locals.user.id },
       include: [
         db.Questions_vote,
+        db.Space,
         db.User,
         {
           model: db.Answer,
@@ -302,7 +302,7 @@ router.get(
         db.Answers_vote,
         {
           model: db.Question,
-          include: [db.User, db.Questions_vote],
+          include: [db.User, db.Space,db.Questions_vote],
         },
       ],
       order: [["createdAt", "DESC"]],
@@ -331,7 +331,7 @@ router.get(
 /////GET OUR STORY PAGE/////
 router.get(
   "/our-story",
-  asyncHandler(async (req, res, next) => {
+  (async (req, res, next) => {
     res.render("our-story", {
       title: "Our Story",
     });
