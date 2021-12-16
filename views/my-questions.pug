@@ -34,7 +34,16 @@ block content
             div(class='question-buttons')
               div(class='vote-section')
                 button(class='upvote-question-button' id=`${question.id}`)
-                  i(class="fa fa-thumbs-up")
+                  - var liked = 0;
+                    each like in question.likes
+
+                      if locals.user.id == like.user_id
+                        - liked = 1;
+
+                    if liked == 0
+                      i(class=`far fa-thumbs-up liked` id= 'liked')
+                    if liked == 1
+                      i(class=`fa fa-thumbs-up liked` id= 'liked')
                 div(class='vote_holder voteNum')= question.Questions_votes.length
               button(class="edit-question-button editBtn questionEditBtn")
                 i(class="fas fa-edit")
@@ -101,5 +110,16 @@ block content
                   div(class='answer-buttons')
                     div(class='vote-section')
                       button(class='upvote-answer-button' id=`UQ/${answer.id}`)
-                        i(class="fa fa-thumbs-up")
+                        - var likedA = 0;
+
+                        each like in answer.Answers_votes
+
+                          if locals.user.id == like.user_id
+                            - likedA = 1;
+
+                        if likedA == 0
+                          i(class=`far fa-thumbs-up likedA` id= 'likedA')
+                        if likedA == 1
+                          i(class=`fa fa-thumbs-up likedA` id= 'likedA')
+
                       div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length
