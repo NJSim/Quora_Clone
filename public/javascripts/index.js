@@ -273,7 +273,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   /////ADD TAG MODAL/////
   var addTagmodal = document.getElementById("addTag-container");
   // Get the button that opens the modal
-  var addTagbtn = document.getElementById("addTag");
+  var addTagbtns = document.getElementsByClassName("addTagBtn");
   // Get the <span> element that closes the modal
   var addTagspan = document.getElementsByClassName("close")[1];
   // When the user clicks the button, open the modal
@@ -303,7 +303,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
   if (span) {
     span.onclick = function () {
       modal.style.display = "none";
-      
     };
   }
   // When the user clicks anywhere outside of the modal, close it

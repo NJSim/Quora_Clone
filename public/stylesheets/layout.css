@@ -308,6 +308,9 @@ a#logo:hover {
   width: 680px;
   height: 400px;
 }
+.modal-space-container{
+  height:fit-content;
+}
 
 .modal-head {
   display: flex;

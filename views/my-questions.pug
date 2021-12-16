@@ -38,11 +38,11 @@ block content
                 div(class='vote_holder voteNum')= question.Questions_votes.length
               button(class="edit-question-button editBtn questionEditBtn")
                 i(class="fas fa-edit")
-              button(class="editBtn questionEditBtn edit-question-button" id="addTag") 
+              button(class="editBtn questionEditBtn edit-question-button addTagBtn" id="addTag") 
                 i(class="fas fa-hashtag")
 
               div(id="addTag-container" class="modal")
-                div(class="modal-content")
+                div(class="modal-content modal-space-container")
                   div(class='space-modal-head')
                     span(class="close") &times;
                     div(class='modal-head-text') Edit Spaces
@@ -73,7 +73,7 @@ block content
                                 label=s
 
                           div(class='modal-sumit-button-container')
-                            button(type="submit" class='modal-submit') Edit Spaces
+                            button(type="submit"  class='modal-submit') Edit Spaces
 
 
 
