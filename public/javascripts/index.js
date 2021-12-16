@@ -289,21 +289,23 @@ document.addEventListener("DOMContentLoaded", (e) => {
     };
   }
   /////ADD TAG MODAL/////
-  var addTagmodal = document.getElementById("addTag-container");
+  var addTagmodals = document.getElementsByClassName("addTag-container");
   // Get the button that opens the modal
-  var addTagbtn = document.getElementById("addTag");
+  var addTagbtns = document.getElementsByClassName("addTagBtn");
   // Get the <span> element that closes the modal
-  var addTagspan = document.getElementsByClassName("close")[1];
+  var addTagspans = document.getElementsByClassName("close");
+  console.log("!!!!!",addTagspans)
   // When the user clicks the button, open the modal
-  if (addTagbtn) {
-    addTagbtn.onclick = function () {
-      addTagmodal.style.display = "flex";
-    };
+  for (let idx =0;idx< addTagbtns.length;idx++) {
+    addTagbtns[idx].addEventListener("click", () =>{
+      addTagmodals[idx].style.display = "flex";
+    })
   }
-  if (addTagspan) {
-    addTagspan.onclick = function () {
-      addTagmodal.style.display = "none";
-    };
+  for (let idx =0;idx< addTagspans.length;idx++) {
+    addTagspans[idx].addEventListener("click", () =>{
+      console.log("!!!!!",idx)
+      addTagmodals[idx-1].style.display = "none";
+    })
   }
   /////ASK QUESTION MODAL/////
   var modal = document.getElementById("myModal");
@@ -321,7 +323,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
   if (span) {
     span.onclick = function () {
       modal.style.display = "none";
-
     };
   }
   // When the user clicks anywhere outside of the modal, close it
@@ -329,8 +330,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
     if (event.target === modal) {
       modal.style.display = "none";
     }
-    if (event.target === addTagmodal) {
-      addTagmodal.style.display = "none";
+    for(const addTagmodal of addTagmodals)
+      if (event.target === addTagmodal) {
+        addTagmodal.style.display = "none";
     }
   };
 });

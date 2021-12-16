@@ -231,7 +231,7 @@ router.post(
   csrfProtection,
   questionValidator,
   asyncHandler(async (req, res) => {
-    const { ...spaces } = req.body;
+    const { title } = req.body;
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {

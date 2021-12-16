@@ -67,7 +67,9 @@ div.question-edit-contain {
 .modal-topic-container {
   display: flex;
   flex-direction: column;
-  margin-left: 15px;
+  margin-left: 35px;
+  margin-right:35px;
+  margin-bottom:35px;
 }
 
 .modal-tag-suggestion {
@@ -97,6 +99,7 @@ div.question-edit-contain {
 .tops-checkbox-container {
   display: flex;
   flex-direction: column;
+  margin-top: 6px;
 }
 .tops-single-checkbox-container {
   display: flex;
@@ -110,7 +113,9 @@ div.question-edit-contain {
   background-color: white;
   height:150px;
   overflow: scroll;
+  margin: 6px 0px;
 }
 .new-tops-checkbox-container::-webkit-scrollbar {
   display: none;
 }
+
