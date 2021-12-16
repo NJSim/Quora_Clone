@@ -55,7 +55,16 @@ block content
             div(class='question-buttons')
               div(class='vote-section')
                 button(class='upvote-question-button' id= `${answer.question_id}`)
-                  i(class="fa fa-thumbs-up")
+                  - var liked = 0;
+                    each like in answer.Question.likes
+
+                      if locals.user.id == like.user_id
+                        - liked = 1;
+
+                    if liked == 0
+                      i(class=`far fa-thumbs-up liked` id= 'liked')
+                    if liked == 1
+                      i(class=`fa fa-thumbs-up liked` id= 'liked')
                 div(class='vote_holder voteNum')= answer.Question.Questions_votes.length
 
           div(class='answer-container' id=`answer-${answer.id}`)
@@ -69,11 +78,22 @@ block content
             div(class='answer-buttons')
               div(class='vote-section')
                 button(class='upvote-answer-button' id=`UQ/${answer.id}`)
-                  i(class="fa fa-thumbs-up")
+                  - var likedA = 0;
+
+                  each like in answer.Answers_votes
+
+                    if locals.user.id == like.user_id
+                      - likedA = 1;
+
+                  if likedA == 0
+                    i(class=`far fa-thumbs-up likedA` id= 'likedA')
+                  if likedA == 1
+                    i(class=`fa fa-thumbs-up likedA` id= 'likedA')
+
                 div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length
-              button(class='editAnswerBtn editBtn' id=`editBtn-${answer.id}`) 
+              button(class='editAnswerBtn editBtn' id=`editBtn-${answer.id}`)
                 i(class="fas fa-edit")
-              button(class='deleteBtn' id=`${answer.id}`) 
+              button(class='deleteBtn' id=`${answer.id}`)
                 i(class="fas fa-trash-alt")
           div(class=`answerContain-${answer.id} answerContain` id=`${answer.Question.id}`)
             img(class='user-text-picture' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
