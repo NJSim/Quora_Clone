@@ -21,7 +21,7 @@ block content
           div(class='question-offset')
             div(class='user-text')
               img(class='user-text-picture' src=`${question.User.profile_picture}`, alt=`${question.User.user_name}`)
-              div(class='userName-container')  
+              div(class='userName-container')
                 div(class='userName')= question.User.user_name
                 div(class='date')= question.date
             div(class='question-text')
@@ -29,7 +29,7 @@ block content
                 div(class='space-container')
                   each s in question.Spaces
                     p(class='single-space-in-question' id=`${s.tag}`)=s.tag
-              a(href=`/questions/${question.id}`) 
+              a(href=`/questions/${question.id}`)
                 div(class='question-text-single') #{question.title}
             div(class='question-buttons')
               div(class='vote-section')
@@ -38,7 +38,7 @@ block content
                 div(class='vote_holder voteNum')= question.Questions_votes.length
               button(class="edit-question-button editBtn questionEditBtn")
                 i(class="fas fa-edit")
-              button(class="editBtn questionEditBtn edit-question-button addTagBtn" id="addTag") 
+              button(class="editBtn questionEditBtn edit-question-button addTagBtn" id="addTag")
                 i(class="fas fa-hashtag")
 
               div(id="addTag-container" class="modal addTag-container")
@@ -52,13 +52,13 @@ block content
                       p(class='model-tag-question-title')=`${question.title}`
                       div(class='modal-tag-form-container')
                         form(method="post" action=`/questions/${question.id}/questionSpaces`)
-                          input(type="hidden" name="_csrf" value=token) 
+                          input(type="hidden" name="_csrf" value=token)
                           div(class='existing-tops-suggestion')
                             div(class="existing-tops-suggestion-1") 1
                             p='Verify that these topics describe your question'
                           div(class='modal-line')
                           div(class='tops-checkbox-container')
-                            each s in question.Spaces 
+                            each s in question.Spaces
                               div(class='tops-single-checkbox-container')
                                 input(type='checkbox' name=`${s.tag.split(" ").join("_")}` checked)
                                 label=s.tag
@@ -67,7 +67,7 @@ block content
                             p='Select any topics that also describe your question'
                           div(class='modal-line')
                           div(class='new-tops-checkbox-container')
-                            each s in question.newSpaces 
+                            each s in question.newSpaces
                               div(class='tops-single-checkbox-container')
                                 input(type='checkbox' name=`${s.split(" ").join("_")}` )
                                 label=s
@@ -94,7 +94,7 @@ block content
                 div(class='answer-container')
                   div(class='user-text')
                     img(class='user-text-picture' src=`${answer.User.profile_picture}`, alt=`${answer.User.user_name}`)
-                    div(class='userName-container')    
+                    div(class='userName-container')
                       div(class='userName')= answer.User.user_name
                       div(class='date')= answer.date
                   div(class='answer-text')= answer.content
