@@ -207,6 +207,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   /////QUESTION UPVOTE BUTTON/////
   const vote = document.querySelectorAll(".upvote-question-button");
+  const like = document.querySelectorAll(".liked")
   for (let i = 0; i < vote.length; i++) {
     vote[i].addEventListener("click", async (e) => {
       // const userid = document.getElementById('userid').value;
@@ -219,11 +220,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
       });
       const { voteArray } = await res.json();
       voteid.innerText = voteArray.length;
+
+      if (like[i].classList.contains('far')){
+        like[i].classList.remove('far')
+        like[i].classList.add('fa')
+      } else{
+        like[i].classList.remove('fa')
+        like[i].classList.add('far')
+      }
     });
   }
 
   /////ANSWER UPVOTE BUTTON/////
   const answerVote = document.querySelectorAll(".upvote-answer-button");
+  const likeA = document.querySelectorAll(".likedA");
   // for (let i = 0; i < answerVote.length; i++) {
   //   answerVote[i].addEventListener("click", async (e) => {
   //     // const userid = document.getElementById('userid').value;
@@ -236,7 +246,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   //     voteid.innerText = voteArray.length;
   //   });
   // }
-  answerVote.forEach((button) => {
+  answerVote.forEach((button, i) => {
     button.addEventListener("click", async (e) => {
       const totalVote = document.getElementById(
         `answer-vote-holder-${button.id}`
@@ -246,6 +256,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
       });
       const { voteArray } = await res.json();
       totalVote.innerText = voteArray.length;
+
+      if (likeA[i].classList.contains('far')){
+        likeA[i].classList.remove('far')
+        likeA[i].classList.add('fa')
+      } else{
+        likeA[i].classList.remove('fa')
+        likeA[i].classList.add('far')
+      }
     });
   });
 
@@ -303,7 +321,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   if (span) {
     span.onclick = function () {
       modal.style.display = "none";
-      
+
     };
   }
   // When the user clicks anywhere outside of the modal, close it

@@ -83,7 +83,12 @@ router.get(
           answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
         }
       }
-      data.push({ question: question, answers: answers });
+
+      const likes = await db.Questions_vote.findAll({
+        where: {question_id: question.id}
+      });
+
+      data.push({ question: question, answers: answers, likes:likes });
     }
     res.render("index", {
       title: "Mora Home",
