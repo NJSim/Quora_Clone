@@ -1,12 +1,13 @@
 extends layout
 include utils.pug
 append head
-  
+
   link(rel="stylesheet" href="/stylesheets/nav-home.css")
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
   if locals.authenticated
+    //- div(class="test") #{locals.user.id}
     div(id='welcome_container')
       div(class='welcome-user-container')
         img(class='welcome-user-image' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
@@ -18,10 +19,12 @@ block content
   div(class='questions-container')
     if data && data.length > 0
       each d in data
+
         div(id=`question-container-${d.question.id}` class='question-container')
           input(type='hidden' id=`d.questionid` value= d.question.id)
-          //- input(type='hidden' id= 'userid' value= user.id)
-          
+          if user
+            input(type='hidden' id= 'userid' value= user.id)
+
           div(class='question-offset')
             div(class='user-text')
               img(class='user-text-picture' src=`${d.question.User.profile_picture}`, alt=`${d.question.User.user_name}`)
@@ -34,7 +37,18 @@ block content
               div(class='question-buttons')
                 div(class='vote-section')
                   button(class='upvote-question-button' id= `${d.question.id}`)
-                    i(class="fa fa-thumbs-up")
+
+                    - var liked = 0;
+                    each like in d.likes
+
+                      if locals.user.id == like.user_id
+                        - liked = 1;
+
+                    if liked == 0
+                      i(class=`far fa-thumbs-up liked` id= 'liked')
+                    if liked == 1
+                      i(class=`fa fa-thumbs-up liked` id= 'liked')
+
                   div(class='vote_holder voteNum')= d.question.Questions_votes.length
                 div(class='answer-delete-section')
                   div(class = `answer-button-${d.question.id}`)
@@ -48,7 +62,7 @@ block content
                 input(type='hidden' name='_csrf' value=token)
                 +field('', 'content', '', 'text', 'Add a comment...' )
                 button(type='submit' class='answer-submit-button') Add Comment
-          
+
           div(class='answers-container')
             if d.answers && d.answers.length > 0
               each answer in d.answers
@@ -63,5 +77,19 @@ block content
                     div(class='vote-section')
                       if locals.authenticated
                         button(class='upvote-answer-button' id=`UQ/${answer.id}`)
-                          i(class="fa fa-thumbs-up")
+                          //- i(class="fa fa-thumbs-up")
+                          - var likedA = 0;
+
+                          each like in answer.Answers_votes
+
+                            if locals.user.id == like.user_id
+                              - likedA = 1;
+
+                          if likedA == 0
+                            i(class=`far fa-thumbs-up likedA` id= 'likedA')
+                          if likedA == 1
+                            i(class=`fa fa-thumbs-up likedA` id= 'likedA')
+
+
+
                         div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length

@@ -23,3 +23,10 @@ npx dotenv sequelize db:seed:undo:all
 npx dotenv sequelize db:migrate:undo:all
 npx dotenv sequelize db:migrate
 npx dotenv sequelize db:seed:all
+
+
+HEROKU DATABASE SETUP STEPS
+heroku run npx dotenv sequelize db:seed:undo:all
+heroku run npx dotenv sequelize db:migrate:undo:all
+heroku run npx dotenv sequelize db:migrate
+heroku run npx dotenv sequelize db:seed:all

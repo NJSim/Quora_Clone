@@ -27,6 +27,7 @@ const restoreUser = async (req, res, next) => {
       const user = await db.User.findByPk(userId);
 
       if (user) {
+        //get all likes from user and add a object key value pair for each like
         res.locals.authenticated = true;
         res.locals.user = user;
         next();

@@ -42,7 +42,7 @@ router.get(
       ],
       order: [["createdAt", "DESC"]],
     });
-    
+
     var options = {
       weekday: "long",
       year: "numeric",
@@ -64,9 +64,21 @@ router.get(
           answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
         }
       }
-      data.push({question:question,answers:answers});
-      console.log('answers', answers)
+      const likes = await db.Questions_vote.findAll({
+        where: {question_id: question.id}
+      });
+      console.log("TEST LIKES", likes)
+      data.push({question:question,answers:answers,likes:likes});
+      //console.log('answers', answers)
     }
+
+    // const result = await fetch(`/questions/${questionid}/votes`, {
+    //   method: "GET",
+    // });
+    // const { voteArray } = await result.json();
+    // data.push({voteArray:voteArray})
+
+
     res.render("index", {
       title: "Mora Home",
       data,

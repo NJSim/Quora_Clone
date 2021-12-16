@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       });
     }
   }
-  
+
 
   /////DELETE ANSWER BUTTON/////
   const deleteAnswerBtns = document.querySelectorAll("div button.deleteBtn");
@@ -202,9 +202,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   /////QUESTION UPVOTE BUTTON/////
   const vote = document.querySelectorAll(".upvote-question-button");
+  const like = document.querySelectorAll(".liked")
+
   for (let i = 0; i < vote.length; i++) {
     vote[i].addEventListener("click", async (e) => {
-      // const userid = document.getElementById('userid').value;
+      const userid = document.getElementById('userid').value;
       const questionid = document.getElementsByClassName(
         `upvote-question-button`
       )[i].id;
@@ -214,10 +216,21 @@ document.addEventListener("DOMContentLoaded", (e) => {
       });
       const { voteArray } = await res.json();
       voteid.innerText = voteArray.length;
+      console.log(voteArray);
+      console.log(userid)
+      console.log(like)
+      if (like[i].classList.contains('far')){
+        like[i].classList.remove('far')
+        like[i].classList.add('fa')
+      } else{
+        like[i].classList.remove('fa')
+        like[i].classList.add('far')
+      }
     });
   }
 
-  
+
+
   /////ANSWER UPVOTE BUTTON/////
   const answerVote = document.querySelectorAll(".upvote-answer-button");
   // for (let i = 0; i < answerVote.length; i++) {
@@ -232,7 +245,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
   //     voteid.innerText = voteArray.length;
   //   });
   // }
-  answerVote.forEach((button) => {
+  const likeA = document.querySelectorAll(".likedA")
+  answerVote.forEach((button, i) => {
     button.addEventListener("click", async (e) => {
       const totalVote = document.getElementById(
         `answer-vote-holder-${button.id}`
@@ -242,6 +256,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
       });
       const { voteArray } = await res.json();
       totalVote.innerText = voteArray.length;
+      console.log(likeA)
+      if (likeA[i].classList.contains('far')){
+        likeA[i].classList.remove('far')
+        likeA[i].classList.add('fa')
+      } else{
+        likeA[i].classList.remove('fa')
+        likeA[i].classList.add('far')
+      }
     });
   });
 
@@ -267,7 +289,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   var btn = document.getElementById("modal-button");
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
-  // When the user clicks the button, open the modal 
+  // When the user clicks the button, open the modal
   btn.onclick = function() {
     modal.style.display = "flex";
   }
@@ -283,5 +305,3 @@ document.addEventListener("DOMContentLoaded", (e) => {
   }
 
 });
-
-
