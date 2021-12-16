@@ -143,7 +143,10 @@ router.get(
           answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
         }
       }
-      data.push({ question: question, answers: question.Answers });
+      const likes = await db.Questions_vote.findAll({
+        where: {question_id: question.id}
+      });
+      data.push({ question: question, answers: question.Answers, likes:likes });
     }
     res.render("index", {
       title: `All Questions in ${space}`,
@@ -185,12 +188,16 @@ router.get(
     for (let answer of answers) {
       answer.date = answer.updatedAt.toLocaleDateString("en-US", options);
     }
+    const likes = await db.Questions_vote.findAll({
+      where: {question_id: question.id}
+    });
     res.render("question-detail", {
       title: "View Question",
       question,
       answers,
       spaces,
       images,
+      likes,
       token: req.csrfToken(),
     });
   }

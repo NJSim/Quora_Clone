@@ -71,9 +71,9 @@ block content
                 button(class='upvote-answer-button' id=`UQ/${answer.id}`)
                   i(class="fa fa-thumbs-up")
                 div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length
-              button(class='editAnswerBtn editBtn' id=`editBtn-${answer.id}`) 
+              button(class='editAnswerBtn editBtn' id=`editBtn-${answer.id}`)
                 i(class="fas fa-edit")
-              button(class='deleteBtn' id=`${answer.id}`) 
+              button(class='deleteBtn' id=`${answer.id}`)
                 i(class="fas fa-trash-alt")
           div(class=`answerContain-${answer.id} answerContain` id=`${answer.Question.id}`)
             img(class='user-text-picture' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
