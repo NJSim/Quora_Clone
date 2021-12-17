@@ -117,7 +117,7 @@ Search questions by categories.
 Add Friends via Friend Request.
 Notifications.
 
-Mora Developer
+## Mora Developers
 
 https://www.linkedin.com/in/jingyuan-zhang-708ab763/
 https://www.linkedin.com/in/nicolas-sim-156422170/
