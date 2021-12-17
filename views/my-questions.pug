@@ -21,7 +21,7 @@ block content
           div(class='question-offset')
             div(class='user-text')
               img(class='user-text-picture' src=`${question.User.profile_picture}`, alt=`${question.User.user_name}`)
-              div(class='userName-container')  
+              div(class='userName-container')
                 div(class='userName')= question.User.user_name
                 div(class='date')= question.date
             div(class='question-text')
@@ -29,16 +29,25 @@ block content
                 div(class='space-container')
                   each s in question.Spaces
                     p(class='single-space-in-question' id=`${s.tag}`)=s.tag
-              a(href=`/questions/${question.id}`) 
+              a(href=`/questions/${question.id}`)
                 div(class='question-text-single') #{question.title}
             div(class='question-buttons')
               div(class='vote-section')
                 button(class='upvote-question-button' id=`${question.id}`)
-                  i(class="fa fa-thumbs-up")
+                  - var liked = 0;
+                    each like in question.likes
+
+                      if locals.user.id == like.user_id
+                        - liked = 1;
+
+                    if liked == 0
+                      i(class=`far fa-thumbs-up liked` id= 'liked')
+                    if liked == 1
+                      i(class=`fa fa-thumbs-up liked` id= 'liked')
                 div(class='vote_holder voteNum')= question.Questions_votes.length
               button(class="edit-question-button editBtn questionEditBtn")
                 i(class="fas fa-edit")
-              button(class="editBtn questionEditBtn edit-question-button addTagBtn" id="addTag") 
+              button(class="editBtn questionEditBtn edit-question-button addTagBtn" id="addTag")
                 i(class="fas fa-hashtag")
 
               div(id="addTag-container" class="modal addTag-container")
@@ -52,13 +61,13 @@ block content
                       p(class='model-tag-question-title')=`${question.title}`
                       div(class='modal-tag-form-container')
                         form(method="post" action=`/questions/${question.id}/questionSpaces`)
-                          input(type="hidden" name="_csrf" value=token) 
+                          input(type="hidden" name="_csrf" value=token)
                           div(class='existing-tops-suggestion')
                             div(class="existing-tops-suggestion-1") 1
                             p='Verify that these topics describe your question'
                           div(class='modal-line')
                           div(class='tops-checkbox-container')
-                            each s in question.Spaces 
+                            each s in question.Spaces
                               div(class='tops-single-checkbox-container')
                                 input(type='checkbox' name=`${s.tag.split(" ").join("_")}` checked)
                                 label=s.tag
@@ -67,7 +76,7 @@ block content
                             p='Select any topics that also describe your question'
                           div(class='modal-line')
                           div(class='new-tops-checkbox-container')
-                            each s in question.newSpaces 
+                            each s in question.newSpaces
                               div(class='tops-single-checkbox-container')
                                 input(type='checkbox' name=`${s.split(" ").join("_")}` )
                                 label=s
@@ -94,12 +103,23 @@ block content
                 div(class='answer-container')
                   div(class='user-text')
                     img(class='user-text-picture' src=`${answer.User.profile_picture}`, alt=`${answer.User.user_name}`)
-                    div(class='userName-container')    
+                    div(class='userName-container')
                       div(class='userName')= answer.User.user_name
                       div(class='date')= answer.date
                   div(class='answer-text')= answer.content
                   div(class='answer-buttons')
                     div(class='vote-section')
                       button(class='upvote-answer-button' id=`UQ/${answer.id}`)
-                        i(class="fa fa-thumbs-up")
+                        - var likedA = 0;
+
+                        each like in answer.Answers_votes
+
+                          if locals.user.id == like.user_id
+                            - likedA = 1;
+
+                        if likedA == 0
+                          i(class=`far fa-thumbs-up likedA` id= 'likedA')
+                        if likedA == 1
+                          i(class=`fa fa-thumbs-up likedA` id= 'likedA')
+
                       div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length
