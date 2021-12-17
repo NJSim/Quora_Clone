@@ -170,7 +170,7 @@ router.get(
     }
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, {
-      include: [{ model: db.User }, { model: db.Questions_vote }],
+      include: [{ model: db.User }, { model: db.Space },{ model: db.Questions_vote }],
     });
     var options = {
       weekday: "long",
