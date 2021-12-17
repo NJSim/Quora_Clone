@@ -50,10 +50,19 @@ AJAX
 Heroku (for hosting services)
 Material UI Icons (Font Awesome)
 
+## Features
 
+### Post a Question
 
-### Code Highlights / Challenges
-## Highlights
+### Answer a Question
+
+### Like a Question or Answer
+
+### Add a Space (Category) to your Question
+
+### View Questions related to it's Space
+
+## Code Highlights / Challenges
 
 When a user types in the search bar up above we make a POST request based on the information typed and append below. Uses regex to correctly find the question the user is looking for.
 
