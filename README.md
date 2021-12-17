@@ -1,9 +1,8 @@
 # Mora (A Quora Clone)
-Welcome to Mora!
 
 Try out [Mora](https://afternoon-fjord-07018.herokuapp.com/) here!
 
-Mora, a Quora clone, is a popular social media website that allows users to publicly share questions, leave comments and vote on questions and answers. Go to our live site to sign up and start asking questions about your favorite movies and TV shows!
+Welcome to Mora, a Quora clone, is a popular social media website that allows users to publicly share questions, leave comments and vote on questions and answers. Go to our live site to sign up and start asking questions about your favorite movies and TV shows!
 
 
 
