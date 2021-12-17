@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", (e) => {
   /////EDIT QUESTON BUTTON/////
-  const editQuestionBtn = document.querySelector("button.edit-question-button");
-  if (editQuestionBtn) {
-    editQuestionBtn.addEventListener("click", async (e) => {
-      const questionId = parseInt(e.target.id, 10);
-      const questionContain = document.querySelector(
-        `div.question-edit-contain`
-      );
+  const editQuestionBtns = document.getElementsByClassName("edit-question-button");
+  const questionContains = document.getElementsByClassName("question-edit-contain")
+  const existQuestions = document.getElementsByClassName("question-text-single")
+  const updatedQuestions = document.getElementsByClassName("form-control");
+  for (let idx =0;idx<editQuestionBtns.length;idx++) {
+    editQuestionBtns[idx].addEventListener("click", async (e) => {
+      const questionContain = questionContains[idx]
       if (
         questionContain.style.display === "" ||
         questionContain.style.display === "none"
@@ -15,11 +15,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
       } else {
         questionContain.style.display = "none";
       }
-      const existQuestion = document.querySelector(
-        "div.question-text-single"
-      ).innerHTML;
-      const inputBar = document.querySelector("input.form-control");
-      inputBar.value = existQuestion;
+      const existQuestion = existQuestions[idx].innerHTML;
+      console.log(existQuestion)
+      const updatedQuestion = updatedQuestions[idx]
+      updatedQuestion.value = existQuestion;
     });
   }
 
@@ -301,7 +300,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     })
   }
   for (let idx =0;idx< addTagspans.length;idx++) {
-    addTagspans[idx].addEventListener("click", () =>{fed
+    addTagspans[idx].addEventListener("click", () =>{
       addTagmodals[idx-1].style.display = "none";
     })
   }
