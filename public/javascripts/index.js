@@ -1,12 +1,18 @@
 document.addEventListener("DOMContentLoaded", (e) => {
   /////EDIT QUESTON BUTTON/////
-  const editQuestionBtn = document.querySelector("button.edit-question-button");
-  if (editQuestionBtn) {
-    editQuestionBtn.addEventListener("click", async (e) => {
-      const questionId = parseInt(e.target.id, 10);
-      const questionContain = document.querySelector(
-        `div.question-edit-contain`
-      );
+  const editQuestionBtns = document.getElementsByClassName(
+    "edit-question-button"
+  );
+  const questionContains = document.getElementsByClassName(
+    "question-edit-contain"
+  );
+  const existQuestions = document.getElementsByClassName(
+    "question-text-single"
+  );
+  const updatedQuestions = document.getElementsByClassName("form-control");
+  for (let idx = 0; idx < editQuestionBtns.length; idx++) {
+    editQuestionBtns[idx].addEventListener("click", async (e) => {
+      const questionContain = questionContains[idx];
       if (
         questionContain.style.display === "" ||
         questionContain.style.display === "none"
@@ -15,11 +21,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
       } else {
         questionContain.style.display = "none";
       }
-      const existQuestion = document.querySelector(
-        "div.question-text-single"
-      ).innerHTML;
-      const inputBar = document.querySelector("input.form-control");
-      inputBar.value = existQuestion;
+      const existQuestion = existQuestions[idx].innerHTML;
+      console.log(existQuestion);
+      const updatedQuestion = updatedQuestions[idx];
+      updatedQuestion.value = existQuestion;
     });
   }
 
@@ -43,9 +48,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const answerContains = document.querySelector(
           `div.answerContain-${answerId}`
         );
-        // if (!answerContains.style.display) {
-        //   answerContains.style.display = "block";
-        // }
         if (
           answerContains.style.display === "" ||
           answerContains.style.display === "none"
@@ -129,36 +131,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
     false
   );
 
-  // document.getElementsByClassName("suggestions-container").addEventListener(
-  //   "click",
-  //   function (ev) {
-  //     ev.stopPropagation(); //this is important! If removed, you'll get both alerts
-  //   },
-  //   false
-  // );
-
   ////ANSWER BUTTON/////
   const answers = document.querySelectorAll("div.answer-delete-section");
   for (const answer of answers) {
     answer.addEventListener("click", (e) => {
-      // console.log("!!!!!!!!", e.currentTarget);
       const answerContains = document.getElementsByClassName("answerContain");
       for (const answerContain of answerContains) {
         const questionId = e.currentTarget.getElementsByTagName("button")[0].id;
-        // console.log(questionId, "%%%%%%%%%%");
         if (answerContain.id === questionId) {
-          // console.log("12345", answerContain.style.display, "54321");
           if (
             answerContain.style.display === "" ||
             answerContain.style.display === "none"
           ) {
-            // console.log(answerContain.style.display, "first situ***&&%^%$$");
             answerContain.style.display = "flex";
           } else {
-            // console.log(
-            //   answerContain.style.display,
-            //   "else now is block situation"
-            // );
             answerContain.style.display = "none";
           }
         }
@@ -168,14 +154,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   ////PROFILE DROPDOWN/////
   const profile = document.getElementById("profileSelect");
-  // const title = document.getElementById("dropdownSelect");
-  // if (title) {
-  //   if (title.innerText === "My Answers") {
-  //     profile.value = "myAnswer";
-  //   } else if (title.innerText === "My Questions") {
-  //     profile.value = "myQuestion";
-  //   }
-  // }
   if (profile) {
     profile.addEventListener("change", async (e) => {
       if (e.target.value === "myQuestion") {
@@ -207,10 +185,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   /////QUESTION UPVOTE BUTTON/////
   const vote = document.querySelectorAll(".upvote-question-button");
-  const like = document.querySelectorAll(".liked")
+  const like = document.querySelectorAll(".liked");
   for (let i = 0; i < vote.length; i++) {
     vote[i].addEventListener("click", async (e) => {
-      // const userid = document.getElementById('userid').value;
       const questionid = document.getElementsByClassName(
         `upvote-question-button`
       )[i].id;
@@ -221,12 +198,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const { voteArray } = await res.json();
       voteid.innerText = voteArray.length;
 
-      if (like[i].classList.contains('far')){
-        like[i].classList.remove('far')
-        like[i].classList.add('fa')
-      } else{
-        like[i].classList.remove('fa')
-        like[i].classList.add('far')
+      if (like[i].classList.contains("far")) {
+        like[i].classList.remove("far");
+        like[i].classList.add("fa");
+      } else {
+        like[i].classList.remove("fa");
+        like[i].classList.add("far");
       }
     });
   }
@@ -234,18 +211,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
   /////ANSWER UPVOTE BUTTON/////
   const answerVote = document.querySelectorAll(".upvote-answer-button");
   const likeA = document.querySelectorAll(".likedA");
-  // for (let i = 0; i < answerVote.length; i++) {
-  //   answerVote[i].addEventListener("click", async (e) => {
-  //     // const userid = document.getElementById('userid').value;
-  //     const answerid = document.getElementsByClassName(`upvote-answer-button`)[i].id;
-  //     const voteid = document.getElementsByClassName(`answer-vote-holder`)[i];
-  //     const res = await fetch(`/answers/${answerid}/votes`, {
-  //       method: "GET",
-  //     });
-  //     const { voteArray } = await res.json();
-  //     voteid.innerText = voteArray.length;
-  //   });
-  // }
   answerVote.forEach((button, i) => {
     button.addEventListener("click", async (e) => {
       const totalVote = document.getElementById(
@@ -257,12 +222,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const { voteArray } = await res.json();
       totalVote.innerText = voteArray.length;
 
-      if (likeA[i].classList.contains('far')){
-        likeA[i].classList.remove('far')
-        likeA[i].classList.add('fa')
-      } else{
-        likeA[i].classList.remove('fa')
-        likeA[i].classList.add('far')
+      if (likeA[i].classList.contains("far")) {
+        likeA[i].classList.remove("far");
+        likeA[i].classList.add("fa");
+      } else {
+        likeA[i].classList.remove("fa");
+        likeA[i].classList.add("far");
       }
     });
   });
@@ -294,18 +259,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
   var addTagbtns = document.getElementsByClassName("addTagBtn");
   // Get the <span> element that closes the modal
   var addTagspans = document.getElementsByClassName("close");
-  console.log("!!!!!",addTagspans)
   // When the user clicks the button, open the modal
-  for (let idx =0;idx< addTagbtns.length;idx++) {
-    addTagbtns[idx].addEventListener("click", () =>{
+  for (let idx = 0; idx < addTagbtns.length; idx++) {
+    addTagbtns[idx].addEventListener("click", () => {
       addTagmodals[idx].style.display = "flex";
-    })
+    });
   }
-  for (let idx =0;idx< addTagspans.length;idx++) {
-    addTagspans[idx].addEventListener("click", () =>{
-      console.log("!!!!!",idx)
-      addTagmodals[idx-1].style.display = "none";
-    })
+  for (let idx = 0; idx < addTagspans.length; idx++) {
+    addTagspans[idx].addEventListener("click", () => {
+      addTagmodals[idx - 1].style.display = "none";
+    });
   }
   /////ASK QUESTION MODAL/////
   var modal = document.getElementById("myModal");
@@ -330,10 +293,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
     if (event.target === modal) {
       modal.style.display = "none";
     }
-    for(const addTagmodal of addTagmodals)
+    for (const addTagmodal of addTagmodals)
       if (event.target === addTagmodal) {
         addTagmodal.style.display = "none";
-    }
+      }
   };
 });
 
