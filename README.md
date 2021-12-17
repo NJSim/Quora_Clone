@@ -1,19 +1,10 @@
-# Express Project Skeleton
+# Mora (A Quora Clone)
 
-Use this project skeleton as a starting point for structuring your app. Things to note
-* Sequelize configuration has not yet been added -- you will need to set that up yourself
-* You may find yourself wanting to use javascript -- js files can be added in `public/javascripts` and should be appended to the Pug templates as needed
-* CSS files can go in `public/stylesheets` and also will need to be added to Pug templates
+Try out [Mora](https://afternoon-fjord-07018.herokuapp.com/) here!
 
+Welcome to Mora, a Quora clone, is a popular social media website that allows users to publicly share questions, leave comments and vote on questions and answers. Go to our live site to sign up and start asking questions about your favorite movies and TV shows!
 
-
-Welcome to Mora!
-Live Link: * [Mora](https://afternoon-fjord-07018.herokuapp.com/)
-Mora, a Quora clone, is a popular social media website that allows users to publicly share questions, leave comments and vote on questions and answers.
-
-## Getting Started
-
-
+![Alt Text]()
 
 ### Prerequisites
 Before you begin, please check the following Wiki documents:
@@ -59,9 +50,31 @@ AJAX
 Heroku (for hosting services)
 Material UI Icons (Font Awesome)
 
+## Features
 
-### Code Highlights / Challenges
-## Highlights
+### Post a Question
+
+![Alt Text]()
+
+### Answer a Question
+
+![Alt Text]()
+
+### Like a Question or Answer
+
+![Alt Text]()
+
+### Add a Space (Category) to your Question
+
+![Alt Text]()
+
+### View Questions related to it's Space
+
+![Alt Text]()
+
+## Code Highlights / Challenges
+
+![Alt Text]()
 
 When a user types in the search bar up above we make a POST request based on the information typed and append below. Uses regex to correctly find the question the user is looking for.
 
