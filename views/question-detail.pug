@@ -47,6 +47,42 @@ block content
               //-       i(class="far fa-comment answer")
             div
               if locals.user.user_name === question.User.user_name
+                button(class="editBtn questionEditBtn addTagBtn" id="addTag")
+                  i(class="fas fa-hashtag")
+
+                div(id="addTag-container" class="modal addTag-container")
+                  div(class="modal-content modal-space-container")
+                    div(class='space-modal-head')
+                      span(class="close") &times;
+                      div(class='modal-head-text') Edit Spaces
+                    div(class='modal-line')
+                    div(class='modal-topic-container')
+                        p(class='modal-tag-suggestion')="Make sure this question has the right topics:"
+                        p(class='model-tag-question-title')=`${question.title}`
+                        div(class='modal-tag-form-container')
+                          form(method="post" action=`/questions/${question.id}/questionSpaces`)
+                            input(type="hidden" name="_csrf" value=token)
+                            div(class='existing-tops-suggestion')
+                              div(class="existing-tops-suggestion-1") 1
+                              p='Verify that these topics describe your question'
+                            div(class='modal-line')
+                            div(class='tops-checkbox-container')
+                              each s in question.Spaces
+                                div(class='tops-single-checkbox-container')
+                                  input(type='checkbox' name=`${s.tag.split(" ").join("_")}` checked)
+                                  label=s.tag
+                            div(class='existing-tops-suggestion')
+                              p(class="existing-tops-suggestion-1")='2'
+                              p='Select any topics that also describe your question'
+                            div(class='modal-line')
+                            div(class='new-tops-checkbox-container')
+                              each s in question.newSpaces
+                                div(class='tops-single-checkbox-container')
+                                  input(type='checkbox' name=`${s.split(" ").join("_")}` )
+                                  label=s
+
+                            div(class='modal-sumit-button-container')
+                              button(type="submit"  class='modal-submit') Edit Spaces
                 button(class="edit-question-button editBtn questionEditBtn")
                   i(class="fas fa-edit")
                 button(class='delete-question-button' id=`${question.id}`)
