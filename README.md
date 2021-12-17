@@ -4,7 +4,7 @@ Try out [Mora](https://afternoon-fjord-07018.herokuapp.com/) here!
 
 Welcome to Mora, a Quora clone, is a popular social media website that allows users to publicly share questions, leave comments and vote on questions and answers. Go to our live site to sign up and start asking questions about your favorite movies and TV shows!
 
-
+![Alt Text]()
 
 ### Prerequisites
 Before you begin, please check the following Wiki documents:
@@ -54,15 +54,27 @@ Material UI Icons (Font Awesome)
 
 ### Post a Question
 
+![Alt Text]()
+
 ### Answer a Question
+
+![Alt Text]()
 
 ### Like a Question or Answer
 
+![Alt Text]()
+
 ### Add a Space (Category) to your Question
+
+![Alt Text]()
 
 ### View Questions related to it's Space
 
+![Alt Text]()
+
 ## Code Highlights / Challenges
+
+![Alt Text]()
 
 When a user types in the search bar up above we make a POST request based on the information typed and append below. Uses regex to correctly find the question the user is looking for.
 
