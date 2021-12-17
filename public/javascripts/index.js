@@ -294,7 +294,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
   var addTagbtns = document.getElementsByClassName("addTagBtn");
   // Get the <span> element that closes the modal
   var addTagspans = document.getElementsByClassName("close");
-  console.log("!!!!!",addTagspans)
   // When the user clicks the button, open the modal
   for (let idx =0;idx< addTagbtns.length;idx++) {
     addTagbtns[idx].addEventListener("click", () =>{
@@ -302,8 +301,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     })
   }
   for (let idx =0;idx< addTagspans.length;idx++) {
-    addTagspans[idx].addEventListener("click", () =>{
-      console.log("!!!!!",idx)
+    addTagspans[idx].addEventListener("click", () =>{fed
       addTagmodals[idx-1].style.display = "none";
     })
   }
