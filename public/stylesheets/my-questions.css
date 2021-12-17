@@ -4,14 +4,14 @@ div.question-edit-contain {
 
 .delete-question-button {
   position: relative;
-  background-color: white;
+  background-color: transparent;
   border: none;
   color: grey;
-  font-size: 20px;
+  font-size: 16px;
   width: 40px;
   height: 30px;
   text-align: center;
-  left: 520px;
+  /* left: 520px; */
 }
 
 .delete-question-button:hover {
@@ -24,8 +24,6 @@ div.question-edit-contain {
 .delete-question-button:active {
   color: rgb(170, 170, 170);
 }
-
-
 
 .space-container {
   display: flex;

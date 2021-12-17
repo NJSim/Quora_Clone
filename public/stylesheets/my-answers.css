@@ -1,8 +1,7 @@
-
-
-
-.answer-button, .editBtn, .deleteBtn {
-  /* background-color: white; */
+.answer-button, 
+.editBtn, 
+.deleteBtn {
+  background-color: transparent;
   border: none;
   color: grey;
   font-size: 16px;
@@ -11,23 +10,25 @@
   text-align: center;
 }
 
-.editBtn, .deleteBtn {
+.editBtn, 
+.deleteBtn {
   position: relative;
-  left: 520px;
+  /* left: 520px; */
+  background-color: transparent;
 }
 
-.questionEditBtn {
-  background-color: white;
-}
-
-.answer-button:hover, .editBtn:hover, .deleteBtn:hover {
+.answer-button:hover, 
+.editBtn:hover, 
+.deleteBtn:hover {
   border: 1px solid rgb(241, 242, 242);;
   border-radius: 20px; 
   background-color: rgb(235, 235, 235);
   cursor: pointer;
 }
 
-.answer-button:active, .editBtn:active, .deleteBtn:active {
+.answer-button:active, 
+.editBtn:active, 
+.deleteBtn:active {
   color: rgb(170, 170, 170);
 }
 
@@ -42,7 +43,8 @@
   outline: none;
 }
 
-.answer-submit-button, .edit-submit-button {
+.answer-submit-button, 
+.edit-submit-button {
   background-color: #2E69ff;
   color: white;
   border-radius: 20px;
@@ -52,10 +54,12 @@
   font-weight: bold;
 }
 
-.answer-submit-button:hover, .edit-submit-button:hover {
+.answer-submit-button:hover, 
+.edit-submit-button:hover {
   background-color: #0040e1;
 }
 
-.answer-submit-button:active, .edit-submit-button:active {
+.answer-submit-button:active, 
+.edit-submit-button:active {
   color: rgb(210, 210, 210);
 }

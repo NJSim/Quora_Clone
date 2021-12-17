@@ -134,7 +134,8 @@ button#welcome-submit-btn{
 
 }
 
-.question-text a, .question-text-single {
+.question-text a, 
+.question-text-single {
   font-weight: bold;
   font-size: 16px;
   overflow-wrap: break-word;
@@ -149,7 +150,9 @@ button#welcome-submit-btn{
 .question-buttons {
   display: flex;
   flex-direction: row;
-  width: 10%;
+  /* background-color: red; */
+  justify-content: space-between;
+  /* width: 10%; */
   /* justify-content: space-between; */
   /* padding-left:15px;
   padding-right: 15px; */
@@ -163,7 +166,8 @@ button#welcome-submit-btn{
   gap: 5px;
 }
 
-.upvote-question-button, .upvote-answer-button {
+.upvote-question-button, 
+.upvote-answer-button {
   border: 1px solid rgb(241, 242, 242);
   border-radius: 20px;
   background-color: rgb(235, 235, 235);
@@ -192,12 +196,14 @@ button#welcome-submit-btn{
   cursor: default;
 }
 
-.upvote-question-button:hover, .upvote-answer-button:hover {
+.upvote-question-button:hover, 
+.upvote-answer-button:hover {
   background-color: rgb(225, 225, 225);
   cursor: pointer;
 }
 
-.upvote-question-button:active, .upvote-answer-button:active {
+.upvote-question-button:active, 
+.upvote-answer-button:active {
   color: #5d89f9;
 }
 
@@ -242,6 +248,7 @@ button#welcome-submit-btn{
 .answer-buttons {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   /* background-color: aquamarine; */
 }
 

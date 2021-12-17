@@ -41,7 +41,8 @@
   color: rgb(185, 43, 39);;
 }
 
-.developer-intr, .developer-image img{
+.developer-intr, 
+.developer-image img{
   /* background-color: red; */
   display: flex;
   flex-direction: column;
@@ -57,7 +58,9 @@
   line-height: 25px;
 }
 
-.portfolio-icon, .github-icon, .linkedIn-icon {
+.portfolio-icon, 
+.github-icon, 
+.linkedIn-icon {
   font-size: 30px;
   color: grey;
 }
