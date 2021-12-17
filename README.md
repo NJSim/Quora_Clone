@@ -4,7 +4,7 @@ Try out [Mora](https://afternoon-fjord-07018.herokuapp.com/) here!
 
 Welcome to Mora, a Quora clone, is a popular social media website that allows users to publicly share questions, leave comments and vote on questions and answers. Go to our live site to sign up and start asking questions about your favorite movies and TV shows!
 
-![Alt Text]()
+![Alt Text](https://github.com/NJSim/Quora_Clone/blob/main/gif_folder/mora_home.gif)
 
 ### Prerequisites
 Before you begin, please check the following Wiki documents:
@@ -54,27 +54,25 @@ Material UI Icons (Font Awesome)
 
 ### Post a Question
 
-![Alt Text]()
+![Alt Text](https://github.com/NJSim/Quora_Clone/blob/main/gif_folder/mora_post.gif)
 
 ### Answer a Question
 
-![Alt Text]()
+![Alt Text](https://github.com/NJSim/Quora_Clone/blob/main/gif_folder/mora_answer.gif)
 
 ### Like a Question or Answer
 
-![Alt Text]()
+![Alt Text](https://github.com/NJSim/Quora_Clone/blob/main/gif_folder/mora_like.gif)
 
 ### Add a Space (Category) to your Question
 
-![Alt Text]()
+![Alt Text](https://github.com/NJSim/Quora_Clone/blob/main/gif_folder/mora_spaces.gif)
 
 ### View Questions related to it's Space
 
-![Alt Text]()
+![Alt Text](https://github.com/NJSim/Quora_Clone/blob/main/gif_folder/mora_space_check.gif)
 
 ## Code Highlights / Challenges
-
-![Alt Text]()
 
 When a user types in the search bar up above we make a POST request based on the information typed and append below. Uses regex to correctly find the question the user is looking for.
 
