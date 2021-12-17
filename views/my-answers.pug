@@ -91,10 +91,11 @@ block content
                     i(class=`fa fa-thumbs-up likedA` id= 'likedA')
 
                 div(class='voteNum' id=`answer-vote-holder-UQ/${answer.id}`)= answer.Answers_votes.length
-              button(class='editAnswerBtn editBtn' id=`editBtn-${answer.id}`)
-                i(class="fas fa-edit")
-              button(class='deleteBtn' id=`${answer.id}`)
-                i(class="fas fa-trash-alt")
+              div
+                button(class='editAnswerBtn editBtn' id=`editBtn-${answer.id}`)
+                  i(class="fas fa-edit")
+                button(class='deleteBtn' id=`${answer.id}`)
+                  i(class="fas fa-trash-alt")
           div(class=`answerContain-${answer.id} answerContain` id=`${answer.Question.id}`)
             img(class='user-text-picture' src=`${locals.user.profile_picture}`, alt=`${locals.user.user_name}`)
             form(class='answerContain-form' action=`/answers/${answer.id}` method='post')
