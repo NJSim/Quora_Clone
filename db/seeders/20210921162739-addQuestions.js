@@ -66,7 +66,86 @@ module.exports = {
         title: "What are all the movies that you can think of with the word 'water' in it?",
         createdAt: new Date(),
         updatedAt: new Date()
-      }
+      },
+      {
+        user_id: 2,
+        title: "What is the city where Katrina Kaif and Vicky Kaushal get married?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 2,
+        title: "Is Neha Dhupia still an A-list Bollywood actress?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 3,
+        title: "Can you think of a great actor who is consistently in bad films?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 3,
+        title: "Which movie was better, Avengers: Infinity War or Justice League?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 4,
+        title: "What are the best top movie lists? Why?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 5,
+        title: "what is your favorite netflix shows",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 6,
+        title: "Is Jennifer Lawrance hollywood A-list star",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 7,
+        title: "has anyone watched the movie 'Bright Star'?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 8,
+        title: "which Oscar winning movie you like?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 8,
+        title: "any spanish telenovas on Netflix?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 9,
+        title: "any movies that i can practice my spanish?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 10,
+        title: "super hero movies for minority groups?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 11,
+        title: "Which black actor could you see playing the Joker successfully?",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+
     ], {});
   },
 
