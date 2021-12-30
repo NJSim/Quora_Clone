@@ -179,7 +179,14 @@ router.get(
       day: "numeric",
     };
     question.date = question.updatedAt.toLocaleDateString("en-US", options);
-
+    const newSpaces = [...spaces];
+    if (question.Spaces) {
+      for (const s of question.Spaces) {
+        const spaceIdx = newSpaces.indexOf(s.tag);
+        newSpaces.splice(spaceIdx, 1);
+      }
+    }
+    question.newSpaces = newSpaces;
     const answers = await db.Answer.findAll({
       where: { question_id: questionId },
       include: [{ model: db.User }, { model: db.Answers_vote }],
